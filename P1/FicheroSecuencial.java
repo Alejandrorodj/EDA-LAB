@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * sd
+ * 
  * FicheroSecuencial
  * 
  * @param <T>
