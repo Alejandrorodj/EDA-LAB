@@ -1,4 +1,4 @@
-package proyectos.P2;
+package P2;
 
 public class Cartas {
     
