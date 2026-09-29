@@ -10,6 +10,9 @@ public class main {
 
     public static void main(String[] args) {
 
+        JuegoDeCartas.inicializar();
+        JuegoDeCartas.simulacion();
+
     }
 
 }
