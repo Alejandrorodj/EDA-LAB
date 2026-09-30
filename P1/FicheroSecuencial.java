@@ -99,7 +99,6 @@ public class FicheroSecuencial<T extends LeerFicheroInt> {
     /**
     Method name: isEndOfFile
     *
-    * Name of the original author: Estudiante
     * Description of the Method: Comprueba si se ha alcanzado el final del fichero.
     * Calling arguments: Ninguno.
     * Return value: boolean - Devuelve true si no existen más líneas por leer, false en caso contrario.
