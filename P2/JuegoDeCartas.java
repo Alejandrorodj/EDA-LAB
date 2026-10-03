@@ -3,8 +3,10 @@ package P2;
 import java.io.FileNotFoundException;
 import java.util.Stack;
 
-import P2.Constantes.CARTA;
 import P2.file.FicheroSecuencial;
+import P2.model.Accion;
+import P2.util.Constantes;
+import P2.util.Constantes.CARTA;
 
 public class JuegoDeCartas {
 

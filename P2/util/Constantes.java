@@ -1,4 +1,4 @@
-package P2;
+package P2.util;
 
 public class Constantes {
     public static enum CARTA {

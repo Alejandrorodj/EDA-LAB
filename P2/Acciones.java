@@ -1,14 +1,18 @@
 package P2;
 
+import java.util.Stack;
+
+import P2.model.Accion;
+
 public class Acciones {
 
-    public static String robar(Accion accion){
+    public static String robar(Accion accion, Stack<String> mazoDeRobo, Stack<String> mazoDeDescartes) {
         if (mazoDeRobo.empty()) {
             while (!mazoDeDescartes.empty()) {
                 mazoDeRobo.push(mazoDeDescartes.pop());
             }
         }
-    
+
         if (mazoDeRobo.empty()) {
             System.out.println("Está vacío");
         } else {
@@ -17,15 +21,15 @@ public class Acciones {
         }
     }
 
-    public static String jugar(Accion accion){
+    public static String jugar(Accion accion, Stack<Accion> pilaEfectos) {
         pilaEfectos.push(accion);
     }
 
-    public static String descartar(){
+    public static String descartar() {
         return "";
     }
 
-    public static String resolver(){
+    public static String resolver() {
         return "";
     }
 }
