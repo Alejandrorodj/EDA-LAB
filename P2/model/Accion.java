@@ -1,6 +1,7 @@
 package P2.model;
 
-import P2.file.LeerFicheroInt;
+import P2.util.Constantes.CARTA;
+import P2.util.file.LeerFicheroInt;
 
 /**
  * 
@@ -10,7 +11,7 @@ public class Accion implements LeerFicheroInt {
 
     private String jugador;
     private String jugada;
-    private String carta;
+    private CARTA carta;
 
     /**
      * 
@@ -23,7 +24,7 @@ public class Accion implements LeerFicheroInt {
      * @param jugada
      * @param carta
      */
-    public Accion(String jugador, String jugada, String carta) {
+    public Accion(String jugador, String jugada, CARTA carta) {
         this.jugador = jugador;
         this.jugada = jugada;
         this.carta = carta;
@@ -32,11 +33,17 @@ public class Accion implements LeerFicheroInt {
     public void leerDatos(String[] campos) {
         jugador = campos[0].trim();
         jugada = campos[1].trim();
-        try {
-            carta = campos[2].trim();
-        } catch (Exception e) {
 
+        // Al no tener todos las lineas 3 campos hayq ue comprobar que tiene el 3
+        // elemento para que no de error
+        if (campos.length == 3) {
+            try {
+                carta = CARTA.valueOf(campos[2].trim());
+            } catch (IllegalArgumentException e) {
+                System.err.println("Carta no reconocida en el sistema: " + campos[2].trim());
+            }
         }
+
     }
 
     /**
@@ -70,14 +77,14 @@ public class Accion implements LeerFicheroInt {
     /**
      * @return the carta
      */
-    public String getCarta() {
+    public CARTA getCarta() {
         return carta;
     }
 
     /**
      * @param carta the carta to set
      */
-    public void setCarta(String carta) {
+    public void setCarta(CARTA carta) {
         this.carta = carta;
     }
 
@@ -88,7 +95,7 @@ public class Accion implements LeerFicheroInt {
      */
     @Override
     public String toString() {
-        return "Accion [jugador=" + jugador + ", jugada=" + jugada + ", carta=" + carta + "]";
+        return jugador + "(accion: " + jugada + " - carta: " + carta + ")";
     }
 
 }
