@@ -19,7 +19,7 @@ public class JuegoDeCartas {
 
     public void inicializar() {
         System.out.println("*************************************************************");
-        System.out.println("INICIALIZANDO DATOS");
+        System.out.println("INICIALIZANDO DATOS:\n");
         // Inicializamos las pilas
         mazoDeRobo = new Stack<CARTA>();
         mazoDeDescartes = new Stack<CARTA>();
@@ -64,7 +64,7 @@ public class JuegoDeCartas {
      */
     private static List<Accion> leerFicheroAcciones() {
         System.out.println("*************************************************************");
-        System.out.println("LEYENDO FIHCERO ACCIONES");
+        System.out.println("LEYENDO FIHCERO ACCIONES:\n");
         List<Accion> lstAcciones = new ArrayList<>();
 
         try {
