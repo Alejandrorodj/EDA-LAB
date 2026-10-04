@@ -26,10 +26,18 @@ public class Acciones {
         switch (accion.getJugada()) {
             case "JUGAR":
 
-                break;
-            case "ROBAR":
+                jugar(accion, pilaDeEfectos);
 
-                break;
+                return accion.getJugador() + " juega " + accion.getCarta();
+            case "ROBAR":
+                
+                CARTA cartaRobada = robar(mazoDeRobo, mazoDeDescartes);
+
+                if (cartaRobada == null) {
+                    return "No hay cartas para robar";
+                }
+
+                return accion.getJugador() + " roba: " + cartaRobada;
             case "DESCARTAR":
                 descartar(accion, mazoDeDescartes);
                 System.out.println(accion);
@@ -61,13 +69,26 @@ public class Acciones {
 
     }
 
-    private static CARTA robar() {
+    private static CARTA robar(Stack<CARTA> mazoDeRobo, Stack<CARTA> mazoDeDescartes) {
 
-        return null;
+        if (mazoDeRobo.empty()) {
+            while (!mazoDeDescartes.empty()) {
+                mazoDeRobo.push(mazoDeDescartes.pop());
+            }
+        }
+    
+        if (mazoDeRobo.empty()) {
+            return null;
+        }
+    
+        return mazoDeRobo.pop();
     }
 
-    private static void jugar() {
+    private static void jugar(Accion accion, Stack<Efecto> pilaDeEfectos) {
 
+        Efecto efecto = new Efecto(accion.getJugador(), accion.getCarta());
+
+        pilaDeEfectos.push(efecto);
     }
 
     /**
