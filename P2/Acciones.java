@@ -17,10 +17,6 @@ import P2.model.Accion;
 import P2.model.Efecto;
 import P2.util.Constantes.CARTA;
 
-/**
- * 
- * Acciones
- */
 public class Acciones {
 
     /**
@@ -44,14 +40,6 @@ public class Acciones {
      * List of Checked Exceptions: Ninguno
      *************/
 
-    /**
-     * 
-     * @param accion
-     * @param pilaDeEfectos
-     * @param mazoDeDescartes
-     * @param mazoDeRobo
-     * @return
-     */
     public static String ejecutarAcciones(Accion accion, Stack<Efecto> pilaDeEfectos, Stack<CARTA> mazoDeDescartes,
             Stack<CARTA> mazoDeRobo) {
         String result = "";
@@ -106,12 +94,6 @@ public class Acciones {
      *
      * List of Checked Exceptions: Ninguno
      *************/
-
-    /**
-     * 
-     * @param pilaDeEfectos
-     * @return
-     */
     private static void resolver(Stack<Efecto> pilaDeEfectos) {
 
         while (pilaDeEfectos.size() != 0) {
@@ -188,13 +170,7 @@ public class Acciones {
      * List of Checked Exceptions: Ninguno
      *************/
 
-    /**
-     * 
-     * @param accion
-     * @param mazoDescartes
-     */
     private static void descartar(Accion accion, Stack<CARTA> mazoDescartes) {
         mazoDescartes.push(accion.getCarta());
     }
-
 }

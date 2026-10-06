@@ -1,9 +1,3 @@
-package P2.util.file;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 /****
 *
 * Class Name: FicheroSecuencial
@@ -14,10 +8,14 @@ import java.util.Scanner;
 *                    Permite procesar el contenido de un archivo línea a línea utilizando
 *                    un delimitador especificado para inicializar objetos que implementen
 *                    la interfaz LeerFicheroInt.
-*
-* @param <T> Tipo genérico que debe implementar la interfaz LeerFicheroInt.
-*
 */
+
+package P2.util.file;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class FicheroSecuencial<T extends LeerFicheroInt> {
 
     // Objeto File que representa el archivo físico a leer
@@ -28,13 +26,6 @@ public class FicheroSecuencial<T extends LeerFicheroInt> {
 
     // Cadena de texto utilizada como delimitador o separador de campos
     private String separator;
-
-    /**
-     * @param file
-     * @param scan
-     * @param separator
-     * @throws FileNotFoundException
-     */
 
     /**
     * Method name: FicheroSecuencial

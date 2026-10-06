@@ -73,11 +73,6 @@ public class JuegoDeCartas {
     *
     * List of Checked Exceptions: Ninguno
     *************/
-
-    /**
-     * 
-     * @param mazo
-     */
     public void rellenarMazoRobo(Stack<CARTA> mazo) {
         for (CARTA carta : Constantes.CARTA.values()) {
             System.out.println(carta);
@@ -98,12 +93,6 @@ public class JuegoDeCartas {
     * List of Checked Exceptions: Ninguno
     *************/
 
-    /**
-     * 
-     * @param pilaDeEfectos
-     * @param mazoDeDescartes
-     * @param mazoDeRobo
-     */
     public void simulacion() {
 
         List<Accion> lstAccciones = JuegoDeCartas.leerFicheroAcciones();
@@ -128,10 +117,6 @@ public class JuegoDeCartas {
     * List of Checked Exceptions: Ninguno
     *************/
 
-    /**
-     * 
-     * @return
-     */
     private static List<Accion> leerFicheroAcciones() {
         System.out.println("*************************************************************");
         System.out.println("LEYENDO FIHCERO ACCIONES:\n");
