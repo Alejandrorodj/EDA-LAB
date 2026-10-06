@@ -107,9 +107,8 @@ public class JuegoDeCartas {
             System.out.println(resultadoAccion);
         }
 
+        System.out.println("FIN DE SIMULACIÓN");
         System.out.println("*************************************************************");
-        System.out.println("FIN DE SIMULACIÓN:");
-        System.out.println();
     }
 
     /**
