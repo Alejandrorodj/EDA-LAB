@@ -109,9 +109,7 @@ public class JuegoDeCartas {
 
         System.out.println("*************************************************************");
         System.out.println("FIN DE SIMULACIÓN:");
-        System.out.println("MAZO DE DESCARTES: " + mazoDeDescartes.toString());
-        System.out.println("MAZO DE ROBO: " + mazoDeRobo.toString());
-        System.out.println("PILA DE EFECTOS: " + pilaDeEfectos.toString());
+        System.out.println();
     }
 
     /**
