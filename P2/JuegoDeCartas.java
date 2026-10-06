@@ -35,18 +35,19 @@ public class JuegoDeCartas {
     private Stack<Efecto> pilaDeEfectos;
 
     /**
-    * Method name: inicializar
-    *
-    * Description of the Method: Prepara las estructuras de datos iniciales del juego,
-    *                            instanciando las pilas e introduciendo todas las cartas
-    *                            disponibles en el mazo de robo.
-    * Calling arguments: Ninguno
-    *
-    * Return value: void.
-    * Required Files: Ninguno
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
+     * Method name: inicializar
+     *
+     * Description of the Method: Prepara las estructuras de datos iniciales del
+     * juego,
+     * instanciando las pilas e introduciendo todas las cartas
+     * disponibles en el mazo de robo.
+     * Calling arguments: Ninguno
+     *
+     * Return value: void.
+     * Required Files: Ninguno
+     *
+     * List of Checked Exceptions: Ninguno
+     *************/
     public void inicializar() {
         System.out.println("*************************************************************");
         System.out.println("INICIALIZANDO DATOS:\n");
@@ -61,18 +62,20 @@ public class JuegoDeCartas {
     }
 
     /**
-    * Method name: rellenarMazoRobo
-    *
-    * Description of the Method: Recorre todas las cartas del enumerado CARTA y las apila
-    *                            en el mazo de robo suministrado.
-    * Calling arguments: 
-    *   - Stack<CARTA> mazo: Pila correspondiente al mazo de robo que se va a rellenar.
-    *
-    * Return value: void.
-    * Required Files: Nignuno
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
+     * Method name: rellenarMazoRobo
+     *
+     * Description of the Method: Recorre todas las cartas del enumerado CARTA y las
+     * apila
+     * en el mazo de robo suministrado.
+     * Calling arguments:
+     * - Stack<CARTA> mazo: Pila correspondiente al mazo de robo que se va a
+     * rellenar.
+     *
+     * Return value: void.
+     * Required Files: Nignuno
+     *
+     * List of Checked Exceptions: Ninguno
+     *************/
     public void rellenarMazoRobo(Stack<CARTA> mazo) {
         for (CARTA carta : Constantes.CARTA.values()) {
             System.out.println(carta);
@@ -81,17 +84,19 @@ public class JuegoDeCartas {
     }
 
     /**
-    * Method name: simulacion
-    *
-    * Description of the Method: Carga la lista de acciones desde el fichero y las ejecuta de forma
-    *                            secuencial sobre el estado actual del juego, imprimiendo el resultado.
-    * Calling arguments: Nignuno
-    *
-    * Return value: void.
-    * Required Files: Fichero de acciones accesible en la ruta especificada en Constantes.
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
+     * Method name: simulacion
+     *
+     * Description of the Method: Carga la lista de acciones desde el fichero y las
+     * ejecuta de forma
+     * secuencial sobre el estado actual del juego, imprimiendo el resultado.
+     * Calling arguments: Nignuno
+     *
+     * Return value: void.
+     * Required Files: Fichero de acciones accesible en la ruta especificada en
+     * Constantes.
+     *
+     * List of Checked Exceptions: Ninguno
+     *************/
 
     public void simulacion() {
 
@@ -100,26 +105,32 @@ public class JuegoDeCartas {
         for (Accion accion : lstAccciones) {
             String resultadoAccion = Acciones.ejecutarAcciones(accion, pilaDeEfectos, mazoDeDescartes, mazoDeRobo);
             System.out.println(resultadoAccion);
-            System.out.println("");
         }
+
+        System.out.println("*************************************************************");
+        System.out.println("FIN DE SIMULACIÓN:");
+        System.out.println("MAZO DE DESCARTES: " + mazoDeDescartes.toString());
+        System.out.println("MAZO DE ROBO: " + mazoDeRobo.toString());
+        System.out.println("PILA DE EFECTOS: " + pilaDeEfectos.toString());
     }
 
     /**
-    * Method name: leerFicheroAcciones
-    *
-    * Description of the Method: Lee y procesa las acciones registradas en el archivo CSV especificado
-    *                            en las constantes, validando las jugadas y retornando la lista cargada.
-    * Calling arguments: Ninguno
-    *
-    * Return value: List<Accion> - Lista de acciones leídas y validadas desde el fichero.
-    * Required Files: Fichero CSV configurado en Constantes.RUTA_FICHERO_ACCIONES.
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
-
+     * Method name: leerFicheroAcciones
+     *
+     * Description of the Method: Lee y procesa las acciones registradas en el
+     * archivo CSV especificado
+     * en las constantes, validando las jugadas y retornando la lista cargada.
+     * Calling arguments: Ninguno
+     *
+     * Return value: List<Accion> - Lista de acciones leídas y validadas desde el
+     * fichero.
+     * Required Files: Fichero CSV configurado en Constantes.RUTA_FICHERO_ACCIONES.
+     *
+     * List of Checked Exceptions: Ninguno
+     *************/
     private static List<Accion> leerFicheroAcciones() {
         System.out.println("*************************************************************");
-        System.out.println("LEYENDO FIHCERO ACCIONES:\n");
+        System.out.println("LEYENDO FICHERO ACCIONES:\n");
         List<Accion> lstAcciones = new ArrayList<>();
 
         try {
@@ -131,7 +142,7 @@ public class JuegoDeCartas {
 
                 // Revisamos que las cartas jugadas existan
                 if (a.getCarta() != null
-                        || (a.getJugada().equalsIgnoreCase("ROBAR") || a.getJugada().equalsIgnoreCase("DESCARTAR"))) {
+                        || (a.getJugada().equalsIgnoreCase("ROBAR") || a.getJugada().equalsIgnoreCase("RESOLVER"))) {
                     System.out.println(a);
                     lstAcciones.add(a);
                 }

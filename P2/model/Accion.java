@@ -27,34 +27,35 @@ public class Accion implements LeerFicheroInt {
     private CARTA carta;
 
     /**
-    * Method name: Accion
-    *
-    * Description of the Method: Constructor por defecto de la clase Accion.
-    *                            Crea una instancia de la clase sin inicializar sus atributos.
-    * Calling arguments: Ninguno
-    *
-    * Return value: Instancia de la clase Accion.
-    * Required Files: Ninguno
-    *
-    * List of Checked Exceptions: Ninguna
-    *************/
+     * Method name: Accion
+     *
+     * Description of the Method: Constructor por defecto de la clase Accion.
+     * Crea una instancia de la clase sin inicializar sus atributos.
+     * Calling arguments: Ninguno
+     *
+     * Return value: Instancia de la clase Accion.
+     * Required Files: Ninguno
+     *
+     * List of Checked Exceptions: Ninguna
+     *************/
     public Accion() {
     }
 
     /**
-    * Method name: Accion
-    *
-    * Description of the Method: Constructor parametrizado que inicializa los atributos jugador, jugada y carta.
-    * Calling arguments: 
-    *   - String jugador: Nombre del jugador que realiza la acción.
-    *   - String jugada: Descripción o tipo de la jugada realizada.
-    *   - CARTA carta: Carta utilizada en la jugada.
-    *
-    * Return value: Instancia de la clase Accion.
-    * Required Files: Ninguno
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
+     * Method name: Accion
+     *
+     * Description of the Method: Constructor parametrizado que inicializa los
+     * atributos jugador, jugada y carta.
+     * Calling arguments:
+     * - String jugador: Nombre del jugador que realiza la acción.
+     * - String jugada: Descripción o tipo de la jugada realizada.
+     * - CARTA carta: Carta utilizada en la jugada.
+     *
+     * Return value: Instancia de la clase Accion.
+     * Required Files: Ninguno
+     *
+     * List of Checked Exceptions: Ninguno
+     *************/
 
     public Accion(String jugador, String jugada, CARTA carta) {
         this.jugador = jugador;
@@ -106,6 +107,7 @@ public class Accion implements LeerFicheroInt {
     public void setJugada(String jugada) {
         this.jugada = jugada;
     }
+
     public CARTA getCarta() {
         return carta;
     }

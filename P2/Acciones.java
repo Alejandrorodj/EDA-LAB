@@ -42,23 +42,24 @@ public class Acciones {
 
     public static String ejecutarAcciones(Accion accion, Stack<Efecto> pilaDeEfectos, Stack<CARTA> mazoDeDescartes,
             Stack<CARTA> mazoDeRobo) {
+
         String result = "";
+
         switch (accion.getJugada()) {
             case "JUGAR":
-
                 jugar(accion, pilaDeEfectos);
-
-                result = accion.getJugador() + " juega " + accion.getCarta();
+                result = accion.getJugador() + " juega: " + accion.getCarta();
                 break;
+
             case "ROBAR":
 
                 CARTA cartaRobada = robar(mazoDeRobo, mazoDeDescartes);
 
                 if (cartaRobada == null) {
                     result = "No hay cartas para robar";
+                } else {
+                    result = accion.getJugador() + " roba: " + cartaRobada;
                 }
-
-                result = accion.getJugador() + " roba: " + cartaRobada;
                 break;
             case "DESCARTAR":
                 descartar(accion, mazoDeDescartes);
@@ -67,7 +68,7 @@ public class Acciones {
                 result = "descartar: " + mazoDeDescartes.peek();
                 break;
             case "RESOLVER":
-                resolver(pilaDeEfectos);
+                resolver(pilaDeEfectos, mazoDeDescartes);
                 System.out.println(accion);
                 break;
 
@@ -83,21 +84,24 @@ public class Acciones {
      * Method name: resolver
      *
      * Description of the Method: Vacía la pila de efectos desapilándolos de uno en
-     * uno
-     * e imprimiendo su contenido por la consola.
+     * uno (del último jugado al primero), muestra la carta y el jugador de cada
+     * efecto y mueve la carta al mazo de descartes.
      * Calling arguments:
      * - Stack<Efecto> pilaDeEfectos: Pila que contiene los efectos pendientes de
      * resolver.
+     * - Stack<CARTA> mazoDeDescartes: Pila donde se dejan las cartas resueltas.
      *
      * Return value: void.
      * Required Files: Ninguno
      *
      * List of Checked Exceptions: Ninguno
      *************/
-    private static void resolver(Stack<Efecto> pilaDeEfectos) {
+    private static void resolver(Stack<Efecto> pilaDeEfectos, Stack<CARTA> mazoDeDescartes) {
 
         while (pilaDeEfectos.size() != 0) {
-            System.out.println(pilaDeEfectos.pop());
+            Efecto efecto = pilaDeEfectos.pop();
+            System.out.println(efecto);
+            mazoDeDescartes.push(efecto.getCarta());
         }
 
     }
@@ -107,7 +111,8 @@ public class Acciones {
      *
      * Description of the Method: Extrae la carta superior del mazo de robo. Si el
      * mazo está vacío,
-     * pasa todas las cartas del mazo de descartes al de robo antes de extraerla.
+     * pasa todas las cartas del mazo de descartes al de robo antes de extraerla
+     * y muestra por pantalla las cartas recicladas.
      * Calling arguments:
      * - Stack<CARTA> mazoDeRobo: Pila con las cartas disponibles para robar.
      * - Stack<CARTA> mazoDeDescartes: Pila con las cartas descartadas previamente.
@@ -120,10 +125,15 @@ public class Acciones {
      *************/
     private static CARTA robar(Stack<CARTA> mazoDeRobo, Stack<CARTA> mazoDeDescartes) {
 
-        if (mazoDeRobo.empty()) {
+        // Reciclaje: si el mazo de robo esta vacio, pasamos el descarte al robo
+        if (mazoDeRobo.empty() && !mazoDeDescartes.empty()) {
+            System.out.print("\nReciclaje: mazo de robo sin cartas, se pasan las cartas del descarte al robo:");
             while (!mazoDeDescartes.empty()) {
-                mazoDeRobo.push(mazoDeDescartes.pop());
+                CARTA carta = mazoDeDescartes.pop();
+                mazoDeRobo.push(carta);
+                System.out.print(" " + carta);
             }
+            System.out.println("\n");
         }
 
         if (mazoDeRobo.empty()) {
