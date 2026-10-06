@@ -1,60 +1,73 @@
-/****
-*
-* Class Name: Efecto
-* Author/s name: Luis Perez, Alejandro Rodriguez, Victor Tapiador
-* Release/Creation date: 04/10/2026
-* Class version: 1.0
-* Class description: Clase que representa el efecto aplicado a un jugador en el juego.
-*                    Almacena la información del jugador afectado y la carta involucrada.
-*
-*/
-
 package P2.model;
 
 import P2.util.Constantes.CARTA;
 
+/**
+ * Efecto de la pila de efectos: la carta jugada y el jugador que la lanzó.
+ *
+ * @author LP, AR, VT (código de equipo: TODO)
+ * @version 1.0 (04/10/2026)
+ */
 public class Efecto {
-    // Nombre del jugador sobre el que recae el efecto
+
+    /** Jugador que lanzó la carta. */
     private String jugador;
 
-    // Carta asociada al efecto generado
+    /** Carta jugada. */
     private CARTA carta;
 
     @Override
+    /**
+     * Devuelve el efecto como texto: carta y jugador.
+     *
+     * @return el efecto en formato legible
+     */
     public String toString() {
         return carta + " - " + jugador;
     }
 
+    /**
+     * Devuelve el jugador que lanzó la carta.
+     *
+     * @return el jugador
+     */
     public String getJugador() {
         return jugador;
     }
 
+    /**
+     * Cambia el jugador que lanzó la carta.
+     *
+     * @param jugador el nuevo jugador
+     */
     public void setJugador(String jugador) {
         this.jugador = jugador;
     }
 
+    /**
+     * Devuelve la carta del efecto.
+     *
+     * @return la carta
+     */
     public CARTA getCarta() {
         return carta;
     }
 
+    /**
+     * Cambia la carta del efecto.
+     *
+     * @param carta la nueva carta
+     */
     public void setCarta(CARTA carta) {
         this.carta = carta;
     }
 
     /**
-    * Method name: Efecto
-    *
-    * Description of the Method: Constructor parametrizado que inicializa los atributos jugador y carta.
-    * Calling arguments: 
-    *   - String jugador: Nombre del jugador afectado por el efecto.
-    *   - CARTA carta: Carta vinculada al efecto.
-    *
-    * Return value: Instancia de la clase Efecto.
-    * Required Files: Ninguno
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
-
+     * Crea un efecto con la carta jugada y el jugador que la lanzó.
+     *
+     * @param jugador jugador que lanzó la carta
+     * @param carta carta jugada
+     */
     public Efecto(String jugador, CARTA carta) {
         this.jugador = jugador;
         this.carta = carta;

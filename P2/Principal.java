@@ -1,35 +1,19 @@
-/****
-*
-* Class Name: Main
-* Author/s name: Luis Perez, Alejandro Rodriguez, Victor Tapiador
-* Release/Creation date: 04/10/2026
-* Class version: 1.0
-* Class description: Clase principal que contiene el punto de entrada de la aplicación.
-*                    Instancia el juego de cartas, inicializa sus componentes y ejecuta
-*                    la simulación.
-*
-*/
-
 package P2;
 
+/**
+ * Clase principal: punto de entrada de la simulación del juego de cartas.
+ *
+ * @author LP, AR, VT (código de equipo: TODO)
+ * @version 1.0 (04/10/2026)
+ */
 public class Principal {
 
     /**
-     * Method name: main
+     * Crea el juego, inicializa las pilas y ejecuta la simulación de las acciones
+     * del fichero CSV.
      *
-     * Description of the Method: Método principal que inicia la ejecución de la
-     * aplicación.
-     * Crea una instancia de JuegoDeCartas, inicializa los elementos
-     * necesarios y comienza el proceso de simulación del juego.
-     * Calling arguments:
-     * - String[] args: Arreglo de argumentos pasados por la línea de comandos.
-     *
-     * Return value: void.
-     * Required Files: Fichero CSV de acciones accesible para la correcta
-     * simulación.
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
+     * @param args argumentos de la línea de comandos (no se usan)
+     */
     public static void main(String[] args) {
 
         JuegoDeCartas jc = new JuegoDeCartas();
