@@ -1,0 +1,21 @@
+# Compilados de Java
+*.class
+bin/
+out/
+
+# Javadoc generado
+P2/doc/
+doc/
+
+# VS Code / IntelliJ / Eclipse
+.vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
