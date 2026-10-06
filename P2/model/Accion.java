@@ -1,62 +1,37 @@
-/****
-*
-* Class Name: Accion
-* Author/s name: Luis Perez, Alejandro Rodriguez, Victor Tapiador
-* Release/Creation date: 04/10/2026
-* Class version: 1.0
-* Class description: Clase que representa una acción aplicable dentro del juego. 
-*                    Contiene un identificador, el nombre de la acción y el efecto 
-*                    asociado a la misma.
-*
-*/
-
 package P2.model;
 
 import P2.util.Constantes.CARTA;
 import P2.util.file.LeerFicheroInt;
 
+/**
+ * Acción leída de una línea del fichero CSV: jugador, jugada ({@code ROBAR},
+ * {@code JUGAR}, {@code DESCARTAR} o {@code RESOLVER}) y carta, si la lleva.
+ *
+ * @author LP, AR, VT (código de equipo: TODO)
+ * @version 1.0 (04/10/2026)
+ */
 public class Accion implements LeerFicheroInt {
 
-    // Nombre o identificador del jugador que realiza la acción
+    /** Jugador que realiza la acción. */
     private String jugador;
 
-    // Tipo de jugada realizada por el jugador
+    /** Tipo de jugada: ROBAR, JUGAR, DESCARTAR o RESOLVER. */
     private String jugada;
 
-    // Carta asociada a la jugada realizada
+    /** Carta de la jugada; {@code null} en ROBAR y RESOLVER o si no existe. */
     private CARTA carta;
 
-    /**
-     * Method name: Accion
-     *
-     * Description of the Method: Constructor por defecto de la clase Accion.
-     * Crea una instancia de la clase sin inicializar sus atributos.
-     * Calling arguments: Ninguno
-     *
-     * Return value: Instancia de la clase Accion.
-     * Required Files: Ninguno
-     *
-     * List of Checked Exceptions: Ninguna
-     *************/
+    /** Crea una acción vacía, que se rellena después con {@link #leerDatos(String[])}. */
     public Accion() {
     }
 
     /**
-     * Method name: Accion
+     * Crea una acción con todos sus datos.
      *
-     * Description of the Method: Constructor parametrizado que inicializa los
-     * atributos jugador, jugada y carta.
-     * Calling arguments:
-     * - String jugador: Nombre del jugador que realiza la acción.
-     * - String jugada: Descripción o tipo de la jugada realizada.
-     * - CARTA carta: Carta utilizada en la jugada.
-     *
-     * Return value: Instancia de la clase Accion.
-     * Required Files: Ninguno
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
-
+     * @param jugador jugador que realiza la acción
+     * @param jugada tipo de jugada
+     * @param carta carta de la jugada, o {@code null} si no lleva
+     */
     public Accion(String jugador, String jugada, CARTA carta) {
         this.jugador = jugador;
         this.jugada = jugada;
@@ -64,18 +39,11 @@ public class Accion implements LeerFicheroInt {
     }
 
     /**
-    * Method name: leerDatos
-    *
-    * Description of the Method: Lee los datos de un arreglo de cadenas y asigna los valores correspondientes
-    *                            a los atributos jugador, jugada y carta.
-    * Calling arguments: 
-    *   - String[] campos: Arreglo de cadenas de caracteres que contiene los valores a asignar a la acción.
-    *
-    * Return value: void.
-    * Required Files: Ninguno
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
+     * Rellena la acción con los campos de una línea del CSV. Si la carta no existe
+     * en {@link CARTA}, avisa por la salida de error y la deja a {@code null}.
+     *
+     * @param campos campos de la línea: jugador, jugada y, opcionalmente, carta
+     */
     public void leerDatos(String[] campos) {
         jugador = campos[0].trim();
         jugada = campos[1].trim();
@@ -92,33 +60,76 @@ public class Accion implements LeerFicheroInt {
 
     }
 
+    /**
+     * Devuelve el jugador que realiza la acción.
+     *
+     * @return el jugador
+     */
     public String getJugador() {
         return jugador;
     }
 
+    /**
+     * Cambia el jugador que realiza la acción.
+     *
+     * @param jugador el nuevo jugador
+     */
     public void setJugador(String jugador) {
         this.jugador = jugador;
     }
 
+    /**
+     * Devuelve el tipo de jugada.
+     *
+     * @return la jugada
+     */
     public String getJugada() {
         return jugada;
     }
 
+    /**
+     * Cambia el tipo de jugada.
+     *
+     * @param jugada la nueva jugada
+     */
     public void setJugada(String jugada) {
         this.jugada = jugada;
     }
 
+    /**
+     * Devuelve la carta de la jugada.
+     *
+     * @return la carta, o {@code null} si no lleva
+     */
     public CARTA getCarta() {
         return carta;
     }
 
+    /**
+     * Cambia la carta de la jugada.
+     *
+     * @param carta la nueva carta
+     */
     public void setCarta(CARTA carta) {
         this.carta = carta;
     }
 
     @Override
+    /**
+     * Devuelve la acción como texto; sin la carta si no lleva.
+     *
+     * @return la acción en formato legible
+     */
     public String toString() {
-        return jugador + "(accion: " + jugada + " - carta: " + carta + ")";
+
+        String resultado = jugador + "(accion: " + jugada + " - carta: " + carta + ")";
+
+        if (carta == null) {
+            resultado = jugador + "(accion: " + jugada + ")";
+        }
+
+        return resultado;
+
     }
 
 }

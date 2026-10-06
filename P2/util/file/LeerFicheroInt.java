@@ -1,31 +1,18 @@
-/****
-*
-* Class Name: LeerFicheroInt
-* Author/s name: Luis Perez, Alejandro Rodriguez, Victor Tapiador
-* Release/Creation date: 04/10/2026
-* Class version: 1.0
-* Class description: Interfaz que define el contrato para las clases que procesan
-*                    e inicializan sus atributos a partir de un arreglo de datos
-*                    leídos de un fichero de texto.
-*
-*/
-
 package P2.util.file;
 
+/**
+ * Interfaz para las clases que se rellenan con los campos de una línea de un
+ * fichero de texto.
+ *
+ * @author LP, AR, VT (código de equipo: TODO)
+ * @version 1.0 (04/10/2026)
+ */
 public interface LeerFicheroInt {
 
     /**
-    * Method name: leerDatos
-    *
-    * Description of the Method: Asigna los valores del arreglo de datos pasado como argumento
-    *                            a los atributos correspondientes de la clase que implemente la interfaz.
-    * Calling arguments: 
-    *   - String[] data: Arreglo de cadenas de caracteres que contiene los campos extraídos del fichero.
-    *
-    * Return value: void.
-    * Required Files: Ninguno
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
+     * Rellena el objeto con los campos de una línea.
+     *
+     * @param data campos de la línea
+     */
     void leerDatos(String[] data);
 }

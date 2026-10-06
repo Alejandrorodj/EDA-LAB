@@ -1,28 +1,35 @@
-/****
-*
-* Class Name: Constantes
-* Author/s name: Luis Perez, Alejandro Rodriguez, Victor Tapiador
-* Release/Creation date: 04/10/2026
-* Class version: 1.0
-* Class description: Clase que centraliza las constantes del sistema, incluyendo la ruta
-*                    de los ficheros de datos, el separador utilizado en los archivos CSV
-*                    y el tipo enumerado CARTA para definir los tipos de cartas disponibles.
-*
-*/
-
 package P2.util;
 
+/**
+ * Constantes del programa: ruta y separador del fichero de acciones y
+ * enumerado con los tipos de carta.
+ *
+ * @author LP, AR, VT (código de equipo: TODO)
+ * @version 1.0 (04/10/2026)
+ */
 public class Constantes {
 
-    // Ruta fichero acciones
+    /** Ruta del fichero CSV con las acciones de la simulación. */
     public static final String RUTA_FICHERO_ACCIONES = ".\\P2\\archivos\\acciones.csv";
 
-    // Separador
+    /** Separador de campos del fichero CSV. */
     public static final String SEPARADOR_CSV = ",";
 
-    // carta
+    /** Tipos de carta del juego, en el orden en que se apilan en el mazo de robo. */
     public static enum CARTA {
-        GOLPE_CRITICO, RAYO_CONGELANTE, BARRERA_DE_HIELO, POCION_DE_VIDA,
-        CONTRAHECHIZO, ESCUDO_MAGICO, BOLA_DE_FUEGO
+        /** Carta Golpe crítico. */
+        GOLPE_CRITICO,
+        /** Carta Rayo congelante. */
+        RAYO_CONGELANTE,
+        /** Carta Barrera de hielo. */
+        BARRERA_DE_HIELO,
+        /** Carta Poción de vida. */
+        POCION_DE_VIDA,
+        /** Carta Contrahechizo. */
+        CONTRAHECHIZO,
+        /** Carta Escudo mágico. */
+        ESCUDO_MAGICO,
+        /** Carta Bola de fuego. */
+        BOLA_DE_FUEGO
     }
 }

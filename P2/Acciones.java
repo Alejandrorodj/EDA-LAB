@@ -1,14 +1,3 @@
-/****
-*
-* Class Name: Acciones
-* Author/s name: Luis Perez, Alejandro Rodriguez, Victor Tapiador
-* Release/Creation date: 04/10/2026
-* Class version: 1.0
-* Class description: Clase que contiene los métodos estáticos para gestionar y ejecutar
-*                    las distintas acciones del juego (jugar, robar, descartar y resolver efectos).
-*
-*/
-
 package P2;
 
 import java.util.Stack;
@@ -17,29 +6,25 @@ import P2.model.Accion;
 import P2.model.Efecto;
 import P2.util.Constantes.CARTA;
 
+/**
+ * Acciones del juego de cartas: jugar, robar, descartar y resolver.
+ * Contiene métodos estáticos que modifican las pilas que reciben como parámetro.
+ *
+ * @author LP, AR, VT (código de equipo: TODO)
+ * @version 1.0 (04/10/2026)
+ */
 public class Acciones {
 
     /**
-     * Method name: ejecutarAcciones
+     * Ejecuta una acción leída del fichero sobre los mazos o la pila de efectos y
+     * muestra después el estado de las tres pilas.
      *
-     * Description of the Method: Evalúa la jugada contenida en el objeto Accion y
-     * ejecuta la lógica
-     * correspondiente sobre los mazos o la pila de efectos.
-     * Calling arguments:
-     * - Accion accion: Objeto de tipo Accion con la jugada a procesar.
-     * - Stack<Efecto> pilaDeEfectos: Pila donde se apilan los efectos generados al
-     * jugar cartas.
-     * - Stack<CARTA> mazoDeDescartes: Pila que representa el mazo de descartes.
-     * - Stack<CARTA> mazoDeRobo: Pila que representa el mazo principal para robar
-     * cartas.
-     *
-     * Return value: String - Mensaje descriptivo del resultado de la acción
-     * ejecutada.
-     * Required Files: Ninguno
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
-
+     * @param accion acción a ejecutar (jugador, jugada y carta)
+     * @param pilaDeEfectos pila de efectos pendientes de resolver
+     * @param mazoDeDescartes mazo de descartes
+     * @param mazoDeRobo mazo de robo
+     * @return mensaje que describe el resultado de la acción, o cadena vacía
+     */
     public static String ejecutarAcciones(Accion accion, Stack<Efecto> pilaDeEfectos, Stack<CARTA> mazoDeDescartes,
             Stack<CARTA> mazoDeRobo) {
 
@@ -77,25 +62,21 @@ public class Acciones {
                         + accion.getJugada());
         }
 
+        System.out.println();
+        System.out.println("MAZO DE DESCARTES: " + mazoDeDescartes.toString());
+        System.out.println("MAZO DE ROBO: " + mazoDeRobo.toString());
+        System.out.println("PILA DE EFECTOS: " + pilaDeEfectos.toString());
+        System.out.println();
         return result;
     }
 
     /**
-     * Method name: resolver
+     * Resuelve todos los efectos de la pila, del último jugado al primero: muestra
+     * la carta y el jugador de cada uno y mueve la carta al mazo de descartes.
      *
-     * Description of the Method: Vacía la pila de efectos desapilándolos de uno en
-     * uno (del último jugado al primero), muestra la carta y el jugador de cada
-     * efecto y mueve la carta al mazo de descartes.
-     * Calling arguments:
-     * - Stack<Efecto> pilaDeEfectos: Pila que contiene los efectos pendientes de
-     * resolver.
-     * - Stack<CARTA> mazoDeDescartes: Pila donde se dejan las cartas resueltas.
-     *
-     * Return value: void.
-     * Required Files: Ninguno
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
+     * @param pilaDeEfectos pila de efectos pendientes de resolver
+     * @param mazoDeDescartes mazo donde se dejan las cartas resueltas
+     */
     private static void resolver(Stack<Efecto> pilaDeEfectos, Stack<CARTA> mazoDeDescartes) {
 
         while (pilaDeEfectos.size() != 0) {
@@ -107,22 +88,14 @@ public class Acciones {
     }
 
     /**
-     * Method name: robar
+     * Extrae la carta superior del mazo de robo. Si el mazo de robo está vacío,
+     * pasa antes todas las cartas del mazo de descartes al de robo, una a una, y
+     * muestra las cartas recicladas.
      *
-     * Description of the Method: Extrae la carta superior del mazo de robo. Si el
-     * mazo está vacío,
-     * pasa todas las cartas del mazo de descartes al de robo antes de extraerla
-     * y muestra por pantalla las cartas recicladas.
-     * Calling arguments:
-     * - Stack<CARTA> mazoDeRobo: Pila con las cartas disponibles para robar.
-     * - Stack<CARTA> mazoDeDescartes: Pila con las cartas descartadas previamente.
-     *
-     * Return value: CARTA - La carta extraída o null si no hay cartas disponibles
-     * en ningún mazo.
-     * Required Files: Ninguno
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
+     * @param mazoDeRobo mazo del que se roba
+     * @param mazoDeDescartes mazo de descartes que se recicla si el de robo está vacío
+     * @return la carta robada, o {@code null} si los dos mazos están vacíos
+     */
     private static CARTA robar(Stack<CARTA> mazoDeRobo, Stack<CARTA> mazoDeDescartes) {
 
         // Reciclaje: si el mazo de robo esta vacio, pasamos el descarte al robo
@@ -144,20 +117,12 @@ public class Acciones {
     }
 
     /**
-     * Method name: jugar
+     * Crea un {@link Efecto} con la carta y el jugador de la acción y lo apila en la
+     * pila de efectos.
      *
-     * Description of the Method: Genera un nuevo objeto Efecto a partir de la
-     * acción indicada
-     * y lo apila en la pila de efectos.
-     * Calling arguments:
-     * - Accion accion: La acción jugada que genera el efecto.
-     * - Stack<Efecto> pilaDeEfectos: Pila donde se almacena el nuevo efecto.
-     *
-     * Return value: void.
-     * Required Files: Ninguno
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
+     * @param accion acción {@code JUGAR} con el jugador y la carta
+     * @param pilaDeEfectos pila donde se apila el efecto
+     */
     private static void jugar(Accion accion, Stack<Efecto> pilaDeEfectos) {
 
         Efecto efecto = new Efecto(accion.getJugador(), accion.getCarta());
@@ -166,20 +131,11 @@ public class Acciones {
     }
 
     /**
-     * Method name: descartar
+     * Añade la carta de la acción al mazo de descartes.
      *
-     * Description of the Method: Agrega la carta de la acción indicada al mazo de
-     * descartes.
-     * Calling arguments:
-     * - Accion accion: La acción que contiene la carta a descartar.
-     * - Stack<CARTA> mazoDescartes: Pila donde se apilará la carta descartada.
-     *
-     * Return value: void.
-     * Required Files: Ninguno
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
-
+     * @param accion acción {@code DESCARTAR} con la carta que se descarta
+     * @param mazoDescartes mazo de descartes
+     */
     private static void descartar(Accion accion, Stack<CARTA> mazoDescartes) {
         mazoDescartes.push(accion.getCarta());
     }

@@ -1,15 +1,3 @@
-/****
-*
-* Class Name: JuegoDeCartas
-* Author/s name: Luis Perez, Alejandro Rodriguez, Victor Tapiador
-* Release/Creation date: 04/10/2026
-* Class version: 1.0
-* Class description: Clase principal que controla la lógica y flujo del juego de cartas.
-*                    Se encarga de la inicialización de las pilas, la lectura de las
-*                    acciones desde el fichero y la simulación del juego.
-*
-*/
-
 package P2;
 
 import java.io.FileNotFoundException;
@@ -23,31 +11,26 @@ import P2.util.Constantes;
 import P2.util.Constantes.CARTA;
 import P2.util.file.FicheroSecuencial;
 
+/**
+ * Controla el juego de cartas: guarda las tres pilas (mazo de robo, mazo de
+ * descartes y pila de efectos), lee las acciones del fichero CSV y las ejecuta
+ * en orden.
+ *
+ * @author LP, AR, VT (código de equipo: TODO)
+ * @version 1.0 (04/10/2026)
+ */
 public class JuegoDeCartas {
 
-    // Pila que representa el mazo de robo principal del juego
+    /** Mazo de robo: cartas disponibles para robar. */
     private Stack<CARTA> mazoDeRobo;
 
-    // Pila que almacena las cartas que han sido descartadas
+    /** Mazo de descartes: cartas usadas o descartadas. */
     private Stack<CARTA> mazoDeDescartes;
 
-    // Pila que gestiona los efectos pendientes de resolución en la part
+    /** Pila de efectos pendientes de resolver (carta y jugador que la lanzó). */
     private Stack<Efecto> pilaDeEfectos;
 
-    /**
-     * Method name: inicializar
-     *
-     * Description of the Method: Prepara las estructuras de datos iniciales del
-     * juego,
-     * instanciando las pilas e introduciendo todas las cartas
-     * disponibles en el mazo de robo.
-     * Calling arguments: Ninguno
-     *
-     * Return value: void.
-     * Required Files: Ninguno
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
+    /** Crea las tres pilas vacías y rellena el mazo de robo con una carta de cada tipo. */
     public void inicializar() {
         System.out.println("*************************************************************");
         System.out.println("INICIALIZANDO DATOS:\n");
@@ -62,20 +45,10 @@ public class JuegoDeCartas {
     }
 
     /**
-     * Method name: rellenarMazoRobo
+     * Apila en el mazo una carta de cada tipo, en el orden del enumerado {@link CARTA}.
      *
-     * Description of the Method: Recorre todas las cartas del enumerado CARTA y las
-     * apila
-     * en el mazo de robo suministrado.
-     * Calling arguments:
-     * - Stack<CARTA> mazo: Pila correspondiente al mazo de robo que se va a
-     * rellenar.
-     *
-     * Return value: void.
-     * Required Files: Nignuno
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
+     * @param mazo mazo de robo que se rellena
+     */
     public void rellenarMazoRobo(Stack<CARTA> mazo) {
         for (CARTA carta : Constantes.CARTA.values()) {
             System.out.println(carta);
@@ -84,20 +57,9 @@ public class JuegoDeCartas {
     }
 
     /**
-     * Method name: simulacion
-     *
-     * Description of the Method: Carga la lista de acciones desde el fichero y las
-     * ejecuta de forma
-     * secuencial sobre el estado actual del juego, imprimiendo el resultado.
-     * Calling arguments: Nignuno
-     *
-     * Return value: void.
-     * Required Files: Fichero de acciones accesible en la ruta especificada en
-     * Constantes.
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
-
+     * Lee las acciones del fichero y las ejecuta una a una, mostrando el resultado
+     * de cada una.
+     */
     public void simulacion() {
 
         List<Accion> lstAccciones = JuegoDeCartas.leerFicheroAcciones();
@@ -107,27 +69,16 @@ public class JuegoDeCartas {
             System.out.println(resultadoAccion);
         }
 
+        System.out.println("FIN DE SIMULACIÓN");
         System.out.println("*************************************************************");
-        System.out.println("FIN DE SIMULACIÓN:");
-        System.out.println("MAZO DE DESCARTES: " + mazoDeDescartes.toString());
-        System.out.println("MAZO DE ROBO: " + mazoDeRobo.toString());
-        System.out.println("PILA DE EFECTOS: " + pilaDeEfectos.toString());
     }
 
     /**
-     * Method name: leerFicheroAcciones
+     * Lee el fichero de acciones indicado en {@link Constantes#RUTA_FICHERO_ACCIONES}.
+     * Descarta las líneas de {@code JUGAR} o {@code DESCARTAR} cuya carta no existe.
      *
-     * Description of the Method: Lee y procesa las acciones registradas en el
-     * archivo CSV especificado
-     * en las constantes, validando las jugadas y retornando la lista cargada.
-     * Calling arguments: Ninguno
-     *
-     * Return value: List<Accion> - Lista de acciones leídas y validadas desde el
-     * fichero.
-     * Required Files: Fichero CSV configurado en Constantes.RUTA_FICHERO_ACCIONES.
-     *
-     * List of Checked Exceptions: Ninguno
-     *************/
+     * @return lista de acciones válidas, vacía si no se encuentra el fichero
+     */
     private static List<Accion> leerFicheroAcciones() {
         System.out.println("*************************************************************");
         System.out.println("LEYENDO FICHERO ACCIONES:\n");
@@ -143,7 +94,7 @@ public class JuegoDeCartas {
                 // Revisamos que las cartas jugadas existan
                 if (a.getCarta() != null
                         || (a.getJugada().equalsIgnoreCase("ROBAR") || a.getJugada().equalsIgnoreCase("RESOLVER"))) {
-                    System.out.println(a);
+                    System.out.println(a.toString());
                     lstAcciones.add(a);
                 }
 
