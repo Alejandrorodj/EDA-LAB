@@ -12,7 +12,7 @@
 
 package P2;
 
-public class Juego {
+public class Principal {
 
     /**
      * Method name: main
