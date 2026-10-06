@@ -140,7 +140,7 @@ public class JuegoDeCartas {
                 // Revisamos que las cartas jugadas existan
                 if (a.getCarta() != null
                         || (a.getJugada().equalsIgnoreCase("ROBAR") || a.getJugada().equalsIgnoreCase("RESOLVER"))) {
-                    System.out.println(a);
+                    System.out.println(a.toString());
                     lstAcciones.add(a);
                 }
 

@@ -64,18 +64,20 @@ public class Accion implements LeerFicheroInt {
     }
 
     /**
-    * Method name: leerDatos
-    *
-    * Description of the Method: Lee los datos de un arreglo de cadenas y asigna los valores correspondientes
-    *                            a los atributos jugador, jugada y carta.
-    * Calling arguments: 
-    *   - String[] campos: Arreglo de cadenas de caracteres que contiene los valores a asignar a la acción.
-    *
-    * Return value: void.
-    * Required Files: Ninguno
-    *
-    * List of Checked Exceptions: Ninguno
-    *************/
+     * Method name: leerDatos
+     *
+     * Description of the Method: Lee los datos de un arreglo de cadenas y asigna
+     * los valores correspondientes
+     * a los atributos jugador, jugada y carta.
+     * Calling arguments:
+     * - String[] campos: Arreglo de cadenas de caracteres que contiene los valores
+     * a asignar a la acción.
+     *
+     * Return value: void.
+     * Required Files: Ninguno
+     *
+     * List of Checked Exceptions: Ninguno
+     *************/
     public void leerDatos(String[] campos) {
         jugador = campos[0].trim();
         jugada = campos[1].trim();
@@ -118,7 +120,15 @@ public class Accion implements LeerFicheroInt {
 
     @Override
     public String toString() {
-        return jugador + "(accion: " + jugada + " - carta: " + carta + ")";
+
+        String resultado = jugador + "(accion: " + jugada + " - carta: " + carta + ")";
+
+        if (carta == null) {
+            resultado = jugador + "(accion: " + jugada + ")";
+        }
+
+        return resultado;
+
     }
 
 }
