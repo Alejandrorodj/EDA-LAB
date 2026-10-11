@@ -15,6 +15,8 @@ public class Principal {
     /**
      * Crea el juego, inicializa las pilas y ejecuta la simulación de las acciones
      * del fichero CSV.
+     * 
+     * @param args argumentos de la línea de comandos
      */
     public static void main(String[] args) {
 
