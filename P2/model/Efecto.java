@@ -5,7 +5,7 @@ import P2.util.Constantes.CARTA;
 /**
  * Efecto de la pila de efectos: la carta jugada y el jugador que la lanzó.
  *
- * @author LP, AR, VT (código de equipo: TODO)
+ * @author LP, AR, VT
  * @version 1.0 (04/10/2026)
  */
 public class Efecto {
@@ -26,38 +26,18 @@ public class Efecto {
         return carta + " - " + jugador;
     }
 
-    /**
-     * Devuelve el jugador que lanzó la carta.
-     *
-     * @return el jugador
-     */
     public String getJugador() {
         return jugador;
     }
 
-    /**
-     * Cambia el jugador que lanzó la carta.
-     *
-     * @param jugador el nuevo jugador
-     */
     public void setJugador(String jugador) {
         this.jugador = jugador;
     }
 
-    /**
-     * Devuelve la carta del efecto.
-     *
-     * @return la carta
-     */
     public CARTA getCarta() {
         return carta;
     }
 
-    /**
-     * Cambia la carta del efecto.
-     *
-     * @param carta la nueva carta
-     */
     public void setCarta(CARTA carta) {
         this.carta = carta;
     }

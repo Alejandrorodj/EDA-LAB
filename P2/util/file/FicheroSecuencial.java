@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @param <T> tipo de objeto que se rellena con cada línea
  *
- * @author LP, AR, VT (código de equipo: TODO)
+ * @author LP, AR, VT
  * @version 1.0 (04/10/2026)
  */
 public class FicheroSecuencial<T extends LeerFicheroInt> {

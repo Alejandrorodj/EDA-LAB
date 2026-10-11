@@ -10,11 +10,15 @@ import P2.util.Constantes.CARTA;
  * Acciones del juego de cartas: jugar, robar, descartar y resolver.
  * Contiene métodos estáticos que modifican las pilas que reciben como parámetro.
  *
- * @author LP, AR, VT (código de equipo: TODO)
+ * @author LP, AR, VT
  * @version 1.0 (04/10/2026)
  */
 public class Acciones {
 
+    /** Crea una instancia de Acciones. */
+    public Acciones() {
+    }
+    
     /**
      * Ejecuta una acción leída del fichero sobre los mazos o la pila de efectos y
      * muestra después el estado de las tres pilas.
