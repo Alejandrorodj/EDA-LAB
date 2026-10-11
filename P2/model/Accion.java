@@ -7,7 +7,7 @@ import P2.util.file.LeerFicheroInt;
  * Acción leída de una línea del fichero CSV: jugador, jugada ({@code ROBAR},
  * {@code JUGAR}, {@code DESCARTAR} o {@code RESOLVER}) y carta, si la lleva.
  *
- * @author LP, AR, VT (código de equipo: TODO)
+ * @author LP, AR, VT
  * @version 1.0 (04/10/2026)
  */
 public class Accion implements LeerFicheroInt {
@@ -48,8 +48,6 @@ public class Accion implements LeerFicheroInt {
         jugador = campos[0].trim();
         jugada = campos[1].trim();
 
-        // Al no tener todos las lineas 3 campos hayq ue comprobar que tiene el 3
-        // elemento para que no de error
         if (campos.length == 3) {
             try {
                 carta = CARTA.valueOf(campos[2].trim());
@@ -60,56 +58,26 @@ public class Accion implements LeerFicheroInt {
 
     }
 
-    /**
-     * Devuelve el jugador que realiza la acción.
-     *
-     * @return el jugador
-     */
     public String getJugador() {
         return jugador;
     }
 
-    /**
-     * Cambia el jugador que realiza la acción.
-     *
-     * @param jugador el nuevo jugador
-     */
     public void setJugador(String jugador) {
         this.jugador = jugador;
     }
 
-    /**
-     * Devuelve el tipo de jugada.
-     *
-     * @return la jugada
-     */
     public String getJugada() {
         return jugada;
     }
 
-    /**
-     * Cambia el tipo de jugada.
-     *
-     * @param jugada la nueva jugada
-     */
     public void setJugada(String jugada) {
         this.jugada = jugada;
     }
 
-    /**
-     * Devuelve la carta de la jugada.
-     *
-     * @return la carta, o {@code null} si no lleva
-     */
     public CARTA getCarta() {
         return carta;
     }
 
-    /**
-     * Cambia la carta de la jugada.
-     *
-     * @param carta la nueva carta
-     */
     public void setCarta(CARTA carta) {
         this.carta = carta;
     }

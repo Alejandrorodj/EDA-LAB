@@ -16,11 +16,15 @@ import P2.util.file.FicheroSecuencial;
  * descartes y pila de efectos), lee las acciones del fichero CSV y las ejecuta
  * en orden.
  *
- * @author LP, AR, VT (código de equipo: TODO)
+ * @author LP, AR, VT
  * @version 1.0 (04/10/2026)
  */
 public class JuegoDeCartas {
 
+    /** Crea una instancia del juego de cartas. */
+    public JuegoDeCartas() {
+    }
+    
     /** Mazo de robo: cartas disponibles para robar. */
     private Stack<CARTA> mazoDeRobo;
 
