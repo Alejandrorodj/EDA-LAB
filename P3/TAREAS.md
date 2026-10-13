@@ -147,7 +147,6 @@ Notas importantes sobre `PriorityQueue`:
   - OK (7-oct): creado `P3/generar_javadoc.bat`; `P3/doc/` ya queda fuera de git por la regla `doc/` del `.gitignore`.
 
 ### Fase 1 · Modelo de datos
-- [ ] Enum `TipoPase` con los tres pases y su prioridad.
 - [ ] Clase `Visitante` (id, pase, llegada e inicio de recorrido) con constructor, getters, cálculo de espera y `toString`.
   - PARCIAL (13-oct): tiene `id`, `pase` (`String`) y `llegada`, con getters/setters y un constructor `Visitante(int id, String pase)`.
   - Falta: el constructor no recibe la **llegada** (se queda a 0 salvo que se llame a `setLlegada`); falta la **hora de inicio del recorrido**, el método que calcula la **espera** y `toString`.
