@@ -3,10 +3,6 @@
 bin/
 out/
 
-# Javadoc generado
-P2/doc/
-doc/
-
 # VS Code / IntelliJ / Eclipse
 .vscode/
 .idea/
