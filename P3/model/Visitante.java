@@ -8,10 +8,10 @@ public class Visitante implements Comparable<Visitante> {
     private int llegada;
     private String pase;
 
-    public Visitante(int id, int inicio, int llegada, String pase) {
+    public Visitante(int id, int inicio, int salida, String pase) {
         this.id = id;
         this.inicio = inicio;
-        this.llegada = llegada;
+        this.salida = salida;
         this.pase = pase;
     }
     
@@ -32,17 +32,17 @@ public class Visitante implements Comparable<Visitante> {
     }
 
     /**
-     * @return the llegada
+     * @return the salida
      */
-    public int getLlegada() {
-        return llegada;
+    public int getSalida() {
+        return salida;
     }
 
     /**
-     * @param llegada the llegada to set
+     * @param salida the salida to set
      */
-    public void setLlegada(int llegada) {
-        this.llegada = llegada;
+    public void setSalida(int salida) {
+        this.salida = salida;
     }
 
     /**

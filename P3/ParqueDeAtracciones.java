@@ -40,7 +40,7 @@ public class ParqueDeAtracciones {
         } while (E + F + 1 != N);
     }
 
-    public static List<Visitante> generarVisitantes() {
+    public static List<Visitante> generarVisitantes(int tiempo) {
         int id = 1;
         List<Visitante> LoteVisitantes = new ArrayList<Visitante>();
 
