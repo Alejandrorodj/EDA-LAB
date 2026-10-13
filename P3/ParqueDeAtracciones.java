@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
+import P3.model.Visitante;
+
 public class ParqueDeAtracciones {
     
     private static int N, E, F, L;
@@ -12,7 +14,7 @@ public class ParqueDeAtracciones {
     public static void main(String[] args) {
 
         PriorityQueue cola= new PriorityQueue<Visitante>();
-        List<Visitante> LoteVisitantes = new ArrayList<Visitante>();
+        
     
 
         leerPorPantalla();
@@ -40,12 +42,27 @@ public class ParqueDeAtracciones {
         } while (E + F + 1 != N);
     }
 
-    public static void generarVisitantes() {
+    public static List generarVisitantes() {
         int id = 1;
         int tiempo;
+        List<Visitante> LoteVisitantes = new ArrayList<Visitante>();
 
-        while(id < N) {
-            tiempo = 
+        while(id < E) {
+            Visitante visitante = new visitante(id,Constantes.STANDARD);
+            LoteVisitantes.add(visitante);
+            id++;
         }
+
+        while(id<F) {
+            Visitante visitante = new visitante(id,Constantes.FAST_PASS);
+            LoteVisitantes.add(visitante);
+            id++;
+        }
+
+        Visitante visitante = new visitante(id,Constantes.VIP_PASS);
+        LoteVisitantes.add(visitante);
+
+
+        return LoteVisitantes;
     }
 }
