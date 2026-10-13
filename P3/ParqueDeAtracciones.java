@@ -9,5 +9,10 @@ public class ParqueDeAtracciones {
 
         PriorityQueue cola= new PriorityQueue<Visitante>();
 
+        leerPorPantalla();
+    }
+
+    public static void leerPorPantalla() {
+        
     }
 }
