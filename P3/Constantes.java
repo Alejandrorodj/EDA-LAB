@@ -6,5 +6,5 @@ public class Constantes {
     public static final String STANDARD = "Standard";
     private static final int DURACION_ATRACCION = 300;
     private static final int PERSONAS_POR_ATRACCION = 5; // 1 por vagon
-    private static final int VISITANTE_VIP = 1;
+    private static final int VISITANTE_VIP_PASS = 1;
 }
