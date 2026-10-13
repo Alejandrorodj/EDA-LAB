@@ -142,15 +142,18 @@ Notas importantes sobre `PriorityQueue`:
 - [ ] Decidir cómo se dan los parámetros `N, E, F, L` (constantes, argumentos de `main` o lectura por teclado) y documentarlo.
 - [x] Crear la estructura de paquetes en `P3/` (`P3`, `P3.model`, `P3.util`), con nombres sin caracteres especiales.
   - OK (7-oct): existen `ParqueDeAtracciones.java` (con `main` vacío), `model/Visitante.java` (vacía), `util/` (vacía) y `archivos/` con el enunciado.
-  - En git (ramas `P3` y `origin/P3`) solo está `P3/Main.java`; los ficheros nuevos aún no se han subido.
+  - (13-oct) Ya están en git (commit `1c88610` "inicial"); `Main.java` ya no existe.
 - [x] Copiar `generar_javadoc.bat` de P2 y cambiar `P2` por `P3` (`-d P3\doc` y `-subpackages P3`).
   - OK (7-oct): creado `P3/generar_javadoc.bat`; `P3/doc/` ya queda fuera de git por la regla `doc/` del `.gitignore`.
 
 ### Fase 1 · Modelo de datos
 - [ ] Enum `TipoPase` con los tres pases y su prioridad.
 - [ ] Clase `Visitante` (id, pase, llegada e inicio de recorrido) con constructor, getters, cálculo de espera y `toString`.
-  - Creada vacía (7-oct).
+  - PARCIAL (13-oct): tiene `id`, `pase` (`String`) y `llegada`, con getters/setters y un constructor `Visitante(int id, String pase)`.
+  - Falta: el constructor no recibe la **llegada** (se queda a 0 salvo que se llame a `setLlegada`); falta la **hora de inicio del recorrido**, el método que calcula la **espera** y `toString`.
+  - Mejorable: el pase como enum `TipoPase` en vez de `String`.
 - [ ] Criterio de prioridad (`Comparable<Visitante>` o `Comparator<Visitante>`): pase, luego llegada, luego id.
+  - MAL (13-oct): `compareTo` existe pero sigue igual que el 7-oct (ver sección 8): no cumple el contrato y no usa `llegada` ni `id` para desempatar.
 - [ ] Javadoc de cada clase y método.
 
 ### Fase 2 · Generación de visitantes
