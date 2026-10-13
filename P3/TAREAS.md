@@ -70,12 +70,12 @@
 
 | Clase | Responsabilidad |
 |---|---|
-| `TipoPase` (enum) | `VIP`, `FAST_PASS`, `STANDARD`, cada uno con su **prioridad explícita** (un atributo numérico o el orden de declaración, documentado) y un nombre para mostrar. |
-| `Visitante` | `id`, `tipoPase`, `tiempoLlegada` y `tiempoInicioRecorrido`, que se rellena al montar. Calcula su **tiempo de espera**. Getters y `toString`. |
+| Tipo de pase | **Decisión del equipo (13-oct): `String`**, con los valores en `Constantes` (`VIP_PASS`, `FAST_PASS`, `STANDARD`). Sin enum `TipoPase`: el criterio de prioridad tiene que traducir cada pase a su prioridad (VIP > Fast > Standard). |
+| `Visitante` | `id`, `pase` (`String`), `llegada` y hora de inicio del recorrido, que se rellena al montar. Calcula su **tiempo de espera**. Getters y `toString`. |
 | Criterio de prioridad | `Visitante implements Comparable<Visitante>` **o** una clase/lambda `Comparator<Visitante>`. Compara por pase, luego por llegada y luego por id. |
 | `Atraccion` (o `Tren`) | Constantes de **capacidad (5)** y **duración (300)**. Saca hasta 5 visitantes de la cola de espera e informa del recorrido. |
 | `Simulador` | Recibe `N, E, F, L`. **Genera** los visitantes en la cola inicial, controla el **reloj**, pasa los visitantes de la cola inicial a la cola de prioridad cuando llegan, lanza los recorridos y busca al que **más ha esperado**. |
-| `Constantes` (opcional) | Capacidad, duración y, si se fijan, los valores de N, E, F y L. |
+| `Constantes` | Nombres de los pases (ya existe, de momento en `P3`), capacidad, duración y, si se fijan, los valores de N, E, F y L. |
 | `ParqueDeAtracciones` | Clase principal (`main`): obtiene los parámetros, crea el `Simulador` y lo arranca. |
 
 ### Estructura de carpetas
@@ -85,11 +85,10 @@ LAB/
     ├── ParqueDeAtracciones.java   arranque: obtiene N, E, F, L, crea el Simulador y lo lanza
     ├── Simulador.java             reloj, las dos colas, bucle de recorridos, visitante de mayor espera
     ├── model/
-    │   ├── TipoPase.java          enum VIP, FAST_PASS, STANDARD (con su prioridad)
     │   ├── Visitante.java         id, pase, llegada, inicio de recorrido, espera
     │   └── ComparadorVisitantes.java   (solo si se usa Comparator en vez de Comparable)
     ├── util/
-    │   └── Constantes.java        CAPACIDAD = 5, DURACION = 300 y los valores por defecto de N, E, F, L
+    │   └── Constantes.java        nombres de los pases, CAPACIDAD = 5, DURACION = 300 y los valores por defecto de N, E, F, L
     ├── archivos/
     │   └── 2026_27_colas_ES.pdf   enunciado
     ├── doc/                       Javadoc generado (en .gitignore)
@@ -150,7 +149,6 @@ Notas importantes sobre `PriorityQueue`:
 - [ ] Clase `Visitante` (id, pase, llegada e inicio de recorrido) con constructor, getters, cálculo de espera y `toString`.
   - PARCIAL (13-oct): tiene `id`, `pase` (`String`) y `llegada`, con getters/setters y un constructor `Visitante(int id, String pase)`.
   - Falta: el constructor no recibe la **llegada** (se queda a 0 salvo que se llame a `setLlegada`); falta la **hora de inicio del recorrido**, el método que calcula la **espera** y `toString`.
-  - Mejorable: el pase como enum `TipoPase` en vez de `String`.
 - [ ] Criterio de prioridad (`Comparable<Visitante>` o `Comparator<Visitante>`): pase, luego llegada, luego id.
   - MAL (13-oct): `compareTo` existe pero sigue igual que el 7-oct (ver sección 8): no cumple el contrato y no usa `llegada` ni `id` para desempatar.
 - [ ] Javadoc de cada clase y método.
@@ -238,7 +236,7 @@ Resultados calculados a mano con la interpretación de la sección 6 (ambigüeda
    - Las comparaciones de las líneas 56-70 casi nunca se ejecutan: a esas alturas `this` ya no es VIP ni Fast, y todas menos una exigen que lo sea.
    - Falta el desempate por **llegada** y por **id**.
 2. **Tipo crudo** en `ParqueDeAtracciones` (línea 10): `PriorityQueue cola = new PriorityQueue<Visitante>()`. Debe ser `PriorityQueue<Visitante>` a los dos lados; `javac -Xlint` avisa `[rawtypes]` y el enunciado lo prohíbe.
-3. **El pase es un `String`** comparado con `equalsIgnoreCase`. Un enum (`TipoPase`) con su prioridad hace la comparación mucho más simple y evita erratas.
+3. **El pase es un `String`** comparado con `equalsIgnoreCase`. (13-oct) Se mantiene por decisión del equipo; para que el criterio sea sencillo y correcto conviene convertir cada pase a un número de prioridad (por ejemplo VIP = 0, Fast = 1, Standard = 2) y comparar esos números, en vez de encadenar `if` por cada pareja de pases.
 4. **Faltan atributos en `Visitante`**: tiempo de llegada y hora de inicio del recorrido (hacen falta para el desempate y para la espera).
 5. **`Constantes` está en `P3`**, no en `P3/util` (la carpeta `util/` existe pero está vacía). Funciona, pero no coincide con la estructura de la sección 3.
 6. **Javadoc**: solo los comentarios automáticos de Eclipse (`@return the id`…); sin comentario de clase ni `@author` con iniciales.
