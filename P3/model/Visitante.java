@@ -4,8 +4,32 @@ import P3.Constantes;
 
 public class Visitante implements Comparable<Visitante> {
     private int id;
+    private int inicio;
     private int llegada;
     private String pase;
+
+    public Visitante(int id, int inicio, int llegada, String pase) {
+        this.id = id;
+        this.inicio = inicio;
+        this.llegada = llegada;
+        this.pase = pase;
+    }
+    
+    /**
+     * 
+     * @return the inicio
+     */
+    public int getInicio() {
+        return inicio;
+    }
+
+    /**
+     * 
+     * @param inicio
+     */
+    public void setInicio(int inicio) {
+        this.inicio = inicio;
+    }
 
     /**
      * @return the llegada
