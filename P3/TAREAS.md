@@ -55,7 +55,7 @@
   - genéricos siempre tipados (`Queue<Visitante>`, `PriorityQueue<Visitante>`), nunca tipos crudos;
   - el criterio de ordenación tipado (`Comparable<Visitante>` o `Comparator<Visitante>`);
   - ojo con `equals(Object)` y con `toArray()` sin argumentos (devuelve `Object[]`): mejor no usarlos.
-- [ ] **Documentación interna (Javadoc)** en **cada clase** y en los métodos relevantes. La guía está en Campus Virtual → sección *Laboratorio*.
+- [ ] **Documentación interna (Javadoc)** en **cada clase** y en los métodos relevantes. La guía está en Campus Virtual → sección *Laboratorio*. **[VT]**
   - Lección de P2: el comentario de clase va **justo encima de la declaración de la clase**, no encima de `package`; usar `@param`, `@return`, `@throws` y `{@code ...}` para los genéricos (`{@code Queue<Visitante>}`), y no dejar bloques `/** */` vacíos duplicados.
 - [ ] **Modularización y diseño orientado a objetos** adecuados: no meter todo en `main` ni en métodos `static`.
 - [ ] **Ningún dato personal en el código.** Nada de nombres ni correos: solo **iniciales + código de grupo de prácticas**.
@@ -134,11 +134,16 @@ Notas importantes sobre `PriorityQueue`:
 
 ## 5. Plan de tareas
 
+**Reparto (14-oct):** documentación, Javadoc y el tipo de la `PriorityQueue` → **VT** · criterio de prioridad (`compareTo`) y `Constantes` → **LP** · generación de visitantes y lectura de parámetros → **AR**. Pruebas (Fase 5) → **IA**, cuando todo lo demás esté OK. Las tareas sin etiqueta están sin asignar.
+
+**Buzones de avisos:** `avisos/AVISOS_AR.md`, `avisos/AVISOS_LP.md`, `avisos/AVISOS_VT.md` y `avisos/AVISOS_EQUIPO.md` (lo que no tiene dueño). Cada uno marca con `[x]` lo que arregla.
+
 ### Fase 0 · Preparación
-- [ ] Leer el enunciado completo en equipo y repartir roles.
-- [ ] Consultar en Campus Virtual la guía de documentación (Javadoc).
+- [x] Leer el enunciado completo en equipo y repartir roles.
+  - OK (14-oct): reparto al principio de esta sección. Falta asignar `Visitante`, la simulación (Fase 3), la salida (Fase 4) y las pruebas (Fase 5).
+- [ ] Consultar en Campus Virtual la guía de documentación (Javadoc). **[VT]**
 - [ ] Anotar las **iniciales de cada integrante y el código de grupo** para la cabecera de los comentarios.
-- [ ] Decidir cómo se dan los parámetros `N, E, F, L` (constantes, argumentos de `main` o lectura por teclado) y documentarlo.
+- [ ] Decidir cómo se dan los parámetros `N, E, F, L` (constantes, argumentos de `main` o lectura por teclado) y documentarlo. **[AR]**
 - [x] Crear la estructura de paquetes en `P3/` (`P3`, `P3.model`, `P3.util`), con nombres sin caracteres especiales.
   - OK (7-oct): existen `ParqueDeAtracciones.java` (con `main` vacío), `model/Visitante.java` (vacía), `util/` (vacía) y `archivos/` con el enunciado.
   - (13-oct) Ya están en git (commit `1c88610` "inicial"); `Main.java` ya no existe.
@@ -149,16 +154,16 @@ Notas importantes sobre `PriorityQueue`:
 - [ ] Clase `Visitante` (id, pase, llegada e inicio de recorrido) con constructor, getters, cálculo de espera y `toString`.
   - PARCIAL (13-oct): tiene `id`, `pase` (`String`) y `llegada`, con getters/setters y un constructor `Visitante(int id, String pase)`.
   - Falta: el constructor no recibe la **llegada** (se queda a 0 salvo que se llame a `setLlegada`); falta la **hora de inicio del recorrido**, el método que calcula la **espera** y `toString`.
-- [ ] Criterio de prioridad (`Comparable<Visitante>` o `Comparator<Visitante>`): pase, luego llegada, luego id.
+- [ ] Criterio de prioridad (`Comparable<Visitante>` o `Comparator<Visitante>`): pase, luego llegada, luego id. **[LP]**
   - MAL (13-oct): `compareTo` existe pero sigue igual que el 7-oct (ver sección 8): no cumple el contrato y no usa `llegada` ni `id` para desempatar.
-- [ ] Javadoc de cada clase y método.
+- [ ] Javadoc de cada clase y método. **[VT]**
 
 ### Fase 2 · Generación de visitantes
-- [ ] Generar `N` lotes con el orden exacto: E Standard, F Fast y 1 VIP.
-- [ ] Asignar los ids correlativos desde 1 (un contador que no se reinicie por lote).
-- [ ] Asignar la llegada `k·L` a todo el lote.
-- [ ] Encolarlos en la **cola inicial** (`Queue<Visitante>`).
-- [ ] Validar los parámetros: `N ≥ 1`, `E ≥ 0`, `F ≥ 0`, `L ≥ 0`. Avisar si son incorrectos.
+- [ ] Generar `N` lotes con el orden exacto: E Standard, F Fast y 1 VIP. **[AR]**
+- [ ] Asignar los ids correlativos desde 1 (un contador que no se reinicie por lote). **[AR]**
+- [ ] Asignar la llegada `k·L` a todo el lote. **[AR]**
+- [ ] Encolarlos en la **cola inicial** (`Queue<Visitante>`). **[AR]**
+- [ ] Validar los parámetros: `N ≥ 1`, `E ≥ 0`, `F ≥ 0`, `L ≥ 0`. Avisar si son incorrectos. **[AR]**
 
 ### Fase 3 · Simulación
 - [ ] Cola de espera `PriorityQueue<Visitante>` con el criterio de la Fase 1.
@@ -172,7 +177,8 @@ Notas importantes sobre `PriorityQueue`:
 - [ ] Resumen final: **visitante con mayor espera** (id, pase, llegada, inicio y espera), con el desempate por llegada.
 - [ ] Formato legible y consistente. Sin trazas de depuración en la versión final.
 
-### Fase 5 · Pruebas
+### Fase 5 · Pruebas **[IA]**
+> Las hace la IA (Claude) **cuando todo lo demás esté OK**: compilar, ejecutar cada caso con sus parámetros y comparar con los resultados calculados a mano. No se añade código de pruebas al repositorio.
 Resultados calculados a mano con la interpretación de la sección 6 (ambigüedad 1, opción A):
 
 - [ ] **Caso base**: `N=2, E=3, F=2, L=100`
@@ -194,7 +200,7 @@ Resultados calculados a mano con la interpretación de la sección 6 (ambigüeda
 
 ### Fase 6 · Revisión final y entrega
 - [ ] **No hay casts ni referencias a `Object`** relacionados con las colas.
-- [ ] Javadoc completo y **sin bloques vacíos duplicados**. Ejecutar `javadoc` y revisar los avisos.
+- [ ] Javadoc completo y **sin bloques vacíos duplicados**. Ejecutar `javadoc` y revisar los avisos. **[VT]**
 - [ ] **Sin nombres ni correos**: solo iniciales + código de grupo.
 - [ ] Nombres de fichero sin caracteres especiales.
 - [ ] Modularización y diseño orientado a objetos (nada de "todo en `main`").
@@ -242,3 +248,40 @@ Resultados calculados a mano con la interpretación de la sección 6 (ambigüeda
 6. **Javadoc**: solo los comentarios automáticos de Eclipse (`@return the id`…); sin comentario de clase ni `@author` con iniciales.
 
 **Falta todo lo demás:** cola FIFO de llegada, generación de lotes, simulación, salida y pruebas.
+
+---
+
+## 9. Revisión del código (2ª revisión, 14-oct-2026)
+
+**NO COMPILA** (javac 21, 3 errores): `Visitante` usa un atributo `salida` que no existe (líneas 14, 38 y 45). El atributo se llama `llegada`.
+
+### `Visitante` (sin asignar)
+- El constructor nuevo `Visitante(int id, int inicio, int salida, String pase)` y `getSalida`/`setSalida` usan `salida`, que no está declarado. Si es la hora de llegada, debe ser `llegada`.
+- Al cambiarlo se han perdido `getLlegada`/`setLlegada`.
+- Ya tiene `inicio` (hora de inicio del recorrido). Faltan el cálculo de la **espera** (`inicio - llegada`) y `toString`.
+- Hay dos constructores; el antiguo `Visitante(int id, String pase)` deja la llegada a 0.
+
+### `compareTo` **[LP]**
+- Sin cambios desde la 1ª revisión: no cumple el contrato y no desempata por llegada ni id (ver sección 8).
+
+### Lectura de parámetros y generación de visitantes **[AR]**
+- `leerPorPantalla` interpreta mal los parámetros: pide "número de visitantes" como `N` y obliga a que `E + F + 1 == N`. En el enunciado **`N` es el número de lotes** y `E`, `F` son visitantes **por lote**; no hay ninguna relación entre ellos. Con `N=2, E=3, F=2` (caso base) el programa no deja continuar.
+- **No se lee `L`** (tiempo entre lotes).
+- La validación correcta es `N ≥ 1`, `E ≥ 0`, `F ≥ 0`, `L ≥ 0`. Si se escribe algo que no es un número, `nextInt()` lanza `InputMismatchException` y el programa se cae.
+- `generarVisitantes(int tiempo)` genera **un solo lote** y tiene fallos de conteo:
+  - `while (id < E)` crea `E - 1` Standard, no `E`.
+  - `while (id < F)` compara el id con `F`, no con `E + F`: con `E=3, F=2` crea 2 Standard, **0 Fast** y el VIP con id 3. Debería ser 3 Standard (1-3), 2 Fast (4-5) y VIP 6.
+  - `id` empieza en 1 en cada llamada: los ids no serían correlativos entre lotes.
+  - El parámetro `tiempo` no se usa: los visitantes no reciben su **llegada**.
+  - Devuelve una `List`; la pista del enunciado es meter a todos en una **cola** (`Queue<Visitante>`).
+- `generarVisitantes` no se llama desde ningún sitio.
+- Menores: falta un espacio en "Has introducido" + N; nombres `N, E, F, L` y `LoteVisitantes` con mayúscula (convención Java: minúscula para variables); todo `static`.
+
+### `ParqueDeAtracciones` **[VT]**
+- Sigue el **tipo crudo** `PriorityQueue cola` (línea 16), y `cola` no se usa.
+
+### `Constantes` **[LP]**
+- Las nuevas `DURACION_ATRACCION`, `PERSONAS_POR_ATRACCION` y `VISITANTE_VIP_PASS` son **`private`**: ninguna otra clase puede usarlas. Deben ser `public`.
+
+### Documentación **[VT]**
+- Sin empezar: solo comentarios automáticos de Eclipse; sin comentario de clase ni `@author` con iniciales.
