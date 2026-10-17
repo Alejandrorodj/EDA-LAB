@@ -38,6 +38,8 @@ public class ParqueDeAtracciones {
             }
 
         } while (E + F + 1 != N);
+
+        sc.close();
     }
 
     public static List<Visitante> generarVisitantes(int tiempo) {
