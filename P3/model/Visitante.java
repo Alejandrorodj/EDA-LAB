@@ -4,14 +4,14 @@ import P3.util.Constantes;
 
 public class Visitante implements Comparable<Visitante> {
     private int id;
-    private int inicio;
+    private int salida;
     private int llegada;
     private String pase;
 
-    public Visitante(int id, int inicio, int llegada, String pase) {
+    public Visitante(int id, int llegada, int salida, String pase) {
         this.id = id;
-        this.inicio = inicio;
         this.llegada = llegada;
+        this.salida = salida;
         this.pase = pase;
     }
 
@@ -19,30 +19,30 @@ public class Visitante implements Comparable<Visitante> {
      * 
      * @return the inicio
      */
-    public int getInicio() {
-        return inicio;
+    public int getLlegada() {
+        return llegada;
     }
 
     /**
      * 
      * @param inicio
      */
-    public void setInicio(int inicio) {
-        this.inicio = inicio;
+    public void setLlegada(int llegada) {
+        this.llegada = llegada;
     }
 
     /**
      * @return the llegada
      */
-    public int getLlegada() {
-        return llegada;
+    public int getSalida() {
+        return salida;
     }
 
     /**
-     * @param llegada the llegada to set
+     * @param salida the llegada to set
      */
-    public void setLlegada(int llegada) {
-        this.llegada = llegada;
+    public void setSalida(int salida) {
+        this.salida = salida;
     }
 
     /**
@@ -102,11 +102,11 @@ public class Visitante implements Comparable<Visitante> {
         } else if (prioridadEste == prioridadOtro) {
 
             // 2. Mismo pase: va antes el que llegó primero
-            if (this.llegada < v.getLlegada()) {
+            if (this.salida < v.getSalida()) {
                 resultado = -1;
-            } else if (this.llegada > v.getLlegada()) {
+            } else if (this.salida > v.getSalida()) {
                 resultado = 1;
-            } else if (this.llegada == v.getLlegada()) {
+            } else if (this.salida == v.getSalida()) {
 
                 // 3. Han llegado a la vez: va antes el de menor id
                 if (this.id < v.getId()) {

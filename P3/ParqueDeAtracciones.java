@@ -22,23 +22,40 @@ public class ParqueDeAtracciones {
     public static void leerPorPantalla() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Introduce un número de visitantes: ");
+        System.out.println("Introduce los número de lotes de visitantes: ");
         N = sc.nextInt();
+        System.out.println("Has introducido " + N);
 
-        System.out.println("Has introducido" + N);
+        System.out.println("Introduce los visitantes Standard: ");
+        E = sc.nextInt();
+        System.out.println("Has introducido " + E);
 
-        do {
-            System.out.println("Introduce E:");
+        System.out.println("Introduce los visitantes Fast Pass: ");
+        F = sc.nextInt();
+        System.out.println("Has introducido " + F);
+
+        System.out.println("Introduce el tiempo entre lotes: ");
+        L = sc.nextInt();
+        System.out.println("Has introducido " + L);
+
+        while (N <= 0 || E < 0 || F < 0 || L <= 0) {
+
+            System.out.println("Introduzca de nuevo el número de lotes de visitantes: ");
+            N = sc.nextInt();
+            System.out.println("Has introducido " + N);
+
+            System.out.println("Introduzca de nuevo los visitantes Standard: ");
             E = sc.nextInt();
+            System.out.println("Has introducido " + E);
 
-            System.out.println("Introduce F:");
+            System.out.println("Introduzca de nuevo los visitantes Fast Pass: ");
             F = sc.nextInt();
+            System.out.println("Has introducido " + F);
 
-            if (E + F + 1 != N) {
-                System.out.println("Error: E + F + 1 debe ser igual a N");
-            }
-
-        } while (E + F + 1 != N);
+            System.out.println("Introduzca de nuevo el tiempo entre lotes: ");
+            L = sc.nextInt();
+            System.out.println("Has introducido " + L);
+        }
 
         sc.close();
     }
@@ -47,21 +64,32 @@ public class ParqueDeAtracciones {
         int id = 1;
         List<Visitante> LoteVisitantes = new ArrayList<Visitante>();
 
-        while (id < E) {
-            Visitante visitante = new Visitante(id, Constantes.STANDARD);
+        for(int i = 0; i < N; i++) {
+
+            int contadorVisitantes = 0;
+            tiempo = i * L;
+
+            while (contadorVisitantes < E) {
+                Visitante visitante = new Visitante(id, llegada, tiempo, Constantes.STANDARD);
+                LoteVisitantes.add(visitante);
+                contadorVisitantes++;
+                id++;
+            }
+    
+            contadorVisitantes = 0;
+            while (contadorVisitantes < F) {
+                Visitante visitante = new Visitante(id, llegada, tiempo, Constantes.FAST_PASS)
+                LoteVisitantes.add(visitante);
+                id++;
+                contadorVisitantes++;
+            }
+    
+            Visitante visitante = new Visitante(id, llegada, tiempo, Constantes.VIP_PASS);
             LoteVisitantes.add(visitante);
             id++;
+
         }
-
-        while (id < F) {
-            Visitante visitante = new Visitante(id, Constantes.FAST_PASS);
-            LoteVisitantes.add(visitante);
-            id++;
-        }
-
-        Visitante visitante = new Visitante(id, Constantes.VIP_PASS);
-        LoteVisitantes.add(visitante);
-
+        
         return LoteVisitantes;
     }
 }
