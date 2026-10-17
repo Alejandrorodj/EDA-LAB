@@ -102,11 +102,11 @@ public class Visitante implements Comparable<Visitante> {
         } else if (prioridadEste == prioridadOtro) {
 
             // 2. Mismo pase: va antes el que llegó primero
-            if (this.salida < v.getSalida()) {
+            if (this.llegada < v.getLlegada()) {
                 resultado = -1;
-            } else if (this.salida > v.getSalida()) {
+            } else if (this.llegada > v.getLlegada()) {
                 resultado = 1;
-            } else if (this.salida == v.getSalida()) {
+            } else if (this.llegada == v.getLlegada()) {
 
                 // 3. Han llegado a la vez: va antes el de menor id
                 if (this.id < v.getId()) {
