@@ -57,7 +57,7 @@
   - ojo con `equals(Object)` y con `toArray()` sin argumentos (devuelve `Object[]`): mejor no usarlos.
 - [ ] **Documentación interna (Javadoc)** en **cada clase** y en los métodos relevantes. La guía está en Campus Virtual → sección *Laboratorio*. **[VT]**
   - Lección de P2: el comentario de clase va **justo encima de la declaración de la clase**, no encima de `package`; usar `@param`, `@return`, `@throws` y `{@code ...}` para los genéricos (`{@code Queue<Visitante>}`), y no dejar bloques `/** */` vacíos duplicados.
-- [ ] **Modularización y diseño orientado a objetos** adecuados: no meter todo en `main` ni en métodos `static`.
+- [ ] **Modularización y diseño orientado a objetos** adecuados: no meter todo en `main` ni en métodos `static`. **[VT]**
 - [ ] **Ningún dato personal en el código.** Nada de nombres ni correos: solo **iniciales + código de grupo de prácticas**.
   - Lección de P2: allí se pusieron los nombres completos en las cabeceras. **No repetirlo.**
 - [ ] **Sin caracteres especiales en los nombres de ficheros**: ni tildes, ni `ñ`, ni espacios.
@@ -75,7 +75,7 @@
 | Criterio de prioridad | `Visitante implements Comparable<Visitante>` **o** una clase/lambda `Comparator<Visitante>`. Compara por pase, luego por llegada y luego por id. |
 | `Atraccion` (o `Tren`) | Constantes de **capacidad (5)** y **duración (300)**. Saca hasta 5 visitantes de la cola de espera e informa del recorrido. |
 | `Simulador` | Recibe `N, E, F, L`. **Genera** los visitantes en la cola inicial, controla el **reloj**, pasa los visitantes de la cola inicial a la cola de prioridad cuando llegan, lanza los recorridos y busca al que **más ha esperado**. |
-| `Constantes` | Nombres de los pases (ya existe, de momento en `P3`), capacidad, duración y, si se fijan, los valores de N, E, F y L. |
+| `Constantes` | Nombres de los pases (ya existe, en `P3/util/` desde el 17-oct), capacidad, duración y, si se fijan, los valores de N, E, F y L. |
 | `ParqueDeAtracciones` | Clase principal (`main`): obtiene los parámetros, crea el `Simulador` y lo arranca. |
 
 ### Estructura de carpetas
@@ -134,7 +134,7 @@ Notas importantes sobre `PriorityQueue`:
 
 ## 5. Plan de tareas
 
-**Reparto (14-oct):** documentación, Javadoc y el tipo de la `PriorityQueue` → **VT** · criterio de prioridad (`compareTo`) y `Constantes` → **LP** · generación de visitantes y lectura de parámetros → **AR**. Pruebas (Fase 5) → **IA**, cuando todo lo demás esté OK. Las tareas sin etiqueta están sin asignar.
+**Reparto (14-oct):** documentación, Javadoc, el tipo de la `PriorityQueue` y el diseño sin `static` → **VT** · criterio de prioridad (`compareTo`) y `Constantes` → **LP** · generación de visitantes, lectura de parámetros y `Visitante` (espera, `toString`, constructores) → **AR**. Pruebas (Fase 5) → **IA**, cuando todo lo demás esté OK. Las tareas sin etiqueta están sin asignar.
 
 **Buzones de avisos:** `avisos/AVISOS_AR.md`, `avisos/AVISOS_LP.md`, `avisos/AVISOS_VT.md` y `avisos/AVISOS_EQUIPO.md` (lo que no tiene dueño). Cada uno marca con `[x]` lo que arregla.
 
@@ -151,11 +151,13 @@ Notas importantes sobre `PriorityQueue`:
   - OK (7-oct): creado `P3/generar_javadoc.bat`; `P3/doc/` ya queda fuera de git por la regla `doc/` del `.gitignore`.
 
 ### Fase 1 · Modelo de datos
-- [ ] Clase `Visitante` (id, pase, llegada e inicio de recorrido) con constructor, getters, cálculo de espera y `toString`.
+- [ ] Clase `Visitante` (id, pase, llegada e inicio de recorrido) con constructor, getters, cálculo de espera y `toString`. **[AR]**
   - PARCIAL (13-oct): tiene `id`, `pase` (`String`) y `llegada`, con getters/setters y un constructor `Visitante(int id, String pase)`.
   - Falta: el constructor no recibe la **llegada** (se queda a 0 salvo que se llame a `setLlegada`); falta la **hora de inicio del recorrido**, el método que calcula la **espera** y `toString`.
-- [ ] Criterio de prioridad (`Comparable<Visitante>` o `Comparator<Visitante>`): pase, luego llegada, luego id. **[LP]**
-  - MAL (13-oct): `compareTo` existe pero sigue igual que el 7-oct (ver sección 8): no cumple el contrato y no usa `llegada` ni `id` para desempatar.
+- [x] Criterio de prioridad (`Comparable<Visitante>` o `Comparator<Visitante>`): pase, luego llegada, luego id. **[LP]**
+  - CASI (17-oct): reescrito con `if` y un método `prioridadPase` (VIP = -1, Fast = 0, Standard = 1). Probado: el orden del caso base sale bien (`6V 12V 4F 5F 10F 11F 1S 2S 3S 7S 8S 9S`) y es simétrico para cualquier pareja distinta.
+  - **OK (17-oct, 10:10):** `resultado` empieza en 0. Probado: simétrico en todas las parejas, `v.compareTo(v) == 0`, orden del caso base correcto y pase desconocido → `IllegalArgumentException`. Falta hacer commit.
+  - OK (17-oct, 10:09): `prioridadPase` lanza `IllegalArgumentException` con un pase desconocido. Compila y el orden del caso base sigue bien.
 - [ ] Javadoc de cada clase y método. **[VT]**
 
 ### Fase 2 · Generación de visitantes
@@ -262,7 +264,7 @@ Resultados calculados a mano con la interpretación de la sección 6 (ambigüeda
 - Hay dos constructores; el antiguo `Visitante(int id, String pase)` deja la llegada a 0.
 
 ### `compareTo` **[LP]**
-- Sin cambios desde la 1ª revisión: no cumple el contrato y no desempata por llegada ni id (ver sección 8).
+- (17-oct) Reescrito y correcto salvo dos detalles: `resultado` empieza en 99 (debe quedar 0 si todo es igual) y un pase desconocido vale -99 (por delante de VIP).
 
 ### Lectura de parámetros y generación de visitantes **[AR]**
 - `leerPorPantalla` interpreta mal los parámetros: pide "número de visitantes" como `N` y obliga a que `E + F + 1 == N`. En el enunciado **`N` es el número de lotes** y `E`, `F` son visitantes **por lote**; no hay ninguna relación entre ellos. Con `N=2, E=3, F=2` (caso base) el programa no deja continuar.

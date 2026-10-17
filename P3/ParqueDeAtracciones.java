@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 import P3.model.Visitante;
+import P3.util.Constantes;
 
 public class ParqueDeAtracciones {
 

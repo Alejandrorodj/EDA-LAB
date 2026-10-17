@@ -1,6 +1,6 @@
 package P3.model;
 
-import P3.Constantes;
+import P3.util.Constantes;
 
 public class Visitante implements Comparable<Visitante> {
     private int id;
@@ -82,39 +82,72 @@ public class Visitante implements Comparable<Visitante> {
         this.pase = pase;
     }
 
+    /**
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
-    public int compareTo(Visitante o) {
-        // Si el actual es de tipo VIP
-        if (this.pase.equalsIgnoreCase(Constantes.VIP_PASS)) {
-            return -1;
-        } else if (this.pase.equalsIgnoreCase(Constantes.FAST_PASS)) {
-            return 0;
+    public int compareTo(Visitante v) {
+        int resultado = 0;
+
+        int prioridadEste = prioridadPase(this.pase);
+        int prioridadOtro = prioridadPase(v.getPase());
+
+        // 1. Miramos el pase
+        if (prioridadEste < prioridadOtro) {
+            resultado = -1;
+        } else if (prioridadEste > prioridadOtro) {
+            resultado = 1;
+        } else if (prioridadEste == prioridadOtro) {
+
+            // 2. Mismo pase: va antes el que llegó primero
+            if (this.llegada < v.getLlegada()) {
+                resultado = -1;
+            } else if (this.llegada > v.getLlegada()) {
+                resultado = 1;
+            } else if (this.llegada == v.getLlegada()) {
+
+                // 3. Han llegado a la vez: va antes el de menor id
+                if (this.id < v.getId()) {
+                    resultado = -1;
+                }
+                if (this.id > v.getId()) {
+                    resultado = 1;
+                }
+            }
         }
 
-        // Si el visitante actual es de tipo standard
-        if (o.getPase().equalsIgnoreCase(Constantes.VIP_PASS) && this.pase.equalsIgnoreCase(Constantes.VIP_PASS)) {
-            return -1;
-        } else if (o.getPase().equalsIgnoreCase(Constantes.FAST_PASS)
-                && this.pase.equalsIgnoreCase(Constantes.VIP_PASS)) {
-            return 0;
-        } else if (o.getPase().equalsIgnoreCase(Constantes.STANDARD)
-                && this.pase.equalsIgnoreCase(Constantes.VIP_PASS)) {
-            return 0;
-        } else if (o.getPase().equalsIgnoreCase(Constantes.VIP_PASS)
-                && this.pase.equalsIgnoreCase(Constantes.FAST_PASS)) {
-            return 0;
-        } else if (o.getPase().equalsIgnoreCase(Constantes.FAST_PASS)
-                && this.pase.equalsIgnoreCase(Constantes.FAST_PASS)) {
-            return 0;
-        } else if (o.getPase().equalsIgnoreCase(Constantes.FAST_PASS)
-                && this.pase.equalsIgnoreCase(Constantes.STANDARD)) {
-            return 0;
-        } else if (o.getPase().equalsIgnoreCase(Constantes.STANDARD)
-                && this.pase.equalsIgnoreCase(Constantes.FAST_PASS)) {
-            return 0;
+        return resultado;
+    }
+
+    /**
+     * Traduce el pase en un numero segun su prioridad
+     * VIP = -1
+     * FAST_PASS = 0
+     * STANDARD = 1
+     * 
+     * @param pase
+     * @return prioridad del pase
+     */
+    private int prioridadPase(String pase) {
+
+        int prioridad = -99;
+
+        if (Constantes.STANDARD.equalsIgnoreCase(pase)) {
+            prioridad = 1;
+        } else if (Constantes.FAST_PASS.equalsIgnoreCase(pase)) {
+            prioridad = 0;
+        } else if (Constantes.VIP_PASS.equalsIgnoreCase(pase)) {
+            prioridad = -1;
         }
 
-        return 1;
+        // Si el pase no es ninguno, revision de errores
+        if (prioridad == -99) {
+            throw new IllegalArgumentException("Pase no reconocido: " + pase);
+        }
+
+        return prioridad;
     }
 
 }

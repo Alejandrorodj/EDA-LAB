@@ -1,4 +1,4 @@
-package P3;
+package P3.util;
 
 public class Constantes {
     public static final String VIP_PASS = "Vip Pass";
