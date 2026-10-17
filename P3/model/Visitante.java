@@ -4,14 +4,12 @@ import P3.util.Constantes;
 
 public class Visitante implements Comparable<Visitante> {
     private int id;
-    private int salida;
     private int llegada;
     private String pase;
 
-    public Visitante(int id, int llegada, int salida, String pase) {
+    public Visitante(int id, int llegada, String pase) {
         this.id = id;
         this.llegada = llegada;
-        this.salida = salida;
         this.pase = pase;
     }
 
@@ -29,20 +27,6 @@ public class Visitante implements Comparable<Visitante> {
      */
     public void setLlegada(int llegada) {
         this.llegada = llegada;
-    }
-
-    /**
-     * @return the llegada
-     */
-    public int getSalida() {
-        return salida;
-    }
-
-    /**
-     * @param salida the llegada to set
-     */
-    public void setSalida(int salida) {
-        this.salida = salida;
     }
 
     /**
@@ -72,16 +56,6 @@ public class Visitante implements Comparable<Visitante> {
     public void setPase(String pase) {
         this.pase = pase;
     }
-
-    /**
-     * @param id
-     * @param pase
-     */
-    public Visitante(int id, String pase) {
-        this.id = id;
-        this.pase = pase;
-    }
-
     /**
      * (non-Javadoc)
      * 
@@ -147,6 +121,10 @@ public class Visitante implements Comparable<Visitante> {
         }
 
         return prioridad;
+    }
+
+    public String toString() {
+        return "ID: " + id + " | Pase: " + pase + " | Llegada: " + llegada;
     }
 
 }

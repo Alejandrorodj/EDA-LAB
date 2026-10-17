@@ -21,9 +21,7 @@ public class ParqueDeAtracciones {
         List<Visitante> visitantes = generarVisitantes(0);
 
         for (Visitante v : visitantes) {
-            System.out.println("ID: " + v.getId()
-                    + " | Pase: " + v.getPase()
-                    + " | Llegada: " + v.getLlegada());
+            System.out.println("ID: " + v.getId() + " | Pase: " + v.getPase()   + " | Llegada: " + v.getLlegada());
         }
     }
 
@@ -46,7 +44,7 @@ public class ParqueDeAtracciones {
         L = sc.nextInt();
         System.out.println("Has introducido " + L);
 
-        while (N <= 0 || E < 0 || F < 0 || L <= 0) {
+        while (N <= 0 || E < 0 || F < 0 || L < 0) {
 
             System.out.println("Introduzca de nuevo el número de lotes de visitantes: ");
             N = sc.nextInt();
@@ -78,7 +76,7 @@ public class ParqueDeAtracciones {
             tiempo = i * L;
 
             while (contadorVisitantes < E) {
-                Visitante visitante = new Visitante(id, tiempo, 0, Constantes.STANDARD);
+                Visitante visitante = new Visitante(id, tiempo, Constantes.STANDARD);
                 loteVisitantes.add(visitante);
                 contadorVisitantes++;
                 id++;
@@ -86,13 +84,13 @@ public class ParqueDeAtracciones {
 
             contadorVisitantes = 0;
             while (contadorVisitantes < F) {
-                Visitante visitante = new Visitante(id, tiempo, 0, Constantes.FAST_PASS);
+                Visitante visitante = new Visitante(id, tiempo, Constantes.FAST_PASS);
                 loteVisitantes.add(visitante);
                 id++;
                 contadorVisitantes++;
             }
 
-            Visitante visitante = new Visitante(id, tiempo, 0, Constantes.VIP_PASS);
+            Visitante visitante = new Visitante(id, tiempo, Constantes.VIP_PASS);
             loteVisitantes.add(visitante);
             id++;
 
