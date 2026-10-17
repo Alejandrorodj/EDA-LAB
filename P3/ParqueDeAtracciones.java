@@ -17,6 +17,14 @@ public class ParqueDeAtracciones {
         PriorityQueue cola = new PriorityQueue<Visitante>();
 
         leerPorPantalla();
+
+        List<Visitante> visitantes = generarVisitantes(0);
+
+        for (Visitante v : visitantes) {
+            System.out.println("ID: " + v.getId()
+                    + " | Pase: " + v.getPase()
+                    + " | Llegada: " + v.getLlegada());
+        }
     }
 
     public static void leerPorPantalla() {
@@ -62,34 +70,34 @@ public class ParqueDeAtracciones {
 
     public static List<Visitante> generarVisitantes(int tiempo) {
         int id = 1;
-        List<Visitante> LoteVisitantes = new ArrayList<Visitante>();
+        List<Visitante> loteVisitantes = new ArrayList<Visitante>();
 
-        for(int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++) {
 
             int contadorVisitantes = 0;
             tiempo = i * L;
 
             while (contadorVisitantes < E) {
-                Visitante visitante = new Visitante(id, llegada, tiempo, Constantes.STANDARD);
-                LoteVisitantes.add(visitante);
+                Visitante visitante = new Visitante(id, tiempo, 0, Constantes.STANDARD);
+                loteVisitantes.add(visitante);
                 contadorVisitantes++;
                 id++;
             }
-    
+
             contadorVisitantes = 0;
             while (contadorVisitantes < F) {
-                Visitante visitante = new Visitante(id, llegada, tiempo, Constantes.FAST_PASS)
-                LoteVisitantes.add(visitante);
+                Visitante visitante = new Visitante(id, tiempo, 0, Constantes.FAST_PASS);
+                loteVisitantes.add(visitante);
                 id++;
                 contadorVisitantes++;
             }
-    
-            Visitante visitante = new Visitante(id, llegada, tiempo, Constantes.VIP_PASS);
-            LoteVisitantes.add(visitante);
+
+            Visitante visitante = new Visitante(id, tiempo, 0, Constantes.VIP_PASS);
+            loteVisitantes.add(visitante);
             id++;
 
         }
-        
-        return LoteVisitantes;
+
+        return loteVisitantes;
     }
 }

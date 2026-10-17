@@ -111,8 +111,7 @@ public class Visitante implements Comparable<Visitante> {
                 // 3. Han llegado a la vez: va antes el de menor id
                 if (this.id < v.getId()) {
                     resultado = -1;
-                }
-                if (this.id > v.getId()) {
+                } else {
                     resultado = 1;
                 }
             }
