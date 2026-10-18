@@ -9,6 +9,13 @@ import java.util.Scanner;
 import P3.model.Visitante;
 import P3.util.Constantes;
 
+/**
+ * Gestiona los parametros, las colas de visitantes y la simulacion
+ * de los recorridos de la atraccion.
+ *
+ * @author LP, AR, VT
+ * @version 1.0 (19/10/2026)
+ */
 public class Simulacion {
 
     // n: numero de lotes

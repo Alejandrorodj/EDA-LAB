@@ -2,6 +2,13 @@ package P3.model;
 
 import P3.util.Constantes;
 
+/**
+ * Representa a un visitante de la atraccion, incluyendo su identificador,
+ * tipo de pase, tiempo de llegada e inicio del recorrido.
+ *
+ * @author LP, AR, VT
+ * @version 1.0 (19/10/2026)
+ */
 public class Visitante implements Comparable<Visitante> {
     private int id;
     private int llegada;
