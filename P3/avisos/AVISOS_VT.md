@@ -1,13 +1,13 @@
 # Buzón de avisos – VT
 
 Avisos de la P3 para **VT**, agrupados por tema. Cuando arregles uno, márcalo con `[x]` y apunta el commit; lo terminado baja a **Hecho**.
-Última revisión: 17-oct-2026 (`origin/P3` = `566f07b` más los cambios sin subir).
+Última revisión: 18-oct-2026, noche (`origin/P3` = `c1a4100`; `Simulacion.java` aún sin subir).
 
 ## Diseño orientado a objetos (`ParqueDeAtracciones.java`)
-- [ ] **Todo es `static`**: los atributos `N, E, F, L` (l. 23) y los métodos `leerPorPantalla` y `generarVisitantes`. Nunca se crea un objeto: son funciones sueltas que comparten variables globales. El enunciado penaliza alejarse de la orientación a objetos (en P2 pasó lo mismo con `Acciones`).
+- [x] *(18-oct: hecho con la clase `Simulacion`; `main` solo crea el objeto)* **Todo es `static`**: los atributos `N, E, F, L` (l. 13) y los métodos `leerPorPantalla` y `generarVisitantes`. Nunca se crea un objeto: son funciones sueltas que comparten variables globales. El enunciado penaliza alejarse de la orientación a objetos (en P2 pasó lo mismo con `Acciones`).
   - Problemas: solo puede haber una simulación; cualquier método toca `N, E, F, L` sin control; `generarVisitantes` usa `E` y `F` sin recibirlos (si se llama antes de leerlos, valen 0).
-- [ ] Pasar a una clase con **atributos de instancia** (sin `static`): `n, e, f, l` en minúscula, la cola de llegada (`Queue<Visitante>`), la cola de espera (`PriorityQueue<Visitante>`) y el reloj. Sus métodos (leer parámetros, generar visitantes, simular, mostrar) también sin `static`.
-- [ ] `main` es lo único `static`: solo crea el objeto y llama a sus métodos (como `JuegoDeCartas` al final de P2). Por ejemplo:
+- [x] *(18-oct)* Pasar a una clase con **atributos de instancia** (sin `static`): `n, e, f, l` en minúscula, la cola de llegada (`Queue<Visitante>`), la cola de espera (`PriorityQueue<Visitante>`) y el reloj. Sus métodos (leer parámetros, generar visitantes, simular, mostrar) también sin `static`.
+- [x] *(18-oct)* `main` es lo único `static`: solo crea el objeto y llama a sus métodos (como `JuegoDeCartas` al final de P2). Por ejemplo:
   ```java
   public static void main(String[] args) {
       Simulador simulador = new Simulador();
@@ -18,14 +18,24 @@ Avisos de la P3 para **VT**, agrupados por tema. Cuando arregles uno, márcalo c
 - Coordinar con **AR**: cambia la forma de `leerPorPantalla` y `generarVisitantes`. Mejor hacerlo **antes** de escribir la simulación.
 
 ## Cola de prioridad (`ParqueDeAtracciones.java`)
-- [ ] `PriorityQueue cola = new PriorityQueue<Visitante>();` (l. 27) es un **tipo crudo**: falta `<Visitante>` a la izquierda. `javac -Xlint` avisa `[rawtypes]` y el enunciado lo prohíbe (sin casts ni `Object`). Debe ser `PriorityQueue<Visitante>` a los dos lados.
-- [ ] `cola` se crea y no se usa.
+- [x] *(18-oct: en `Simulacion` ya es `PriorityQueue<Visitante>`)* `PriorityQueue cola = new PriorityQueue<Visitante>();` (l. 17) es un **tipo crudo**: falta `<Visitante>` a la izquierda. `javac -Xlint` avisa `[rawtypes]` y el enunciado lo prohíbe (sin casts ni `Object`). Debe ser `PriorityQueue<Visitante>` a los dos lados.
+- [x] *(18-oct, noche: ya se usa en la simulación)* `cola` se crea y no se usa (sigue así en `Simulacion`: se usará en `iniciarSimulacion`).
 
 ## Documentación
 - [ ] Sin comentario Javadoc de clase en `Constantes`, `ParqueDeAtracciones` y `Visitante`. Va **justo encima de `public class`**, no antes de `package`.
 - [ ] `@author` solo con **iniciales + código de grupo** (nada de nombres: en P2 se pusieron los nombres completos).
-- [ ] Los métodos solo tienen los comentarios automáticos de Eclipse (`@return the id`…), sin descripción; `getInicio`/`setInicio` tienen el bloque vacío y `compareTo` el "(non-Javadoc)". Faltan los de `leerPorPantalla`, `generarVisitantes` y `main`.
+- [ ] Los métodos solo tienen los comentarios automáticos de Eclipse (`@return the id`…), sin descripción; `compareTo` y `toString` tienen el "(non-Javadoc)" de Eclipse. Faltan los de `leerPorPantalla`, `generarVisitantes`, `toString` y `main`.
 - [ ] Constantes y atributos sin `/** … */`.
+- [ ] **`Simulacion`** *(18-oct)*:
+  - Sin javadoc de clase (con `@author` iniciales + grupo).
+  - Atributos `n, e, f, l` con `//` y erratas ("standar", "fastPAss"): pasar a `/** */`, uno por atributo. `idVisitante`, `cola` y `colaEspera` sin comentario.
+  - Constructor: "Constructor vacio" no es cierto (lee los datos y genera los visitantes).
+  - `iniciarSimulacion` sin javadoc. `generarLote`: dice "el lote" pero genera todos, y sobra la línea ` * ` vacía.
+  - `leerPorPantalla`: es por teclado; decir que repite si hay valores no válidos.
+  - `generarVisitantes`: `@param tiempo` (el parámetro es `llegada`) y `@return` en un `void` (error de javadoc); la descripción habla de una cola que ya no devuelve.
+- [ ] **`ParqueDeAtracciones`** *(18-oct)*: sin javadoc de clase ni de `main`.
+- [ ] **`Visitante`** *(18-oct)*: sin javadoc de clase, constructor ni atributos; `@param` sin descripción; mezcla "the inicio … to set" en inglés; en `prioridadPase` las líneas "VIP = -1…" salen juntas en el javadoc (usar `<ul><li>` o `<br>`).
+- [ ] **`Constantes`** *(18-oct)*: ningún comentario.
 - [ ] Al terminar, ejecutar `generar_javadoc.bat` y revisar errores y avisos (en P2 empezamos con 10 errores y 70 avisos). Los genéricos dentro de comentarios van como `{@code Queue<Visitante>}`.
 
 ## Commits

@@ -5,6 +5,8 @@ import P3.util.Constantes;
 public class Visitante implements Comparable<Visitante> {
     private int id;
     private int llegada;
+    private int inicio;
+
     private String pase;
 
     public Visitante(int id, int llegada, String pase) {
@@ -14,8 +16,22 @@ public class Visitante implements Comparable<Visitante> {
     }
 
     /**
-     * 
      * @return the inicio
+     */
+    public int getInicio() {
+        return inicio;
+    }
+
+    /**
+     * @param inicio the inicio to set
+     */
+    public void setInicio(int inicio) {
+        this.inicio = inicio;
+    }
+
+    /**
+     * 
+     * @return llegada
      */
     public int getLlegada() {
         return llegada;
@@ -23,39 +39,40 @@ public class Visitante implements Comparable<Visitante> {
 
     /**
      * 
-     * @param inicio
+     * @param llegada
      */
     public void setLlegada(int llegada) {
         this.llegada = llegada;
     }
 
     /**
-     * @return the id
+     * @return id
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * @param id
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * @return the pase
+     * @return pase
      */
     public String getPase() {
         return pase;
     }
 
     /**
-     * @param pase the pase to set
+     * @param pase pase
      */
     public void setPase(String pase) {
         this.pase = pase;
     }
+
     /**
      * (non-Javadoc)
      * 
@@ -85,7 +102,7 @@ public class Visitante implements Comparable<Visitante> {
                 // 3. Han llegado a la vez: va antes el de menor id
                 if (this.id < v.getId()) {
                     resultado = -1;
-                } else {
+                } else if (this.id > v.getId()) {
                     resultado = 1;
                 }
             }
@@ -123,8 +140,14 @@ public class Visitante implements Comparable<Visitante> {
         return prioridad;
     }
 
+    /**
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
     public String toString() {
-        return "ID: " + id + " | Pase: " + pase + " | Llegada: " + llegada;
+        return "ID: " + id + " | Pase: " + pase + " | Llegada: " + llegada + " | Inicio: " + inicio;
     }
 
 }
