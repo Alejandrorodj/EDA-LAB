@@ -1,5 +1,6 @@
 package P3;
 
+import java.util.InputMismatchException;
 import java.util.ArrayDeque;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -50,7 +51,7 @@ public class Simulacion {
             reloj += Constantes.DURACION_ATRACCION;
         }
 
-        System.out.println("El visitante que mas a esperado es: " + visitanteMasEspera.getId() + " | Pase: "
+        System.out.println("El visitante con el ID que mas ha esperado es: ID = " + visitanteMasEspera.getId() + " | Pase: "
                 + visitanteMasEspera.getPase() + " | Espera: " + esperaMaxima);
     }
 
@@ -79,7 +80,13 @@ public class Simulacion {
 
             int espera = reloj - v.getLlegada();
 
-            if (espera > esperaMaxima) {
+            if (espera > esperaMaxima
+                    || (espera == esperaMaxima
+                        && v.getLlegada() < visitanteMasEspera.getLlegada())
+                    || (espera == esperaMaxima
+                        && v.getLlegada() == visitanteMasEspera.getLlegada()
+                        && v.getId() < visitanteMasEspera.getId())) {
+
                 visitanteMasEspera = v;
                 esperaMaxima = espera;
             }
@@ -109,49 +116,89 @@ public class Simulacion {
     public void leerPorPantalla() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Introduce los número de lotes de visitantes: ");
-        n = sc.nextInt();
+        boolean correcto = false;
+        while (!correcto) {
+            try {
+                System.out.print("Introduce el número de lotes de visitantes: ");
+                n = sc.nextInt();
+
+                if (n > 0) {
+                    correcto = true;
+                } else {
+                    System.out.println("El número debe ser mayor que 0.");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Debes introducir un número entero.");
+                sc.next();
+            }
+        }
         System.out.println("Has introducido " + n);
 
-        System.out.print("Introduce los visitantes Standard: ");
-        e = sc.nextInt();
+        correcto = false;
+        while (!correcto) {
+            try {
+                System.out.print("Introduce los visitantes Standard: ");
+                e = sc.nextInt();
+
+                if (e >= 0) {
+                    correcto = true;
+                } else {
+                    System.out.println("El número debe ser igual o mayor que 0.");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Debes introducir un número entero.");
+                sc.next();
+            }
+        }
         System.out.println("Has introducido " + e);
 
-        System.out.print("Introduce los visitantes Fast Pass: ");
-        f = sc.nextInt();
+        correcto = false;
+        while (!correcto) {
+            try {
+                System.out.print("Introduce los visitantes Fast Pass: ");
+                f = sc.nextInt();
+
+                if (f >= 0) {
+                    correcto = true;
+                } else {
+                    System.out.println("El número debe ser igual o mayor que 0.");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Debes introducir un número entero.");
+                sc.next();
+            }
+        }
         System.out.println("Has introducido " + f);
 
-        System.out.print("Introduce el tiempo entre lotes: ");
-        l = sc.nextInt();
-        System.out.println("Has introducido " + l);
+        correcto = false;
+        while (!correcto) {
+            try {
+                System.out.print("Introduce el tiempo entre lotes: ");
+                l = sc.nextInt();
 
-        while (n <= 0 || e < 0 || f < 0 || l < 0) {
+                if (l >= 0) {
+                    correcto = true;
+                } else {
+                    System.out.println("El número debe ser igual o mayor que 0.");
+                }
 
-            System.out.print("Introduzca de nuevo el número de lotes de visitantes: ");
-            n = sc.nextInt();
-            System.out.println("Has introducido " + n);
-
-            System.out.print("Introduzca de nuevo los visitantes Standard: ");
-            e = sc.nextInt();
-            System.out.println("Has introducido " + e);
-
-            System.out.print("Introduzca de nuevo los visitantes Fast Pass: ");
-            f = sc.nextInt();
-            System.out.println("Has introducido " + f);
-
-            System.out.print("Introduzca de nuevo el tiempo entre lotes: ");
-            l = sc.nextInt();
-            System.out.println("Has introducido " + l);
+            } catch (InputMismatchException e) {
+                System.out.println("Debes introducir un número entero.");
+                sc.next();
+            }
         }
+        System.out.println("Has introducido " + l);
 
         sc.close();
     }
 
     /**
-     * Generar visitantes
-     * 
-     * @param llegada
-     * @return cola de visitantes ordenados standard-fastPass-VIP
+     * Genera los visitantes de un lote y los añade a la cola inicial.
+     *
+     * @param llegada instante de llegada de los visitantes del lote
      */
     private void generarVisitantes(int llegada) {
 

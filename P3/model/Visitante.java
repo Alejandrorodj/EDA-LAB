@@ -74,9 +74,11 @@ public class Visitante implements Comparable<Visitante> {
     }
 
     /**
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     * Compara este visitante con otro según la prioridad del pase,
+     * el tiempo de llegada y el identificador.
+     *
+     * @param v visitante con el que se compara
+     * @return un valor negativo, cero o positivo según el orden
      */
     @Override
     public int compareTo(Visitante v) {
@@ -141,9 +143,9 @@ public class Visitante implements Comparable<Visitante> {
     }
 
     /**
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
+     * Devuelve una representación textual de este visitante.
+     *
+     * @return cadena con la información del visitante
      */
     @Override
     public String toString() {
