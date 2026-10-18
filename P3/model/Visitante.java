@@ -10,12 +10,26 @@ import P3.util.Constantes;
  * @version 1.0 (19/10/2026)
  */
 public class Visitante implements Comparable<Visitante> {
+    /** Identificador numerico unico del visitante. */
     private int id;
+
+    /** Instante en el que el visitante llega a la atraccion. */
     private int llegada;
+
+    /** Instante en el que el visitante comienza el recorrido. */
     private int inicio;
 
+    /** Tipo de pase del visitante: VIP, Fast Pass o Standard. */
     private String pase;
 
+    /**
+     * Crea un visitante con su identificador, instante de llegada y tipo de pase.
+     * El instante de inicio queda inicialmente a cero.
+     *
+     * @param id identificador del visitante
+     * @param llegada instante de llegada a la atraccion
+     * @param pase tipo de pase del visitante
+     */
     public Visitante(int id, int llegada, String pase) {
         this.id = id;
         this.llegada = llegada;
@@ -80,12 +94,13 @@ public class Visitante implements Comparable<Visitante> {
         this.pase = pase;
     }
 
-    /**
-     * Compara este visitante con otro según la prioridad del pase,
-     * el tiempo de llegada y el identificador.
+     /**
+     * Compara este visitante con otro según la prioridad del pase; si ambos
+     * tienen el mismo tipo de pase, compara la llegada y, si coincide, el id.
      *
-     * @param v visitante con el que se compara
-     * @return un valor negativo, cero o positivo según el orden
+     * @param v visitante con el que se compara este visitante
+     * @return un valor negativo si este visitante va antes, cero si empatan,
+     *         o un valor positivo si este visitante va después
      */
     @Override
     public int compareTo(Visitante v) {
@@ -121,13 +136,12 @@ public class Visitante implements Comparable<Visitante> {
     }
 
     /**
-     * Traduce el pase en un numero segun su prioridad
-     * VIP = -1
-     * FAST_PASS = 0
-     * STANDARD = 1
-     * 
-     * @param pase
-     * @return prioridad del pase
+     * Asigna un valor numerico a cada tipo de pase para establecer su prioridad.
+     * VIP tiene prioridad máxima(-1), seguido de Fast Pass(0) y Standard(1).
+     *
+     * @param pase tipo de pase que se desea evaluar
+     * @return valor numerico de prioridad del pase
+     * @throws IllegalArgumentException si el pase no se reconoce
      */
     private int prioridadPase(String pase) {
 
@@ -150,9 +164,9 @@ public class Visitante implements Comparable<Visitante> {
     }
 
     /**
-     * Devuelve una representación textual de este visitante.
+     * Genera una representación textual con los datos principales del visitante.
      *
-     * @return cadena con la información del visitante
+     * @return cadena con el id, el pase, la llegada y el inicio del recorrido
      */
     @Override
     public String toString() {

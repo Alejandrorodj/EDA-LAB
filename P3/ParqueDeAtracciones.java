@@ -9,10 +9,10 @@ package P3;
  */
 public class ParqueDeAtracciones {
 
-    /**
-     * Main
-     * 
-     * @param args
+     /**
+     * Crea la simulacion e inicia su ejecucion.
+     *
+     * @param args argumentos recibidos desde la linea de comandos
      */
     public static void main(String[] args) {
 
