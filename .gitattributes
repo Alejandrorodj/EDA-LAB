@@ -1,0 +1,9 @@
+# Finales de línea: git guarda LF y cada uno los ve como en su sistema (CRLF en Windows).
+# Así no salen ficheros enteros modificados solo por los saltos de línea.
+* text=auto
+
+# Los .bat de Windows siempre con CRLF
+*.bat text eol=crlf
+
+# Binarios
+*.pdf binary

@@ -1,29 +1,32 @@
 # Buzón de avisos – AR
 
-Avisos de revisión de la P3 para **AR**. Cuando arregles uno, márcalo con `[x]` y apunta el commit.
-Lo más nuevo, arriba. Estado del repositorio revisado: `origin/P3` = `887a748` (14-oct-2026).
+Avisos de la P3 para **AR**, agrupados por tema. Cuando arregles uno, márcalo con `[x]` y apunta el commit; lo terminado baja a **Hecho**.
+Última revisión: 18-oct-2026 (`origin/P3` = `c1a4100`).
 
-## 14-oct-2026
+## `compareTo` (lo tocaste en `c34d14b`; es de LP)
+- [x] *(18-oct: LP lo devolvió a `else if (this.id > v.getId())`; `v.compareTo(v) == 0`.)* En el paso del id cambiaste el segundo `if (this.id > v.getId())` por `else`. Ahora, con el **mismo visitante**, devuelve **1**: `v.compareTo(v) == 1` (probado), y el contrato pide 0. Volver a como estaba (`else if (this.id > v.getId())`). El `compareTo` era de LP y estaba probado; si ves algo, avisa en su buzón en vez de cambiarlo.
 
-### Urgente
-- [ ] **El último commit no compila** (`887a748`, "no message", subido a `origin/P3`). En `model/Visitante.java` se cambió `llegada` por `salida` en el constructor (l. 11-16) y en el getter/setter (l. 34-46), pero el atributo sigue llamándose `llegada` (l. 8) → `cannot find symbol` en las líneas 14, 38 y 45. Además se han perdido `getLlegada()`/`setLlegada()`. Quien haga `pull` recibe código que no compila. Volver a `llegada`.
+## `Visitante` (`model/Visitante.java`)
+- [x] *(18-oct: LP lo volvió a poner, con `getInicio`/`setInicio` y en `toString`)* **Has quitado el atributo `inicio`** (y `getInicio`/`setInicio`) en `8c02882`. Hace falta: es la hora a la que monta cada visitante (se pone con `setInicio` al montar) y sin él no hay espera ni "visitante que más espera". Volver a ponerlo (sin meterlo en el constructor).
+- [→EQUIPO] *(18-oct)* **Espera**: no hace falta un método en `Visitante`; se calcula en la simulación al montar (`reloj - llegada`). Pasa a `AVISOS_EQUIPO.md`.
+- [x] *(18-oct, corregido)* Los comentarios de `getLlegada`/`setLlegada` dicen "inicio" (`@return the inicio`, `@param inicio`).
+- No tocar `compareTo` ni `prioridadPase` (LP).
 
-### Lectura de parámetros (`ParqueDeAtracciones.leerPorPantalla`, commits `728ffa8`, `26a8fd8`)
-- [ ] Pide "número de visitantes" como `N` y obliga a que `E + F + 1 == N` (l. 24-40). En el enunciado **`N` es el número de lotes** y `E`, `F` son visitantes **por lote**: no hay relación entre ellos. Con el caso base `N=2, E=3, F=2` el programa no deja seguir.
-- [ ] **No se pide `L`** (tiempo entre lotes).
-- [ ] Validar `N ≥ 1`, `E ≥ 0`, `F ≥ 0`, `L ≥ 0` y avisar si no.
-- [ ] Si se escribe algo que no es un número, `nextInt()` lanza `InputMismatchException` y el programa se cae.
-- [ ] Falta un espacio: `"Has introducido" + N` (l. 27).
+## Lectura de parámetros (`leerPorPantalla`)
+- [ ] Si se escribe algo que no es un número, `nextInt()` lanza `InputMismatchException` y el programa se cae (probado con "x"). Capturarla y volver a pedir el dato.
 
-### Generación de visitantes (`ParqueDeAtracciones.generarVisitantes`, commit `26a8fd8`)
-- [ ] Solo genera **un lote**; hay que generar los `N`.
-- [ ] `while (id < E)` crea `E - 1` Standard, no `E`.
-- [ ] `while (id < F)` compara el id con `F`, no con `E + F`: con `E=3, F=2` salen 2 Standard, **0 Fast** y el VIP con id 3. Debería ser Standard 1-3, Fast 4-5 y VIP 6.
-- [ ] `id` empieza en 1 en cada llamada: los ids tienen que seguir entre lotes (lote 2: 7-12).
-- [ ] El parámetro `tiempo` no se usa: cada visitante tiene que llevar su **llegada** (`k·L`). El constructor `Visitante(id, pase)` la deja a 0.
-- [ ] Devuelve una `List`; la pista del enunciado es meter a todos en una **cola** (`Queue<Visitante>`) en orden de llegada.
-- [ ] No se llama desde ningún sitio.
-- [ ] Nombres: `N, E, F, L` y `LoteVisitantes` empiezan por mayúscula (en Java, variables en minúscula).
+## Generación de visitantes (`generarVisitantes`)
+- [x] *(18-oct: ahora va a `colaEspera`, un `ArrayDeque`, en `Simulacion`)* Devuelve una `List`; la pista del enunciado es meter a todos en una **cola** (`Queue<Visitante>`, por ejemplo `ArrayDeque` o `LinkedList`) en orden de llegada.
+- [x] *(18-oct: `generarVisitantes(int llegada)` crea un solo lote y la llegada la calcula `generarLote`)* El parámetro `tiempo` no sirve: se sobrescribe con `i * L` en el bucle. Quitarlo (y el `0` de la llamada en `main`).
+- Coordinar con **VT**, que va a quitar los `static` de `ParqueDeAtracciones`.
 
-### Commits
-- [ ] Mensajes que no dicen nada ("no message", "Luis me manda lo mas aburrido"…). Mejor: "generarVisitantes: ids correlativos entre lotes".
+## Commits
+- [ ] Mensajes que no dicen nada o con indirectas ("no message", "Luis haz bien el compareTo", "modificacion penultima"). Mejor: "generarVisitantes: N lotes con ids correlativos".
+
+## Hecho
+- [x] `leerPorPantalla`: pide `N` como número de lotes, `E`, `F` y **`L`**, sin la relación `E + F + 1 == N`, y vuelve a pedirlos si `N ≤ 0` o alguno es negativo (`c34d14b`, `c1a4100`).
+- [x] Espacio en "Has introducido " + N.
+- [x] `generarVisitantes`: genera los `N` lotes, E Standard + F Fast + 1 VIP, ids correlativos y llegada `i * L`. **Probado** con `N=2, E=3, F=2, L=100`: ids 1-3 S, 4-5 F, 6 V en t=0 y 7-9 S, 10-11 F, 12 V en t=100.
+- [x] `generarVisitantes` ya se llama desde `main`; `loteVisitantes` en minúscula.
+- [x] `Visitante`: un solo constructor `Visitante(int id, int llegada, String pase)` y `toString`.
+- [x] El commit `887a748` no compilaba (`salida`). Arreglado por LP en `566f07b`.

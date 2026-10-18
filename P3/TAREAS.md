@@ -11,7 +11,7 @@
 ## 1. Resumen del enunciado
 
 ### La atracción
-- Un tren de **5 vagonetas individuales**: en cada recorrido montan **como máximo 5 personas**.
+- La atracción tiene **5 vagonetas individuales**: en cada recorrido montan **como máximo 5 personas**.
 - Cada recorrido dura **300 unidades de tiempo**.
 - Montan los que toque según su **pase** y su **orden de llegada**.
 
@@ -47,17 +47,19 @@
 
 ## 2. Requisitos técnicos y normas (checklist de cumplimiento)
 
-- [ ] **Pista del enunciado:** usar una **cola para recoger inicialmente a todos los visitantes** del parque, en orden de llegada (una `Queue` básica: `LinkedList` o `ArrayDeque`).
-- [ ] Usar las **implementaciones de colas de la librería estándar** que correspondan:
+- [x] *(18-oct)* **Pista del enunciado:** usar una **cola para recoger inicialmente a todos los visitantes** del parque, en orden de llegada (una `Queue` básica: `LinkedList` o `ArrayDeque`).
+- [x] *(18-oct: `ArrayDeque` + `PriorityQueue`)* Usar las **implementaciones de colas de la librería estándar** que correspondan:
   - una cola FIFO (`Queue` / `ArrayDeque` / `LinkedList`) para la llegada de visitantes;
   - una **cola con prioridad** (`PriorityQueue`) para la cola de espera de la atracción.
 - [ ] **Sin moldes (casts)** relacionados con las colas y **sin ninguna referencia a `Object`**:
+  - (18-oct, noche) En el código no hay casts ni `Object`. Solo quedan dos en comentarios de Eclipse de `Visitante` (`@see ...compareTo(java.lang.Object)` y `@see java.lang.Object#toString()`); se van al rehacer esos javadocs **[VT]**.
   - genéricos siempre tipados (`Queue<Visitante>`, `PriorityQueue<Visitante>`), nunca tipos crudos;
   - el criterio de ordenación tipado (`Comparable<Visitante>` o `Comparator<Visitante>`);
   - ojo con `equals(Object)` y con `toArray()` sin argumentos (devuelve `Object[]`): mejor no usarlos.
 - [ ] **Documentación interna (Javadoc)** en **cada clase** y en los métodos relevantes. La guía está en Campus Virtual → sección *Laboratorio*. **[VT]**
   - Lección de P2: el comentario de clase va **justo encima de la declaración de la clase**, no encima de `package`; usar `@param`, `@return`, `@throws` y `{@code ...}` para los genéricos (`{@code Queue<Visitante>}`), y no dejar bloques `/** */` vacíos duplicados.
-- [ ] **Modularización y diseño orientado a objetos** adecuados: no meter todo en `main` ni en métodos `static`.
+- [x] **Modularización y diseño orientado a objetos** adecuados: no meter todo en `main` ni en métodos `static`. **[VT]**
+  - OK (18-oct): clase `Simulacion` con atributos de instancia; `main` solo crea el objeto y llama a `iniciarSimulacion()`.
 - [ ] **Ningún dato personal en el código.** Nada de nombres ni correos: solo **iniciales + código de grupo de prácticas**.
   - Lección de P2: allí se pusieron los nombres completos en las cabeceras. **No repetirlo.**
 - [ ] **Sin caracteres especiales en los nombres de ficheros**: ni tildes, ni `ñ`, ni espacios.
@@ -73,9 +75,9 @@
 | Tipo de pase | **Decisión del equipo (13-oct): `String`**, con los valores en `Constantes` (`VIP_PASS`, `FAST_PASS`, `STANDARD`). Sin enum `TipoPase`: el criterio de prioridad tiene que traducir cada pase a su prioridad (VIP > Fast > Standard). |
 | `Visitante` | `id`, `pase` (`String`), `llegada` y hora de inicio del recorrido, que se rellena al montar. Calcula su **tiempo de espera**. Getters y `toString`. |
 | Criterio de prioridad | `Visitante implements Comparable<Visitante>` **o** una clase/lambda `Comparator<Visitante>`. Compara por pase, luego por llegada y luego por id. |
-| `Atraccion` (o `Tren`) | Constantes de **capacidad (5)** y **duración (300)**. Saca hasta 5 visitantes de la cola de espera e informa del recorrido. |
+| `Atraccion` | Constantes de **capacidad (5)** y **duración (300)**. Saca hasta 5 visitantes de la cola de espera e informa del recorrido. |
 | `Simulador` | Recibe `N, E, F, L`. **Genera** los visitantes en la cola inicial, controla el **reloj**, pasa los visitantes de la cola inicial a la cola de prioridad cuando llegan, lanza los recorridos y busca al que **más ha esperado**. |
-| `Constantes` | Nombres de los pases (ya existe, de momento en `P3`), capacidad, duración y, si se fijan, los valores de N, E, F y L. |
+| `Constantes` | Nombres de los pases (ya existe, en `P3/util/` desde el 17-oct), capacidad, duración y, si se fijan, los valores de N, E, F y L. |
 | `ParqueDeAtracciones` | Clase principal (`main`): obtiene los parámetros, crea el `Simulador` y lo arranca. |
 
 ### Estructura de carpetas
@@ -97,7 +99,7 @@ LAB/
 ```
 - El `package` de cada fichero coincide con su carpeta: `P3`, `P3.model` y `P3.util`.
 - No se lee ningún fichero de datos, así que no hace falta `util/file/`. Si al final los parámetros vienen de un fichero, se añade.
-- `Atraccion` (o `Tren`) es opcional: si `Simulador` crece mucho, se le saca a esa clase lo de montar a 5 y mostrar el recorrido.
+- `Atraccion` es opcional: si `Simulador` crece mucho, se le saca a esa clase lo de montar a 5 y mostrar el recorrido.
 - Se compila desde `LAB/`, igual que en P2.
 
 ### Las dos colas
@@ -134,7 +136,7 @@ Notas importantes sobre `PriorityQueue`:
 
 ## 5. Plan de tareas
 
-**Reparto (14-oct):** documentación, Javadoc y el tipo de la `PriorityQueue` → **VT** · criterio de prioridad (`compareTo`) y `Constantes` → **LP** · generación de visitantes y lectura de parámetros → **AR**. Pruebas (Fase 5) → **IA**, cuando todo lo demás esté OK. Las tareas sin etiqueta están sin asignar.
+**Reparto (14-oct):** documentación, Javadoc, el tipo de la `PriorityQueue` y el diseño sin `static` → **VT** · criterio de prioridad (`compareTo`) y `Constantes` → **LP** · generación de visitantes, lectura de parámetros y `Visitante` (espera, `toString`, constructores) → **AR**. Pruebas (Fase 5) → **IA**, cuando todo lo demás esté OK. Las tareas sin etiqueta están sin asignar.
 
 **Buzones de avisos:** `avisos/AVISOS_AR.md`, `avisos/AVISOS_LP.md`, `avisos/AVISOS_VT.md` y `avisos/AVISOS_EQUIPO.md` (lo que no tiene dueño). Cada uno marca con `[x]` lo que arregla.
 
@@ -143,7 +145,8 @@ Notas importantes sobre `PriorityQueue`:
   - OK (14-oct): reparto al principio de esta sección. Falta asignar `Visitante`, la simulación (Fase 3), la salida (Fase 4) y las pruebas (Fase 5).
 - [ ] Consultar en Campus Virtual la guía de documentación (Javadoc). **[VT]**
 - [ ] Anotar las **iniciales de cada integrante y el código de grupo** para la cabecera de los comentarios.
-- [ ] Decidir cómo se dan los parámetros `N, E, F, L` (constantes, argumentos de `main` o lectura por teclado) y documentarlo. **[AR]**
+- [x] Decidir cómo se dan los parámetros `N, E, F, L` (constantes, argumentos de `main` o lectura por teclado) y documentarlo. **[AR]**
+  - OK (17-oct): por teclado (`leerPorPantalla`).
 - [x] Crear la estructura de paquetes en `P3/` (`P3`, `P3.model`, `P3.util`), con nombres sin caracteres especiales.
   - OK (7-oct): existen `ParqueDeAtracciones.java` (con `main` vacío), `model/Visitante.java` (vacía), `util/` (vacía) y `archivos/` con el enunciado.
   - (13-oct) Ya están en git (commit `1c88610` "inicial"); `Main.java` ya no existe.
@@ -151,35 +154,47 @@ Notas importantes sobre `PriorityQueue`:
   - OK (7-oct): creado `P3/generar_javadoc.bat`; `P3/doc/` ya queda fuera de git por la regla `doc/` del `.gitignore`.
 
 ### Fase 1 · Modelo de datos
-- [ ] Clase `Visitante` (id, pase, llegada e inicio de recorrido) con constructor, getters, cálculo de espera y `toString`.
-  - PARCIAL (13-oct): tiene `id`, `pase` (`String`) y `llegada`, con getters/setters y un constructor `Visitante(int id, String pase)`.
-  - Falta: el constructor no recibe la **llegada** (se queda a 0 salvo que se llame a `setLlegada`); falta la **hora de inicio del recorrido**, el método que calcula la **espera** y `toString`.
-- [ ] Criterio de prioridad (`Comparable<Visitante>` o `Comparator<Visitante>`): pase, luego llegada, luego id. **[LP]**
-  - MAL (13-oct): `compareTo` existe pero sigue igual que el 7-oct (ver sección 8): no cumple el contrato y no usa `llegada` ni `id` para desempatar.
+- [x] Clase `Visitante` (id, pase, llegada e inicio de recorrido) con constructor, getters, cálculo de espera y `toString`. **[AR]**
+  - OK (18-oct, noche): `inicio` vuelve a estar (con `getInicio`/`setInicio` y en `toString`). La espera no es un método: se calcula en `Simulacion` al montar (`reloj - llegada`). Falta commit.
+  - Antes (18-oct): se había quitado `inicio` en `8c02882`.
+- [x] Criterio de prioridad (`Comparable<Visitante>` o `Comparator<Visitante>`): pase, luego llegada, luego id. **[LP]**
+  - CASI (17-oct): reescrito con `if` y un método `prioridadPase` (VIP = -1, Fast = 0, Standard = 1). Probado: el orden del caso base sale bien (`6V 12V 4F 5F 10F 11F 1S 2S 3S 7S 8S 9S`) y es simétrico para cualquier pareja distinta.
+  - **OK (17-oct, 10:10):** `resultado` empieza en 0. Probado: simétrico en todas las parejas, `v.compareTo(v) == 0`, orden del caso base correcto y pase desconocido → `IllegalArgumentException`. Falta hacer commit.
+  - **ARREGLADO (18-oct, LP, falta commit):** vuelve a `else if (this.id > v.getId())`; `v.compareTo(v) == 0` y orden correcto (probado). Antes: **ROTO (17-oct, `c34d14b`, AR):** en el paso del id se cambió el segundo `if` por `else`, así que con el mismo visitante devuelve **1**: `v.compareTo(v) == 1` (probado). Volver a los dos `if` (o `else if (this.id > v.getId())`). El orden de la cola sigue saliendo bien.
+  - OK (17-oct, 10:09): `prioridadPase` lanza `IllegalArgumentException` con un pase desconocido. Compila y el orden del caso base sigue bien.
 - [ ] Javadoc de cada clase y método. **[VT]**
 
 ### Fase 2 · Generación de visitantes
-- [ ] Generar `N` lotes con el orden exacto: E Standard, F Fast y 1 VIP. **[AR]**
-- [ ] Asignar los ids correlativos desde 1 (un contador que no se reinicie por lote). **[AR]**
-- [ ] Asignar la llegada `k·L` a todo el lote. **[AR]**
-- [ ] Encolarlos en la **cola inicial** (`Queue<Visitante>`). **[AR]**
-- [ ] Validar los parámetros: `N ≥ 1`, `E ≥ 0`, `F ≥ 0`, `L ≥ 0`. Avisar si son incorrectos. **[AR]**
+- [x] Generar `N` lotes con el orden exacto: E Standard, F Fast y 1 VIP. **[AR]**
+  - OK (17-oct): bucle de `N` lotes con E Standard, F Fast y 1 VIP. Probado con `N=2, E=3, F=2, L=100`: ids 1-12 con los pases y llegadas correctos.
+- [x] Asignar los ids correlativos desde 1 (un contador que no se reinicie por lote). **[AR]**
+- [x] Asignar la llegada `k·L` a todo el lote. **[AR]**
+- [x] Encolarlos en la **cola inicial** (`Queue<Visitante>`). **[AR]**
+  - OK (18-oct, noche): `generarVisitantes(int llegada)` crea un lote y lo mete en `colaEspera` (`ArrayDeque`); `generarLote` lo llama `n` veces sumando `l`.
+- [x] Validar los parámetros: `N ≥ 1`, `E ≥ 0`, `F ≥ 0`, `L ≥ 0`. Avisar si son incorrectos. **[AR]**
+  - OK (17-oct): vuelve a pedirlos mientras `N ≤ 0` o algún otro sea negativo. Falta: si se escribe algo que no es un número, `nextInt()` lanza `InputMismatchException` (probado).
 
 ### Fase 3 · Simulación
-- [ ] Cola de espera `PriorityQueue<Visitante>` con el criterio de la Fase 1.
-- [ ] Bucle principal (sección 4): pasar los que han llegado, montar hasta 5, mostrar y avanzar 300.
-- [ ] Gestionar el **tren vacío**: si no hay nadie esperando, saltar a la siguiente llegada sin sacar un recorrido vacío.
-- [ ] Guardar la hora de inicio de cada visitante al montar.
-- [ ] Condición de fin: las dos colas vacías.
+- [x] Cola de espera `PriorityQueue<Visitante>` con el criterio de la Fase 1.
+  - OK (18-oct): declarada en `Simulacion` (sin subir), con `colaEspera` como `ArrayDeque`, y usada en la simulación.
+- [x] Bucle principal (sección 4): pasar los que han llegado, montar hasta 5, mostrar y avanzar 300.
+  - OK (18-oct, noche): `iniciarSimulacion` + `pasarALaCola` + `simularAtraccion`.
+- [x] Gestionar la **atracción vacía**: si no hay nadie esperando, la atracción sale igualmente cada 300 y el recorrido vacío **se muestra** (decisión del equipo, 18-oct: opción B de la sección 6).
+  - OK (18-oct): probado con `L = 400` (recorridos en 0, 300 vacío y 600) y `L = 1000` (0, 300, 600 vacío, 900 vacío, 1200 y 1500).
+  - Sugerencia: imprimir algo en los vacíos (por ejemplo "(sin visitantes)"), porque ahora solo sale la cabecera.
+- [x] Guardar la hora de inicio de cada visitante al montar (`setInicio(reloj)`).
+- [x] Condición de fin: las dos colas vacías.
 
 ### Fase 4 · Salida por pantalla
-- [ ] Por cada recorrido: número de recorrido (opcional), **hora de inicio** y lista de visitantes con **id y tipo de pase**.
+- [x] Por cada recorrido: número de recorrido (opcional), **hora de inicio** y lista de visitantes con **id y tipo de pase**.
+  - OK (18-oct, noche): "Recorrido en el tiempo: t" y una línea por visitante (id, pase y llegada).
 - [ ] Resumen final: **visitante con mayor espera** (id, pase, llegada, inicio y espera), con el desempate por llegada.
+  - CASI (18-oct, noche): muestra id, pase y espera; el desempate sale bien (`>` estricto). Falta mostrar llegada e inicio.
 - [ ] Formato legible y consistente. Sin trazas de depuración en la versión final.
 
 ### Fase 5 · Pruebas **[IA]**
 > Las hace la IA (Claude) **cuando todo lo demás esté OK**: compilar, ejecutar cada caso con sus parámetros y comparar con los resultados calculados a mano. No se añade código de pruebas al repositorio.
-Resultados calculados a mano con la interpretación de la sección 6 (ambigüedad 1, opción A):
+Resultados calculados a mano con la interpretación de la sección 6 (ambigüedad 1, **opción B**, la elegida). Solo cambia algo cuando `L > 300`:
 
 - [ ] **Caso base**: `N=2, E=3, F=2, L=100`
 
@@ -193,7 +208,7 @@ Resultados calculados a mano con la interpretación de la sección 6 (ambigüeda
   Este caso comprueba el desempate por llegada: el **3 Std (llegó en 0) monta antes que el 7 Std (llegó en 100)**.
 - [ ] **Recorrido incompleto**: `N=1, E=2, F=1, L=50` → un solo recorrido en t = 0 con 4 personas (4 VIP, 3 Fast, 1 Std, 2 Std).
 - [ ] **Solo VIP**: `N=3, E=0, F=0, L=0` → un recorrido en t = 0 con los VIP 1, 2 y 3 (desempate por id).
-- [ ] **Lotes muy separados** (`L > 300`): `N=2, E=1, F=1, L=400` → el tren queda libre y espera al siguiente lote (recorridos en 0 y en 400 con la opción A; en 0 y en 600 con la opción B).
+- [ ] **Lotes muy separados** (`L > 300`): `N=2, E=1, F=1, L=400` → la atracción sale en 0, en 300 **vacía** y en 600 (con la opción A habría sido en 0 y en 400). Más espera: 6 VIP con 200 (empatan 4, 5 y 6; gana el primero que monta).
 - [ ] **`L = 0`**: todos los lotes llegan a la vez. Hay que comprobar que todos los VIP van primero, luego todos los Fast y luego todos los Standard.
 - [ ] **Mucha cola** (`E` grande, `L` pequeño): los Standard esperan mucho. Comprobar que el de mayor espera es un Standard.
 - [ ] Parámetros inválidos (negativos, `N = 0`).
@@ -210,12 +225,12 @@ Resultados calculados a mano con la interpretación de la sección 6 (ambigüeda
 
 ## 6. Puntos ambiguos del enunciado (conviene aclarar o documentar)
 
-1. **¿Cuándo sale el tren?** El enunciado solo dice que el recorrido dura 300.
-   - **Opción A (la de las pruebas):** el tren sale en cuanto queda libre si hay alguien esperando. Si no hay nadie, espera a la siguiente llegada y sale en ese momento.
-   - **Opción B:** el tren sale siempre en múltiplos de 300 (0, 300, 600…), aunque esté vacío hasta entonces.
+1. **¿Cuándo sale la atracción?** El enunciado solo dice que el recorrido dura 300.
+   - Opción A: la atracción sale en cuanto queda libre si hay alguien esperando. Si no hay nadie, espera a la siguiente llegada y sale en ese momento.
+   - **Opción B (ELEGIDA, 18-oct):** la atracción sale siempre en múltiplos de 300 (0, 300, 600…), y si no hay nadie el recorrido vacío también se muestra.
    - Solo cambian los resultados cuando `L > 300` o hay huecos sin visitantes. **Preguntar al profesor** o documentar la elección.
-2. **¿Sale el tren con menos de 5?** Se entiende que sí: si hay menos de 5 esperando, sale con los que haya. Si no, en el caso de `N=1, E=2, F=1` nunca saldría.
-3. **¿Los que llegan justo cuando sale el tren pueden montar?** Se entiende que sí: llegada **≤** hora de salida. Es lo que pasa en t = 0 con el primer lote.
+2. **¿Sale la atracción con menos de 5?** Se entiende que sí: si hay menos de 5 esperando, sale con los que haya. Si no, en el caso de `N=1, E=2, F=1` nunca saldría.
+3. **¿Los que llegan justo cuando sale la atracción pueden montar?** Se entiende que sí: llegada **≤** hora de salida. Es lo que pasa en t = 0 con el primer lote.
 4. **Desempate del "visitante que espera más"**: si coinciden en espera y en llegada, el enunciado no dice nada más. Lo natural es el **menor id**, que es el que se generó antes.
 5. **Unidad de tiempo:** solo hay enteros; no hace falta usar decimales.
 6. **Origen de N, E, F y L**: no se especifica. Lo más cómodo para probar es leerlos por teclado o como argumentos, con valores por defecto.
@@ -262,7 +277,7 @@ Resultados calculados a mano con la interpretación de la sección 6 (ambigüeda
 - Hay dos constructores; el antiguo `Visitante(int id, String pase)` deja la llegada a 0.
 
 ### `compareTo` **[LP]**
-- Sin cambios desde la 1ª revisión: no cumple el contrato y no desempata por llegada ni id (ver sección 8).
+- (17-oct) Reescrito y correcto salvo dos detalles: `resultado` empieza en 99 (debe quedar 0 si todo es igual) y un pase desconocido vale -99 (por delante de VIP).
 
 ### Lectura de parámetros y generación de visitantes **[AR]**
 - `leerPorPantalla` interpreta mal los parámetros: pide "número de visitantes" como `N` y obliga a que `E + F + 1 == N`. En el enunciado **`N` es el número de lotes** y `E`, `F` son visitantes **por lote**; no hay ninguna relación entre ellos. Con `N=2, E=3, F=2` (caso base) el programa no deja continuar.
@@ -285,3 +300,30 @@ Resultados calculados a mano con la interpretación de la sección 6 (ambigüeda
 
 ### Documentación **[VT]**
 - Sin empezar: solo comentarios automáticos de Eclipse; sin comentario de clase ni `@author` con iniciales.
+
+---
+
+## 10. Revisión del código (3ª revisión, 18-oct-2026, noche)
+
+**Compila y funciona** (javac 21). Todo está en local sin subir: `Simulacion.java` es nuevo (`git add`), y hay cambios en `ParqueDeAtracciones`, `Visitante`, `TAREAS.md` y avisos.
+
+Pruebas rápidas (las de la Fase 5, adelantadas; todas dan lo calculado a mano):
+
+| Entrada (N E F L) | Resultado |
+|---|---|
+| 2 3 2 100 | 0: 6 4 5 1 2 · 300: 12 10 11 3 7 · 600: 8 9 → más espera **8 (500)** ✔ |
+| 3 3 2 100 | 0: 6 4 5 1 2 · 300: 12 18 10 11 16 · 600: 17 3 7 8 9 · 900: 13 14 15 → **13 (700)** ✔ |
+| 1 2 1 50 | un recorrido de 4: 4 3 1 2 ✔ |
+| 3 0 0 0 | un recorrido: 1 2 3 (solo VIP, por id) ✔ |
+| 2 1 1 400 | recorridos en 0, 300 (**vacío**) y 600 → más espera 6 (200) ✔ |
+| 2 3 2 1000 | recorridos en 0, 300, 600 y 900 (**vacíos**), 1200 y 1500 → más espera 9 (500) ✔ |
+| 2 1 1 0 | 0: 3V 6V 2F 5F 1S · 300: 4S (todos los VIP, luego Fast, luego Std) ✔ |
+| 0 … / -1 … | vuelve a pedir los datos ✔ |
+
+**Pendiente:**
+- Documentación de todas las clases **[VT]** (ver `avisos/AVISOS_VT.md`).
+- `InputMismatchException` si se escribe una letra **[AR]**.
+- Mostrar llegada e inicio del que más espera (lo pide la Fase 4).
+- Erratas en mensajes: "Introduce los número de lotes" → "el número"; "mas a esperado" → "más ha esperado".
+- Commits (LP: `Visitante`; todos: `Simulacion.java`).
+- Fase 5 completa cuando esté todo (casos "mucha cola" y entrada no numérica).
