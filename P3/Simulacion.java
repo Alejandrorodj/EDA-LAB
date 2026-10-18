@@ -150,7 +150,7 @@ public class Simulacion {
     /**
      * Generar visitantes
      * 
-     * @param tiempo
+     * @param llegada
      * @return cola de visitantes ordenados standard-fastPass-VIP
      */
     private void generarVisitantes(int llegada) {
