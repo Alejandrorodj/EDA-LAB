@@ -1,3 +1,13 @@
+/****
+*
+* Class Name: LeerFicheroInt
+* Author/s name: Luis Pérez, Alejandro Rodríguez, Victor Tapiador
+* Release/Creation date: 22/09/2026
+* Class version: 1.0
+* Class description: Clase que representa un satélite orbital y almacena sus parámetros orbitales y de identificación.
+*
+*/
+
 package P1;
 
 /**
@@ -24,6 +34,24 @@ public class Satelite implements LeerFicheroInt {
      * @param argumentoPerigeo
      * @param revolucionesPorDia
      */
+
+    /**
+    Method name: Satelite
+    *
+    * Description of the Method: Constructor completo parametrizado para la inicialización de todos los datos del satélite.
+    * Calling arguments:
+    *   - nombre (String): Nombre asignado al satélite.
+    *   - designadorInternacional (String): Código identificador internacional.
+    *   - epoca (String): Cadena que representa la época.
+    *   - inclinacion (double): Ángulo de inclinación de la órbita.
+    *   - raan (double): Ángulo de ascensión recta del nodo ascendente.
+    *   - excentricidad (double): Valor de la excentricidad orbital.
+    *   - argumentoPerigeo (double): Ángulo del argumento del perigeo.
+    *   - numOrbitas (double): Número de órbitas diarias (movimiento medio).
+    * Return value: Ninguno (Constructor).
+    * Required Files: Ninguno.
+    * List of Checked Exceptions: Ninguna.
+    *************/
     public Satelite(String nombre, String designadorInternacional, String epoca, double inclinacion, double raan,
             double excentricidad, double argumentoPerigeo, double numOrbitas) {
         this.nombre = nombre;
@@ -42,6 +70,16 @@ public class Satelite implements LeerFicheroInt {
     public Satelite() {
     }
 
+    /**
+    Method name: leerDatos
+    *
+    * Description of the Method: Procesa un array de cadenas con campos de datos para extraer y asignar las propiedades del satélite.
+    * Calling arguments:
+    *   - campos (String[]): Array de valores leídos previamente desde un fichero secuencial.
+    * Return value: void.
+    * Required Files: Ninguno.
+    * List of Checked Exceptions: Ninguna
+    *************/
     public void leerDatos(String[] campos) {
         nombre = campos[0].trim();
         designadorInternacional = campos[1].trim();
