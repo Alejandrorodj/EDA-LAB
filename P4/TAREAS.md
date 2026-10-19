@@ -1,0 +1,143 @@
+# Tareas – Laboratorio 4: Listas (S4)
+
+Plan de trabajo de la P4. Creado el 19-oct-2026.
+Enunciado: `archivos/2026_27_listas_v2_ES.pdf` · Datos: `candidaturas.csv` · Código base del Campus Virtual (copiado tal cual en `P4/`).
+
+---
+
+## 1. Resumen del enunciado
+
+Programa para la Junta Electoral que procesa las candidaturas de **BB** y **BSOE** en **Madrid** y **Barcelona** (4 listas electorales).
+
+`candidaturas.csv`: una línea por candidato, separada por `;` → `Partido;Circunscripción;Posición;Nombre;Género` (`H`/`M`). 48 líneas, 12 por lista, sin cabecera y sin línea vacía al final.
+
+El programa tiene que:
+
+1. **Leer** el CSV y crear los `Candidato` (ya hecho en el código base: `procesarArchivoCSV`).
+2. **Generar las listas electorales**: repartir los candidatos en las 4 listas y mostrarlas **ordenadas por posición** (se recomienda `Collections.sort()`).
+3. **Verificar la paridad**: una lista cumple si **cada género está entre el 40 % y el 60 %**. Mostrar una alerta por cada lista que no cumpla.
+4. **Pedir los votos** de cada partido en cada circunscripción (ya hecho: `obtenerVotos` / `leerNumeroVotos`).
+5. **Calcular los escaños**: **1 escaño por cada 30.000 votos completos** (ya se muestran en `obtenerEscanos`).
+6. **Candidatos electos**: los **k primeros** de la lista ordenada, siendo k los escaños. Mostrarlos por partido y circunscripción.
+
+### Lo que hay que implementar (8 métodos)
+
+| Clase | Método | Qué hace |
+|---|---|---|
+| `ListaElectoral` | `agregarCandidato` | Añade un candidato a la lista. |
+| `ListaElectoral` | `cumpleParidad` | `true` si H y M están entre el 40 % y el 60 %. |
+| `ListaElectoral` | `calcularEscanos` | `votosPartido / 30000` (división entera). |
+| `ListaElectoral` | `getCandidatosElectos` | Los k primeros de la lista ordenada. |
+| `GestionElectoral` | `generarListasElectorales` | Recorre todos los candidatos y mete cada uno en su lista; deja las 4 ordenadas. |
+| `GestionElectoral` | `verificarParidad` | Junta en una `List<ListaElectoral>` las listas que no cumplen y llama a `mostrarAlertasParidad`. |
+| `GestionElectoral` | `mostrarAlertasParidad` | Muestra una alerta por cada lista recibida (con sus porcentajes). |
+| `GestionElectoral` | `mostrarListaElectos` | Muestra los electos de un partido en una circunscripción. |
+
+Todo lo demás ya viene hecho: lectura del CSV, mostrar las listas, pedir votos, mostrar escaños, `Candidato` (con `compareTo` por posición), `Genero` y `utils`.
+
+---
+
+## 2. Requisitos técnicos y normas
+
+- [ ] Usar las **implementaciones de listas de la librería estándar** (`ArrayList`, `List`).
+- [ ] **Sin moldes (casts) relacionados con las listas y sin ninguna referencia a `Object`**. (El `(double)` de `getPorcentajeHombres` es del código base y no es de listas.)
+- [ ] **Javadoc de los métodos que completemos** (cada uno documenta los suyos, ver reparto).
+- [ ] Cabeceras con **iniciales + código de grupo** (`Autores: [Iniciales]`, `Grupo: [CodigoGrupo]` ya vienen en `Genero`). Nada de nombres ni correos.
+- [ ] Sin caracteres especiales en los nombres de fichero.
+- [ ] En equipo; **sin asistentes de generación de código** (el enunciado nombra expresamente a Claude).
+
+---
+
+## 3. Reparto (sin conflictos)
+
+La regla para no pisarse en git: **cada método tiene un solo dueño**, y los métodos de dos personas en el mismo fichero están **lejos entre sí** (git solo da conflicto si se tocan las mismas líneas o líneas pegadas).
+
+| Quién | Fichero | Métodos (líneas del código base) |
+|---|---|---|
+| **LP** | `ListaElectoral.java` | `cumpleParidad`, `calcularEscanos`, `getCandidatosElectos` (l. 88-98, seguidos) |
+| **LP** | todos | **Fase 0** (preparación, abajo), antes de que nadie empiece |
+| **AR** | `ListaElectoral.java` | `agregarCandidato` (l. 24-26) |
+| **AR** | `GestionElectoral.java` | `generarListasElectorales` (l. 61-64), incluida la **ordenación** |
+| **VT** | `GestionElectoral.java` | `verificarParidad` + `mostrarAlertasParidad` (l. 77-87, seguidos) y `mostrarListaElectos` (l. 122-124) |
+| **IA** | — | Pruebas (Fase 3) cuando todo esté OK; no se añade código de pruebas al repo |
+
+- Cada uno escribe el **javadoc de sus propios métodos** (así nadie toca métodos ajenos).
+- `TAREAS.md` y `avisos/` solo los sube **LP**.
+
+### Normas para no tener conflictos
+1. **`git pull` antes de empezar** y antes de cada commit.
+2. **Tocar solo tus métodos.** Nada de "Formatear documento" en el fichero entero ni reordenar imports (cambia líneas de otros).
+3. **No añadir imports por tu cuenta**: los que hacen falta (`java.util.Collections`) los deja puestos LP en la Fase 0.
+4. Commits pequeños, uno por método o por tarea, con un mensaje que diga qué cambia (por ejemplo, "ListaElectoral: calcularEscanos").
+5. Si de verdad necesitas cambiar algo fuera de tus métodos, avísalo antes en el grupo.
+
+### Dependencias (se puede trabajar en paralelo)
+- VT usa `cumpleParidad` (LP) y `getCandidatosElectos` (LP), pero sus firmas ya existen: puede escribir su parte ya; para probarla necesita lo de LP.
+- AR no depende de nadie. Sin lo de AR las listas salen vacías, pero el programa arranca.
+
+---
+
+## 4. Plan por fases
+
+### Fase 0 · Preparación **[LP]** (antes de que empiecen AR y VT)
+- [x] Rama `P4` creada (`e86c435`, `3a37ba0`).
+- [x] Copiar el código base, `candidaturas.csv` y el enunciado en `P4/` (19-oct, sin modificar).
+- [ ] **Decidir el paquete** (ver sección 5, punto 1) y aplicarlo en los 6 ficheros.
+- [ ] **Ruta del CSV**: `"candidaturas.csv"` se busca en la carpeta desde la que se ejecuta. Ajustarla según el punto anterior.
+- [ ] **Que compile**: `cumpleParidad`, `calcularEscanos` y `getCandidatosElectos` no tienen `return` y el código base **no compila**. Poner un `return` provisional (`false`, `0`, lista vacía) con `// TODO` para que todos puedan ejecutar mientras tanto.
+- [ ] Añadir `import java.util.Collections;` en `GestionElectoral` (para la ordenación de AR).
+- [ ] Cabeceras `Autores`/`Grupo` (iniciales + código de grupo) en las 6 clases.
+- [ ] `generar_javadoc.bat` adaptado a la P4.
+- [ ] Commit y push; avisar a AR y VT para que hagan `pull` y empiecen.
+
+### Fase 1 · `ListaElectoral`
+- [ ] `agregarCandidato` **[AR]**
+- [ ] `cumpleParidad` **[LP]**
+- [ ] `calcularEscanos` **[LP]**
+- [ ] `getCandidatosElectos` **[LP]**
+
+### Fase 2 · `GestionElectoral`
+- [ ] `generarListasElectorales` (repartir y ordenar) **[AR]**
+- [ ] `verificarParidad` **[VT]**
+- [ ] `mostrarAlertasParidad` **[VT]**
+- [ ] `mostrarListaElectos` **[VT]**
+
+### Fase 3 · Pruebas **[IA]**
+Resultados esperados con `candidaturas.csv`:
+
+- [ ] **Listas ordenadas** (posición 1 a 12 en cada una; ninguna tiene huecos ni posiciones repetidas).
+- [ ] **Paridad**: solo **BB Barcelona** da alerta (4 M / 8 H = 33,3 % M). Las demás cumplen: BB Madrid 7 M / 5 H (58,3 % M), BSOE Madrid 5 M / 7 H, BSOE Barcelona 5 M / 7 H (41,7 % M).
+- [ ] **Escaños**: 0 → 0; 29.999 → 0; 30.000 → 1; 95.000 → 3; 360.000 → 12.
+- [ ] **Electos** con 95.000 votos (3 escaños):
+  - BB Madrid: 1 Elena Gomez, 2 Carlos Ruiz, 3 Lucia Sanz
+  - BSOE Madrid: 1 Javier Lopez, 2 Carmen Cano, 3 Andres Gil
+  - BB Barcelona: 1 Marta Roca, 2 Jordi Serra, 3 Adrian Mas
+  - BSOE Barcelona: 1 Lluis Vidal, 2 Laia Sole, 3 Marc Pujol
+- [ ] **0 escaños**: la lista de electos sale vacía y se indica (no un error).
+- [ ] **Más escaños que candidatos**: 400.000 votos → 13 escaños, pero solo hay 12 candidatos. Debe dar los 12, **no lanzar `IndexOutOfBoundsException`**.
+- [ ] Votos no numéricos o negativos → los vuelve a pedir (ya lo hace el código base).
+
+### Fase 4 · Revisión final y entrega
+- [ ] Sin casts de listas ni `Object`.
+- [ ] Javadoc de los 8 métodos; `generar_javadoc.bat` sin errores.
+- [ ] Cabeceras con iniciales y código de grupo; sin nombres.
+- [ ] Commits con mensajes claros.
+
+---
+
+## 5. Decisiones y puntos a vigilar
+
+1. **Paquete.** El código base está en el **paquete por defecto** (sin `package`) y `utils` en `package utils`. En el repo, VS Code toma `LAB` como raíz (`.vscode/settings.json`), así que en `P4/` no compilará tal cual. Opciones:
+   - **A (recomendada, como en P3):** `package P4;` en las 4 clases, `package P4.utils;` en `utils` e `import P4.utils...`. CSV en `"P4/candidaturas.csv"`.
+   - **B:** dejar el código base sin tocar y abrir en VS Code la carpeta `P4` como raíz.
+2. **Paridad con límites incluidos**: "entre el 40 % y el 60 %" → 40 % y 60 % cumplen. Hay que comprobar **los dos géneros** (con 2 géneros basta con uno, pero el enunciado dice "cada género").
+3. **Lista vacía**: `getPorcentaje...` devuelve 0 → no cumple paridad. No pasa con este CSV.
+4. **k > tamaño de la lista**: limitar k al número de candidatos antes de coger los primeros (ver Fase 3).
+5. **Electos de una lista ordenada**: `getCandidatosElectos` da por hecho que la lista ya está ordenada (lo hace AR al generarla). Si no, los electos salen mal.
+6. **Diseño `static`** en `GestionElectoral`: viene así en el código base del profesor; se mantiene.
+
+---
+
+## 6. Revisiones del código
+
+*(vacío: la primera revisión cuando haya código)*
