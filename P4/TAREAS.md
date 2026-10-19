@@ -151,7 +151,7 @@ Resultados esperados con `candidaturas.csv`:
   - [ ] Los **3 proyectos (P2, P3, P4)**, cada uno en **su carpeta** con todas sus clases.
   - [ ] La **plantilla de participación** (Campus Virtual → Recursos).
   - [ ] Nombre del ZIP con el **primer apellido de cada miembro** (aquí sí van apellidos; en el código, no).
-  - [ ] Fecha de entrega y de la sesión: TODO (mirar Campus Virtual).
+  - [ ] **Fecha: martes 27-oct-2026** (sesión de evaluación). Confirmar en Campus Virtual si la entrega del ZIP es ese mismo día o antes.
 
 ### Checklist antes de hacer el ZIP
 - [ ] Cada proyecto **compila y se ejecuta desde el ZIP descomprimido** en un ordenador limpio (no solo desde nuestro VS Code): rutas de ficheros (`acciones.csv` en P2, `candidaturas.csv` en P4) y paquetes.
