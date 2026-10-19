@@ -172,7 +172,8 @@ Notas importantes sobre `PriorityQueue`:
 - [x] Encolarlos en la **cola inicial** (`Queue<Visitante>`). **[AR]**
   - OK (18-oct, noche): `generarVisitantes(int llegada)` crea un lote y lo mete en `colaEspera` (`ArrayDeque`); `generarLote` lo llama `n` veces sumando `l`.
 - [x] Validar los parámetros: `N ≥ 1`, `E ≥ 0`, `F ≥ 0`, `L ≥ 0`. Avisar si son incorrectos. **[AR]**
-  - OK (17-oct): vuelve a pedirlos mientras `N ≤ 0` o algún otro sea negativo. Falta: si se escribe algo que no es un número, `nextInt()` lanza `InputMismatchException` (probado).
+  - OK (17-oct): vuelve a pedirlos mientras `N ≤ 0` o algún otro sea negativo.
+  - OK (19-oct, `03283a4`): si se escribe algo que no es un número, avisa y vuelve a pedir ese dato (probado con "x" y "abc").
 
 ### Fase 3 · Simulación
 - [x] Cola de espera `PriorityQueue<Visitante>` con el criterio de la Fase 1.
@@ -327,3 +328,18 @@ Pruebas rápidas (las de la Fase 5, adelantadas; todas dan lo calculado a mano):
 - Erratas en mensajes: "Introduce los número de lotes" → "el número"; "mas a esperado" → "más ha esperado".
 - Commits (LP: `Visitante`; todos: `Simulacion.java`).
 - Fase 5 completa cuando esté todo (casos "mucha cola" y entrada no numérica).
+
+---
+
+## 11. Revisión del código (4ª revisión, 19-oct-2026, `2a8229f`)
+
+**Compila** (solo el aviso `this-escape`, sin importancia) y **la simulación da todos los casos bien**: 2/3/2/100 → 8 (500); 3/3/2/100 → 13 (700); 1/50/0/0 → 11 recorridos, el 50 espera 3000; L=400 → recorrido vacío en 300; entradas con letras o negativos → vuelve a pedir.
+
+Cambio de VT en `simularAtraccion`: con la misma espera se queda el de **menor llegada** y luego **menor id** (antes, el primero que montaba). Cumple el enunciado ("si hay varios, el que llegó primero").
+
+**Falta:**
+- Javadoc: **12 avisos** con `generar_javadoc.bat` (getters/setters de `Visitante` y constructores por defecto) **[VT]**; `n, e, f, l` en un solo comentario con erratas; código de grupo en `@author`; tildes sin unificar.
+- Mensaje final: añadir llegada e inicio del que más espera y arreglar el texto (Fase 4).
+- `catch (InputMismatchException e)` tapa el atributo `e`: renombrar a `ex`.
+- Mensajes de commit.
+- Fase 5 final (IA) cuando esté lo anterior.

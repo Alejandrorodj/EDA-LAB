@@ -1,7 +1,7 @@
 # Buzón de avisos – VT
 
 Avisos de la P3 para **VT**, agrupados por tema. Cuando arregles uno, márcalo con `[x]` y apunta el commit; lo terminado baja a **Hecho**.
-Última revisión: 18-oct-2026, noche (`origin/P3` = `c1a4100`; `Simulacion.java` aún sin subir).
+Última revisión: 19-oct-2026 (`origin/P3` = `2a8229f`).
 
 ## Diseño orientado a objetos (`ParqueDeAtracciones.java`)
 - [x] *(18-oct: hecho con la clase `Simulacion`; `main` solo crea el objeto)* **Todo es `static`**: los atributos `N, E, F, L` (l. 13) y los métodos `leerPorPantalla` y `generarVisitantes`. Nunca se crea un objeto: son funciones sueltas que comparten variables globales. El enunciado penaliza alejarse de la orientación a objetos (en P2 pasó lo mismo con `Acciones`).
@@ -22,24 +22,19 @@ Avisos de la P3 para **VT**, agrupados por tema. Cuando arregles uno, márcalo c
 - [x] *(18-oct, noche: ya se usa en la simulación)* `cola` se crea y no se usa (sigue así en `Simulacion`: se usará en `iniciarSimulacion`).
 
 ## Documentación
-- [ ] Sin comentario Javadoc de clase en `Constantes`, `ParqueDeAtracciones` y `Visitante`. Va **justo encima de `public class`**, no antes de `package`.
-- [ ] `@author` solo con **iniciales + código de grupo** (nada de nombres: en P2 se pusieron los nombres completos).
-- [ ] Los métodos solo tienen los comentarios automáticos de Eclipse (`@return the id`…), sin descripción; `compareTo` y `toString` tienen el "(non-Javadoc)" de Eclipse. Faltan los de `leerPorPantalla`, `generarVisitantes`, `toString` y `main`.
-- [ ] Constantes y atributos sin `/** … */`.
-- [ ] **`Simulacion`** *(18-oct)*:
-  - Sin javadoc de clase (con `@author` iniciales + grupo).
-  - Atributos `n, e, f, l` con `//` y erratas ("standar", "fastPAss"): pasar a `/** */`, uno por atributo. `idVisitante`, `cola` y `colaEspera` sin comentario.
-  - Constructor: "Constructor vacio" no es cierto (lee los datos y genera los visitantes).
-  - `iniciarSimulacion` sin javadoc. `generarLote`: dice "el lote" pero genera todos, y sobra la línea ` * ` vacía.
-  - `leerPorPantalla`: es por teclado; decir que repite si hay valores no válidos.
-  - `generarVisitantes`: `@param tiempo` (el parámetro es `llegada`) y `@return` en un `void` (error de javadoc); la descripción habla de una cola que ya no devuelve.
-- [ ] **`ParqueDeAtracciones`** *(18-oct)*: sin javadoc de clase ni de `main`.
-- [ ] **`Visitante`** *(18-oct)*: sin javadoc de clase, constructor ni atributos; `@param` sin descripción; mezcla "the inicio … to set" en inglés; en `prioridadPase` las líneas "VIP = -1…" salen juntas en el javadoc (usar `<ul><li>` o `<br>`).
-- [ ] **`Constantes`** *(18-oct)*: ningún comentario.
-- [ ] Al terminar, ejecutar `generar_javadoc.bat` y revisar errores y avisos (en P2 empezamos con 10 errores y 70 avisos). Los genéricos dentro de comentarios van como `{@code Queue<Visitante>}`.
+*(19-oct: hecha en `2a8229f` "Documentacion puesta.Todo correcto": javadoc de clase en las 4 clases, atributos, constantes y casi todos los métodos. Bien.)*
+- [x] Javadoc de clase en las 4 clases, encima de `public class`.
+- [x] Constantes y atributos con `/** */` (salvo lo de abajo).
+- [x] `compareTo`, `prioridadPase` y `toString` con descripción, `@param`, `@return` y `@throws`. Ya no hay "(non-Javadoc)" ni `java.lang.Object`.
+- [ ] **`generar_javadoc.bat` da 12 avisos** (no es "todo correcto"):
+  - `Visitante`: los 8 getters/setters siguen con el comentario de Eclipse (`@return the inicio`, `@param inicio the inicio to set`, `@return id`…): falta la descripción y dos `@param` (`setLlegada`, `setId`) no dicen nada. Ponerlos en español con descripción.
+  - `Constantes` y `ParqueDeAtracciones`: "use of default constructor, which does not provide a comment". Se quita con un constructor `private` vacío con su javadoc (además nadie debería hacer `new Constantes()`).
+- [ ] `Simulacion`, l. 21-27: un solo javadoc para `n, e, f, l` con las erratas "standar" y "fastPAss"; en el HTML sale todo en una línea y repetido en los cuatro. Mejor un atributo por línea con su `/** */`.
+- [ ] `@author LP, AR, VT`: falta el **código de grupo** (el enunciado pide iniciales **y** código de grupo).
+- [ ] Tildes: unas clases las llevan ("más", "según") y otras no ("parametros", "simulacion", "atraccion", "numerico"). Unificar.
 
 ## Commits
-- [ ] "jdad": mejor un mensaje que diga qué cambia.
+- [ ] "jdad", "no message", "limpio", "falta doc": mejor un mensaje que diga qué cambia (por ejemplo "Javadoc de Visitante y Constantes").
 
 ## Hecho / pasado a otro buzón
 - El aviso sobre el constructor de `Visitante` que recibe `inicio` (añadido en `b47e6eb`) pasa a **AR**, que se encarga de `Visitante` desde el 17-oct.

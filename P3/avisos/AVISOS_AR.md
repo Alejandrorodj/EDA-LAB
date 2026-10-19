@@ -1,7 +1,7 @@
 # Buzón de avisos – AR
 
 Avisos de la P3 para **AR**, agrupados por tema. Cuando arregles uno, márcalo con `[x]` y apunta el commit; lo terminado baja a **Hecho**.
-Última revisión: 18-oct-2026 (`origin/P3` = `c1a4100`).
+Última revisión: 19-oct-2026 (`origin/P3` = `2a8229f`).
 
 ## `compareTo` (lo tocaste en `c34d14b`; es de LP)
 - [x] *(18-oct: LP lo devolvió a `else if (this.id > v.getId())`; `v.compareTo(v) == 0`.)* En el paso del id cambiaste el segundo `if (this.id > v.getId())` por `else`. Ahora, con el **mismo visitante**, devuelve **1**: `v.compareTo(v) == 1` (probado), y el contrato pide 0. Volver a como estaba (`else if (this.id > v.getId())`). El `compareTo` era de LP y estaba probado; si ves algo, avisa en su buzón en vez de cambiarlo.
@@ -13,7 +13,7 @@ Avisos de la P3 para **AR**, agrupados por tema. Cuando arregles uno, márcalo c
 - No tocar `compareTo` ni `prioridadPase` (LP).
 
 ## Lectura de parámetros (`leerPorPantalla`)
-- [ ] Si se escribe algo que no es un número, `nextInt()` lanza `InputMismatchException` y el programa se cae (probado con "x"). Capturarla y volver a pedir el dato.
+- [x] *(19-oct: hecho por VT en `03283a4`; probado con "x" y "abc": avisa y vuelve a pedir el dato. Ojo: la excepción se llama `e` en el `catch` y tapa al atributo `e`; mejor `ex`)* Si se escribe algo que no es un número, `nextInt()` lanza `InputMismatchException` y el programa se cae (probado con "x"). Capturarla y volver a pedir el dato.
 
 ## Generación de visitantes (`generarVisitantes`)
 - [x] *(18-oct: ahora va a `colaEspera`, un `ArrayDeque`, en `Simulacion`)* Devuelve una `List`; la pista del enunciado es meter a todos en una **cola** (`Queue<Visitante>`, por ejemplo `ArrayDeque` o `LinkedList`) en orden de llegada.

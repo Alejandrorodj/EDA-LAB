@@ -1,10 +1,10 @@
 # Buzón de avisos – LP
 
 Avisos de la P3 para **LP**, agrupados por tema. Cuando arregles uno, márcalo con `[x]` y apunta el commit; lo terminado baja a **Hecho**.
-Última revisión: 18-oct-2026 (`origin/P3` = `c1a4100`).
+Última revisión: 19-oct-2026 (`origin/P3` = `2a8229f`).
 
 ## Pendiente
-- [ ] Hacer commit del arreglo del `compareTo` (`Visitante.java`).
+- [x] *(19-oct: subido en `48fd766`)* Hacer commit del arreglo del `compareTo` (`Visitante.java`).
 - [x] *(18-oct: arreglado en local, falta commit; probado `v.compareTo(v) == 0` y orden correcto)* **AR tocó tu `compareTo`** (`c34d14b`): cambió el segundo `if` del id por `else`, y ahora `v.compareTo(v) == 1`. Está en el buzón de AR para que lo deshaga; revísalo cuando lo haga. El orden de la cola sigue bien.
 - [x] Commit de `compareTo` y `Constantes` en `util/` (`06e984c`).
 - [ ] Mensajes de commit que digan qué cambia ("aaa", "tarea" no lo dicen). Por ejemplo: "compareTo: prioridad por pase, llegada e id".
