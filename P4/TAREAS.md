@@ -118,6 +118,7 @@ Resultados esperados con `candidaturas.csv`:
 - [ ] Votos no numéricos o negativos → los vuelve a pedir (ya lo hace el código base).
 
 ### Fase 4 · Revisión final y entrega
+- [ ] Repasar la **rúbrica** (sección 6): requisitos del enunciado + casos de prueba.
 - [ ] Sin casts de listas ni `Object`.
 - [ ] Javadoc de los 8 métodos; `generar_javadoc.bat` sin errores.
 - [ ] Cabeceras con iniciales y código de grupo; sin nombres.
@@ -130,6 +131,7 @@ Resultados esperados con `candidaturas.csv`:
 1. **Paquete.** El código base está en el **paquete por defecto** (sin `package`) y `utils` en `package utils`. En el repo, VS Code toma `LAB` como raíz (`.vscode/settings.json`), así que en `P4/` no compilará tal cual. Opciones:
    - **A (recomendada, como en P3):** `package P4;` en las 4 clases, `package P4.utils;` en `utils` e `import P4.utils...`. CSV en `"P4/candidaturas.csv"`.
    - **B:** dejar el código base sin tocar y abrir en VS Code la carpeta `P4` como raíz.
+   - **Importante por la evaluación (sección 6):** otro grupo tiene que poder compilar y ejecutar lo que entreguemos. Elijamos la que elijamos, **la ruta del CSV y los paquetes tienen que funcionar en el ZIP tal como se entregue**, abriéndolo como lo abriría el otro grupo. Con la A hay que abrir la carpeta que contiene `P2/`, `P3/` y `P4/`; con la B, la carpeta `P4`. Probarlo antes de entregar.
 2. **Paridad con límites incluidos**: "entre el 40 % y el 60 %" → 40 % y 60 % cumplen. Hay que comprobar **los dos géneros** (con 2 géneros basta con uno, pero el enunciado dice "cada género").
 3. **Lista vacía**: `getPorcentaje...` devuelve 0 → no cumple paridad. No pasa con este CSV.
 4. **k > tamaño de la lista**: limitar k al número de candidatos antes de coger los primeros (ver Fase 3).
@@ -138,6 +140,25 @@ Resultados esperados con `candidaturas.csv`:
 
 ---
 
-## 6. Revisiones del código
+## 6. Evaluación y entrega (`Evaluacion_Practicas_Lin_26_27.pdf`)
+
+- Pilas (P2), colas (P3) y listas (P4) juntas valen el **10 % de la nota**. Son de **superación obligatoria** y la **asistencia a la sesión de evaluación es obligatoria**.
+- **Evaluación por pares:** en la sesión, el profesor empareja grupos. Nosotros enviamos al otro grupo **exactamente lo que entregamos** (se descarga de la tarea del Campus Virtual).
+- **Si no compila y ejecuta, no se revisa.** Es lo primero que se mira.
+- El otro grupo comprueba los requisitos y restricciones de la **rúbrica** (en papel, se da al empezar) y **ejecuta los casos de prueba** que indique: si el programa cumple el enunciado.
+- Nosotros también evaluamos a otro grupo; el profesor revisa nuestra corrección y **una evaluación mal hecha puede quitarnos puntos**. Hay que conocer bien los enunciados.
+- **Entrega:** un solo **ZIP** por grupo (lo sube uno), en la tarea "[Grupos B1, B2, BD1, BD2, C1, C2] Entrega de las prácticas y plantilla de participación":
+  - [ ] Los **3 proyectos (P2, P3, P4)**, cada uno en **su carpeta** con todas sus clases.
+  - [ ] La **plantilla de participación** (Campus Virtual → Recursos).
+  - [ ] Nombre del ZIP con el **primer apellido de cada miembro** (aquí sí van apellidos; en el código, no).
+  - [ ] Fecha de entrega y de la sesión: TODO (mirar Campus Virtual).
+
+### Checklist antes de hacer el ZIP
+- [ ] Cada proyecto **compila y se ejecuta desde el ZIP descomprimido** en un ordenador limpio (no solo desde nuestro VS Code): rutas de ficheros (`acciones.csv` en P2, `candidaturas.csv` en P4) y paquetes.
+- [ ] **No meter** en el ZIP: `TAREAS.md`, `avisos/`, `doc/` generado, `bin/`, `.vscode/`. (En la rama `P2` está subido `P2/doc/`; quitarlo del ZIP.)
+- [ ] Sin nombres ni correos en el código; cabeceras con iniciales y código de grupo en las 3 prácticas.
+- [ ] Repasar cada enunciado contra el programa como si fuéramos el grupo evaluador.
+
+## 7. Revisiones del código
 
 *(vacío: la primera revisión cuando haya código)*
