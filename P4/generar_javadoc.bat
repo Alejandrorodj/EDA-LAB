@@ -1,0 +1,1 @@
+javadoc -d P4\doc -sourcepath . -subpackages P4 -private -author -version -encoding UTF-8 -docencoding UTF-8 -charset UTF-8
