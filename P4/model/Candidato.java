@@ -55,7 +55,11 @@ public class Candidato implements Comparable<Candidato>, LeerFicheroInt {
         return "Candidato [partido=" + partido + ", circunscripcion=" + circunscripcion + ", posicion=" + posicion
                 + ", nombre=" + nombre + ", genero=" + genero + "]";
     }
-
+    
+    /**
+     * Lee los datos del ficheros
+     * @param data
+     */
     @Override
     public void leerDatos(String[] data) {
         this.partido = data[0];
