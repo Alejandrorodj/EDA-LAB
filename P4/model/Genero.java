@@ -1,3 +1,5 @@
+package P4.model;
+
 /**
  * Representacion del genero del candidato.
  * 

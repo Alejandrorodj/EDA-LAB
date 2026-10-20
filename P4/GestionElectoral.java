@@ -1,9 +1,13 @@
+package P4;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import utils.SequentialFile;
+import P4.model.Candidato;
+import P4.utils.Constantes;
+import P4.utils.file.FicheroSecuencial;
 
 /**
  * Programa principal para la gestion, verificacion y asignacion de candidaturas
@@ -15,8 +19,7 @@ public class GestionElectoral {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String rutaFichero = "candidaturas.csv";
-        String separador = ";";
+
         List<Candidato> todosCandidatos = new ArrayList<>();
         ListaElectoral BBMadrid = new ListaElectoral("BB", "Madrid");
         ListaElectoral BBBarcelona = new ListaElectoral("BB", "Barcelona");
@@ -27,8 +30,8 @@ public class GestionElectoral {
         System.out.println("==========================================================");
         System.out.println("  SISTEMA DE GESTION ELECTORAL - CURSO 2026/27 (S04)");
         System.out.println("==========================================================");
-        System.out.println("Cargando candidaturas desde: " + rutaFichero + "...\n");
-        procesarArchivoCSV(rutaFichero, separador, todosCandidatos);
+        System.out.println("Cargando candidaturas desde: " + Constantes.RUTA_FICHERO + "...\n");
+        procesarArchivoCSV(Constantes.RUTA_FICHERO, Constantes.SEPARADOR, todosCandidatos);
         System.out.println("Se han cargado correctamente " + todosCandidatos.size() + " registros de candidatos.\n");
         // generar listas electorales
         generarListasElectorales(todosCandidatos, BBMadrid, BBBarcelona, BSOEMadrid, BSOEBarcelona);
@@ -46,7 +49,7 @@ public class GestionElectoral {
 
     private static void procesarArchivoCSV(String rutaFichero, String separador, List<Candidato> todosCandidatos) {
         try {
-            SequentialFile<Candidato> sf = new SequentialFile<Candidato>(rutaFichero, separador);
+            FicheroSecuencial<Candidato> sf = new FicheroSecuencial<Candidato>(rutaFichero, separador);
             while (!sf.isEndOfFile()) {
                 Candidato candidato = new Candidato();
                 sf.read(candidato);
@@ -120,7 +123,7 @@ public class GestionElectoral {
     }
 
     private static void mostrarListaElectos(String partido, String circunscripcion, List<Candidato> electos) {
-       // TO DO: completar implementación
+        // TO DO: completar implementación
     }
 
     private static int leerNumeroVotos(String partido, String circunscripcion) {

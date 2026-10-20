@@ -1,5 +1,10 @@
+package P4;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import P4.model.Candidato;
+import P4.model.Genero;
 
 /**
  * Clase que representa la lista electoral de un partido en una circunscripcion
@@ -7,7 +12,7 @@ import java.util.List;
  * 
  */
 public class ListaElectoral {
-    private static final int VOTOS_ESCANO = 30000;
+    
 
     private String partido;
     private String circunscripcion;
@@ -85,7 +90,7 @@ public class ListaElectoral {
         this.votosPartido = votosPartido;
     }
 
-     public boolean cumpleParidad() {
+    public boolean cumpleParidad() {
         // TO DO: completar implementación
     }
 
