@@ -115,39 +115,51 @@ public class GestionElectoral {
         bSOEBarcelona.mostrarListaCandidatos();
     }
 
-    /**
-     * Verifica si la paridad es correcta o no
-     * @param BBMadrid
-     * @param BBBarcelona
-     * @param BSOEMadrid
-     * @param BSOEBarcelona
-     */
     private static void verificarParidad(ListaElectoral BBMadrid, ListaElectoral BBBarcelona,
             ListaElectoral BSOEMadrid, ListaElectoral BSOEBarcelona) {
         System.out.println("----------------------------------------------------------");
         System.out.println("2. ALERTAS DE PARIDAD EN CANDIDATURAS");
         System.out.println("----------------------------------------------------------");
         // TO DO: completar implementación
-        
+        List<ListaElectoral> listasAlertasIncorrecta = new ArrayList<>();
+        List<ListaElectoral> listasAlertasCorrecta = new ArrayList<>();
+        if(!BBMadrid.cumpleParidad()){
+            listasAlertasIncorrecta.add(BBMadrid);
+        } else{
+            listasAlertasCorrecta.add(BBMadrid);
+        }
+
+        if(!BBBarcelona.cumpleParidad()){
+            listasAlertasIncorrecta.add(BBBarcelona);
+        } else{
+            listasAlertasCorrecta.add(BBBarcelona);
+        }
+
+        if(!BSOEMadrid.cumpleParidad()){
+            listasAlertasIncorrecta.add(BSOEMadrid);
+        } else{
+            listasAlertasCorrecta.add(BSOEMadrid);
+        }
+
+        if(!BSOEBarcelona.cumpleParidad()){
+            listasAlertasIncorrecta.add(BSOEBarcelona);
+        } else{
+            listasAlertasCorrecta.add(BSOEBarcelona);
+        }
+
+        mostrarAlertasParidad(listasAlertasIncorrecta);
+        mostrarAlertasParidad(listasAlertasCorrecta);
     }
 
-
-    /**
-     * Muestra las Alertas que el verificarParidad ha detectado
-     * @param listasAlertas
-     */
     private static void mostrarAlertasParidad(List<ListaElectoral> listasAlertas) {
         // TO DO: completar implementación
-        System.out.print("[ALERTA] PARTIDO  no cumple con la paridad" );
+        if (listasAlertas == listasAlertasIncorrecta){
+            for(int i = 0; i < listasAlertas.size(); i++){
+                System.out.print("[ALERTA] El partido " + listasAlertas.get(i) + " no cumple la paridad. La representacion ");
+            }
+        }
     }
 
-    /**
-     * 
-     * @param bBMadrid
-     * @param bBBarcelona
-     * @param bSOEMadrid
-     * @param bSOEBarcelona
-     */
     private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
             ListaElectoral bSOEBarcelona) {
         System.out.println("----------------------------------------------------------");
