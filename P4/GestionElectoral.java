@@ -164,11 +164,21 @@ public class GestionElectoral {
         }
     }
 
-    private static void mostrarAlertasParidadCorrecta(List<ListaElectoral> listasAlertasCorrectas){
+
+      private static void mostrarAlertasParidadCorrecta(List<ListaElectoral> listasAlertasCorrectas){
         // Metodo creado para mostrar las alertas correctas
     }
 
-    private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
+
+    /**
+     * Lee los votos que tiene cada partido en cada ciudad
+     * @param bBMadrid
+     * @param bBBarcelona
+     * @param bSOEMadrid
+     * @param bSOEBarcelona
+     */
+
+private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
             ListaElectoral bSOEBarcelona) {
         System.out.println("----------------------------------------------------------");
         System.out.println("3. RECUENTO DE VOTACIONES");
@@ -180,7 +190,7 @@ public class GestionElectoral {
     }
 
     /**
-     * 
+     * Lee los escaños de cada partido en cada ciudad
      * @param bBMadrid
      * @param bBBarcelona
      * @param bSOEMadrid
