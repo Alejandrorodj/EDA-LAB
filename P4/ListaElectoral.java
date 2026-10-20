@@ -26,7 +26,8 @@ public class ListaElectoral {
     }
 
     public void agregarCandidato(Candidato candidato) {
-        // TO DO: completar implementación
+        candidatos.add(candidato);
+
     }
 
     public String getPartido() {

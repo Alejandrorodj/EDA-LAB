@@ -1,7 +1,9 @@
 package P4;
 
+import java.util.Collections;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -63,7 +65,28 @@ public class GestionElectoral {
 
     private static void generarListasElectorales(List<Candidato> todosCandidatos, ListaElectoral bBMadrid,
             ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid, ListaElectoral bSOEBarcelona) {
-        // TO DO: completar implementación
+
+        for(Candidato c : todosCandidatos) {
+            if(c.getPartido().equals("BB")) {
+                if(c.getCircunscripcion().equals("Madrid")) {
+                    bBMadrid.agregarCandidato(c);
+                } else {
+                    bBBarcelona.agregarCandidato(c);
+                }
+            } else if(c.getPartido().equals("BSOE")) {
+                if(c.getCircunscripcion().equals("Madrid")) {
+                    bSOEMadrid.agregarCandidato(c);
+                } else {
+                    bSOEBarcelona.agregarCandidato(c);
+                }
+            }
+        }
+
+        Collections.sort(bBMadrid.getCandidatos());
+        Collections.sort(bBBarcelona.getCandidatos());
+        Collections.sort(bSOEMadrid.getCandidatos());
+        Collections.sort(bSOEBarcelona.getCandidatos());
+                
     }
 
     private static void mostrarListasElectorales(ListaElectoral bBMadrid, ListaElectoral bBBarcelona,
