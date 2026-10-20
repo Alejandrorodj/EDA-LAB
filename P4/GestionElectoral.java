@@ -154,19 +154,37 @@ public class GestionElectoral {
         }
 
         mostrarAlertasParidad(listasAlertasIncorrecta);
-        mostrarAlertasParidad(listasAlertasCorrecta);
+        mostrarAlertasParidadCorrecta(listasAlertasCorrecta);
     }
 
     private static void mostrarAlertasParidad(List<ListaElectoral> listasAlertas) {
-        // TO DO: completar implementación
-        for(int i = 0; i < listasAlertas.size(); i++){
-                System.out.print("[ALERTA] El partido " + listasAlertas.get(i) + " no cumple la paridad. La representacion ");
+        for (int i = 0; i < listasAlertas.size(); i++) {
+            ListaElectoral lista = listasAlertas.get(i);
+
+            System.out.printf(
+                "[ALERTA] El partido %s (%s) no cumple la paridad adecuada. "
+                + "Representan un %.2f%% hombres y un %.2f%% mujeres.%n",
+                lista.getPartido(),
+                lista.getCircunscripcion(),
+                lista.getPorcentajeHombres(),
+                lista.getPorcentajeMujeres()
+            );
         }
     }
 
+    private static void mostrarAlertasParidadCorrecta(List<ListaElectoral> listasAlertasCorrectas) {
+        for (int i = 0; i < listasAlertasCorrectas.size(); i++) {
+            ListaElectoral lista = listasAlertasCorrectas.get(i);
 
-      private static void mostrarAlertasParidadCorrecta(List<ListaElectoral> listasAlertasCorrectas){
-        // Metodo creado para mostrar las alertas correctas
+            System.out.printf(
+                "El partido %s (%s) cumple la paridad correcta. "
+                + "Representan un %.2f%% hombres y un %.2f%% mujeres.%n",
+                lista.getPartido(),
+                lista.getCircunscripcion(),
+                lista.getPorcentajeHombres(),
+                lista.getPorcentajeMujeres()
+            );
+        }
     }
 
 
