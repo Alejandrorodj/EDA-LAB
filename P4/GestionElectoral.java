@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import P4.model.Candidato;
-import P4.utils.Constantes;
-import P4.utils.file.FicheroSecuencial;
+import P4.util.Constantes;
+import P4.util.file.FicheroSecuencial;
 
 /**
  * Programa principal para la gestion, verificacion y asignacion de candidaturas

@@ -1,4 +1,4 @@
-package P4.utils;
+package P4.util;
 
 public class Constantes {
     public static final int VOTOS_ESCANO = 30000;

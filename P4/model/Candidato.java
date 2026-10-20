@@ -1,6 +1,6 @@
 package P4.model;
 
-import P4.utils.file.LeerFicheroInt;
+import P4.util.file.LeerFicheroInt;
 
 /**
  * Clase que representa a un candidato individual de una lista electoral.

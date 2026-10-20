@@ -1,4 +1,4 @@
-package P4.utils.file;
+package P4.util.file;
 
 /**
  * Interfaz para las clases que se rellenan con los campos de una línea de un

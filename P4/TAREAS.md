@@ -82,8 +82,8 @@ La regla para no pisarse en git: **cada método tiene un solo dueño**, y los m�
 ### Fase 0 · Preparación **[LP]** (antes de que empiecen AR y VT)
 - [x] Rama `P4` creada (`e86c435`, `3a37ba0`).
 - [x] Copiar el código base, `candidaturas.csv` y el enunciado en `P4/` (19-oct, sin modificar).
-- [x] **Lectura del fichero con las mismas clases que en P1 y P2** (decisión de LP, 20-oct): `utils/file/FicheroSecuencial` y `utils/file/LeerFicheroInt` (copiadas de P2, paquete `P4.utils.file`). `Candidato` implementa `LeerFicheroInt` (`leerDatos`) y `GestionElectoral.procesarArchivoCSV` usa `FicheroSecuencial`. Lee los 48 candidatos.
-  - [ ] Borrar `utils/file/SequentialFile.java` y `SequentialFileReadable.java`, que ya no se usan.
+- [x] **Lectura del fichero con las mismas clases que en P1 y P2** (decisión de LP, 20-oct): `util/file/FicheroSecuencial` y `util/file/LeerFicheroInt` (copiadas de P2, paquete `P4.util.file`; carpeta `util` como en P2). `Candidato` implementa `LeerFicheroInt` (`leerDatos`) y `GestionElectoral.procesarArchivoCSV` usa `FicheroSecuencial`. Lee los 48 candidatos.
+  - [x] Borrar `util/file/SequentialFile.java` y `SequentialFileReadable.java`, que ya no se usan.
 - [ ] **Decidir el paquete** (ver sección 5, punto 1) y aplicarlo en los 6 ficheros.
 - [ ] **Ruta del CSV**: `"candidaturas.csv"` se busca en la carpeta desde la que se ejecuta. Ajustarla según el punto anterior.
 - [ ] **Que compile**: `cumpleParidad`, `calcularEscanos` y `getCandidatosElectos` no tienen `return` y el código base **no compila**. Poner un `return` provisional (`false`, `0`, lista vacía) con `// TODO` para que todos puedan ejecutar mientras tanto.
