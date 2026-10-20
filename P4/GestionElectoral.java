@@ -50,7 +50,7 @@ public class GestionElectoral {
     }
 
     /**
-     * 
+     * Proceso el archivo csv
      * @param rutaFichero
      * @param separador
      * @param todosCandidatos
