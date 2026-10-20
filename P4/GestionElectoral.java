@@ -148,7 +148,7 @@ public class GestionElectoral {
     }
 
     /**
-     * 
+     * Lee los votos que tiene cada partido en cada ciudad
      * @param bBMadrid
      * @param bBBarcelona
      * @param bSOEMadrid
@@ -166,7 +166,7 @@ public class GestionElectoral {
     }
 
     /**
-     * 
+     * Lee los escaños de cada partido en cada ciudad
      * @param bBMadrid
      * @param bBBarcelona
      * @param bSOEMadrid
