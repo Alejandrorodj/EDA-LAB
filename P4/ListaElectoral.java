@@ -12,7 +12,6 @@ import P4.model.Genero;
  * 
  */
 public class ListaElectoral {
-    
 
     private String partido;
     private String circunscripcion;
@@ -92,14 +91,23 @@ public class ListaElectoral {
 
     public boolean cumpleParidad() {
         // TO DO: completar implementación
+        boolean result = false;
+
+        return result;
     }
 
     public int calcularEscanos() {
         // TO DO: completar implementación
+        int result = 0;
+
+        return result;
     }
 
     public List<Candidato> getCandidatosElectos() {
         // TO DO: completar implementación
+        List<Candidato> lstCandidatos = new ArrayList<>();
+
+        return lstCandidatos;
     }
 
     public void mostrarListaCandidatos() {
