@@ -49,6 +49,12 @@ public class GestionElectoral {
         mostrarCandidatosElectos(BBMadrid, BBBarcelona, BSOEMadrid, BSOEBarcelona);
     }
 
+    /**
+     * Proceso el archivo csv
+     * @param rutaFichero
+     * @param separador
+     * @param todosCandidatos
+     */
     private static void procesarArchivoCSV(String rutaFichero, String separador, List<Candidato> todosCandidatos) {
         try {
             FicheroSecuencial<Candidato> sf = new FicheroSecuencial<Candidato>(rutaFichero, separador);
