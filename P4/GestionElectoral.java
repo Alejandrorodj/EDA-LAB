@@ -159,11 +159,13 @@ public class GestionElectoral {
 
     private static void mostrarAlertasParidad(List<ListaElectoral> listasAlertas) {
         // TO DO: completar implementación
-        if (listasAlertas == listasAlertasIncorrecta){
-            for(int i = 0; i < listasAlertas.size(); i++){
+        for(int i = 0; i < listasAlertas.size(); i++){
                 System.out.print("[ALERTA] El partido " + listasAlertas.get(i) + " no cumple la paridad. La representacion ");
-            }
         }
+    }
+
+    private static void mostrarAlertasParidadCorrecta(List<ListaElectoral> listasAlertasCorrectas){
+        // Metodo creado para mostrar las alertas correctas
     }
 
     private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
