@@ -83,10 +83,12 @@ public class GestionElectoral {
         System.out.println("2. ALERTAS DE PARIDAD EN CANDIDATURAS");
         System.out.println("----------------------------------------------------------");
         // TO DO: completar implementación
+        
     }
 
     private static void mostrarAlertasParidad(List<ListaElectoral> listasAlertas) {
         // TO DO: completar implementación
+        System.out.print("[ALERTA] PARTIDO  no cumple con la paridad" );
     }
 
     private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
