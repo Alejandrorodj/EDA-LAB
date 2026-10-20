@@ -170,3 +170,10 @@ Resultados esperados con `candidaturas.csv`:
 - **Falta:** `getCandidatosElectos` (LP); `verificarParidad`, `mostrarAlertasParidad`, `mostrarListaElectos` (VT, sin empezar): ahora las secciones 2 y 5 de la salida salen vacías.
 - Javadoc de los 8 métodos y cabeceras de clase. `generar_javadoc.bat` da 1 error (`@param listCandidatos` en `cumpleParidad`).
 - Ruta del CSV: unificar criterio con P2 (sección 4, Fase 0).
+
+### 20-oct, noche (rama `P4` = `e596626`)
+- **NO COMPILA** desde `9afe799` (VT): `mostrarAlertasParidad` usa `listasAlertasIncorrecta`, variable local de `verificarParidad`. Detalle en `avisos/AVISOS_VT.md`.
+- VT: `verificarParidad` empezado (separa las que cumplen y las que no); `mostrarAlertasParidad` a medias; `mostrarListaElectos` sin empezar.
+- LP: `getCandidatosElectos` sin hacer; arreglos de `cumpleParidad` y javadoc pendientes. Detalle en `avisos/AVISOS_LP.md`.
+- AR: javadoc vacío en todos los métodos de `GestionElectoral` (`c98f5aa`), también en los ajenos.
+- Commits: 5 "no message" (AR) y 2 "hay errores" (VT).
