@@ -166,6 +166,13 @@ public class GestionElectoral {
         }
     }
 
+    /**
+     * Lee los votos que tiene cada partido en cada ciudad
+     * @param bBMadrid
+     * @param bBBarcelona
+     * @param bSOEMadrid
+     * @param bSOEBarcelona
+     */
     private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
             ListaElectoral bSOEBarcelona) {
         System.out.println("----------------------------------------------------------");
@@ -178,7 +185,7 @@ public class GestionElectoral {
     }
 
     /**
-     * 
+     * Lee los escaños de cada partido en cada ciudad
      * @param bBMadrid
      * @param bBBarcelona
      * @param bSOEMadrid
