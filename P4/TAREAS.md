@@ -86,6 +86,7 @@ La regla para no pisarse en git: **cada método tiene un solo dueño**, y los m�
   - [x] Borrar `util/file/SequentialFile.java` y `SequentialFileReadable.java`, que ya no se usan.
 - [ ] **Decidir el paquete** (ver sección 5, punto 1) y aplicarlo en los 6 ficheros.
 - [ ] **Ruta del CSV**: `"candidaturas.csv"` se busca en la carpeta desde la que se ejecuta. Ajustarla según el punto anterior.
+  - (20-oct) LP: `".//archivos//candidaturas.csv"` funciona en su VS Code (directorio de trabajo = `P4`). Desde `LAB` falla. **Unificar con P2**, que usa la ruta desde `LAB` (`.\\P2\\archivos\\acciones.csv`): el evaluador tiene que poder ejecutar las tres de la misma forma.
 - [ ] **Que compile**: `cumpleParidad`, `calcularEscanos` y `getCandidatosElectos` no tienen `return` y el código base **no compila**. Poner un `return` provisional (`false`, `0`, lista vacía) con `// TODO` para que todos puedan ejecutar mientras tanto.
 - [ ] Añadir `import java.util.Collections;` en `GestionElectoral` (para la ordenación de AR).
 - [ ] Cabeceras `Autores`/`Grupo` (iniciales + código de grupo) en las 6 clases.

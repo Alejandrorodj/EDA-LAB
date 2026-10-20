@@ -5,6 +5,7 @@ import java.util.List;
 
 import P4.model.Candidato;
 import P4.model.Genero;
+import P4.util.Constantes;
 
 /**
  * Clase que representa la lista electoral de un partido en una circunscripcion
@@ -86,22 +87,43 @@ public class ListaElectoral {
         return res;
     }
 
+    /**
+     * 
+     * @param votosPartido
+     */
     public void setVotosPartido(int votosPartido) {
         this.votosPartido = votosPartido;
     }
 
+    /**
+     * 
+     * @param listCandidatos
+     * @return
+     */
     public boolean cumpleParidad() {
-        // TO DO: completar implementación
         boolean result = false;
+        int mujeres = 0;
+        int total = 0;
+        double porcertajeMujeres = 0;
+
+        for (Candidato c : candidatos) {
+            if (Genero.M.equals(c.getGenero())) {
+                mujeres += 1;
+            }
+            total++;
+        }
+
+        porcertajeMujeres = (mujeres * 100) / total;
+
+        if (porcertajeMujeres >= 40 && porcertajeMujeres <= 60) {
+            result = true;
+        }
 
         return result;
     }
 
     public int calcularEscanos() {
-        // TO DO: completar implementación
-        int result = 0;
-
-        return result;
+        return votosPartido / Constantes.VOTOS_ESCANO;
     }
 
     public List<Candidato> getCandidatosElectos() {
