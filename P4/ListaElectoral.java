@@ -25,7 +25,11 @@ public class ListaElectoral {
         this.votosPartido = 0;
         this.candidatos = new ArrayList<>();
     }
-
+    
+    /**
+     * Añade candidatos a la lista
+     * @param candidato
+     */
     public void agregarCandidato(Candidato candidato) {
         candidatos.add(candidato);
 
