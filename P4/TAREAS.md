@@ -84,23 +84,23 @@ La regla para no pisarse en git: **cada método tiene un solo dueño**, y los m�
 - [x] Copiar el código base, `candidaturas.csv` y el enunciado en `P4/` (19-oct, sin modificar).
 - [x] **Lectura del fichero con las mismas clases que en P1 y P2** (decisión de LP, 20-oct): `util/file/FicheroSecuencial` y `util/file/LeerFicheroInt` (copiadas de P2, paquete `P4.util.file`; carpeta `util` como en P2). `Candidato` implementa `LeerFicheroInt` (`leerDatos`) y `GestionElectoral.procesarArchivoCSV` usa `FicheroSecuencial`. Lee los 48 candidatos.
   - [x] Borrar `util/file/SequentialFile.java` y `SequentialFileReadable.java`, que ya no se usan.
-- [ ] **Decidir el paquete** (ver sección 5, punto 1) y aplicarlo en los 6 ficheros.
+- [x] **Decidir el paquete**: `package P4;` con `model/` (`Candidato`, `Genero`) y `util/` (`Constantes`, `file/`) (20-oct).
 - [ ] **Ruta del CSV**: `"candidaturas.csv"` se busca en la carpeta desde la que se ejecuta. Ajustarla según el punto anterior.
   - (20-oct) LP: `".//archivos//candidaturas.csv"` funciona en su VS Code (directorio de trabajo = `P4`). Desde `LAB` falla. **Unificar con P2**, que usa la ruta desde `LAB` (`.\\P2\\archivos\\acciones.csv`): el evaluador tiene que poder ejecutar las tres de la misma forma.
-- [ ] **Que compile**: `cumpleParidad`, `calcularEscanos` y `getCandidatosElectos` no tienen `return` y el código base **no compila**. Poner un `return` provisional (`false`, `0`, lista vacía) con `// TODO` para que todos puedan ejecutar mientras tanto.
-- [ ] Añadir `import java.util.Collections;` en `GestionElectoral` (para la ordenación de AR).
+- [x] *(20-oct)* **Que compile**: `cumpleParidad`, `calcularEscanos` y `getCandidatosElectos` no tienen `return` y el código base **no compila**. Poner un `return` provisional (`false`, `0`, lista vacía) con `// TODO` para que todos puedan ejecutar mientras tanto.
+- [x] Añadir `import java.util.Collections;` en `GestionElectoral` (lo puso AR en `252ea70`).
 - [ ] Cabeceras `Autores`/`Grupo` (iniciales + código de grupo) en las 6 clases.
-- [ ] `generar_javadoc.bat` adaptado a la P4.
+- [x] `generar_javadoc.bat` adaptado a la P4 (20-oct; con `cd` a `LAB` y `pause`).
 - [ ] Commit y push; avisar a AR y VT para que hagan `pull` y empiecen.
 
 ### Fase 1 · `ListaElectoral`
-- [ ] `agregarCandidato` **[AR]**
-- [ ] `cumpleParidad` **[LP]**
-- [ ] `calcularEscanos` **[LP]**
+- [x] `agregarCandidato` **[AR]** (`252ea70`). Falta javadoc.
+- [x] `cumpleParidad` **[LP]** (funciona con el CSV). Falta: lista vacía → `ArithmeticException`, división entera, javadoc con `@param` que no existe (error en `generar_javadoc.bat`).
+- [x] `calcularEscanos` **[LP]** (probado). Falta javadoc.
 - [ ] `getCandidatosElectos` **[LP]**
 
 ### Fase 2 · `GestionElectoral`
-- [ ] `generarListasElectorales` (repartir y ordenar) **[AR]**
+- [x] `generarListasElectorales` (repartir y ordenar) **[AR]** (`252ea70`; las 4 listas salen completas y ordenadas). Falta javadoc; sobra `import java.util.Collection`.
 - [ ] `verificarParidad` **[VT]**
 - [ ] `mostrarAlertasParidad` **[VT]**
 - [ ] `mostrarListaElectos` **[VT]**
@@ -164,4 +164,9 @@ Resultados esperados con `candidaturas.csv`:
 
 ## 7. Revisiones del código
 
-*(vacío: la primera revisión cuando haya código)*
+### 20-oct (rama `P4` = `905d7f2`)
+- Compila. Lee 48 candidatos; las 4 listas salen con 12 y **ordenadas por posición**; con 95.000 votos salen 3 escaños en cada una.
+- **Hecho:** `agregarCandidato`, `generarListasElectorales` (AR), `cumpleParidad`, `calcularEscanos` (LP).
+- **Falta:** `getCandidatosElectos` (LP); `verificarParidad`, `mostrarAlertasParidad`, `mostrarListaElectos` (VT, sin empezar): ahora las secciones 2 y 5 de la salida salen vacías.
+- Javadoc de los 8 métodos y cabeceras de clase. `generar_javadoc.bat` da 1 error (`@param listCandidatos` en `cumpleParidad`).
+- Ruta del CSV: unificar criterio con P2 (sección 4, Fase 0).
