@@ -126,7 +126,7 @@ public class GestionElectoral {
         System.out.println("----------------------------------------------------------");
         System.out.println("2. ALERTAS DE PARIDAD EN CANDIDATURAS");
         System.out.println("----------------------------------------------------------");
-        // TO DO: completar implementación
+
         List<ListaElectoral> listasAlertasIncorrecta = new ArrayList<>();
         List<ListaElectoral> listasAlertasCorrecta = new ArrayList<>();
         if(!BBMadrid.cumpleParidad()){
@@ -162,7 +162,7 @@ public class GestionElectoral {
             ListaElectoral lista = listasAlertas.get(i);
 
             System.out.printf(
-                "[ALERTA] El partido %s (%s) no cumple la paridad adecuada. "
+                "\n[ALERTA] El partido %s (%s) no cumple la paridad adecuada. "
                 + "Representan un %.2f%% hombres y un %.2f%% mujeres.%n",
                 lista.getPartido(),
                 lista.getCircunscripcion(),
@@ -177,7 +177,7 @@ public class GestionElectoral {
             ListaElectoral lista = listasAlertasCorrectas.get(i);
 
             System.out.printf(
-                "El partido %s (%s) cumple la paridad correcta. "
+                "\nEl partido %s (%s) cumple la paridad correcta. "
                 + "Representan un %.2f%% hombres y un %.2f%% mujeres.%n",
                 lista.getPartido(),
                 lista.getCircunscripcion(),
@@ -250,7 +250,16 @@ private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarce
      * @param electos
      */
     private static void mostrarListaElectos(String partido, String circunscripcion, List<Candidato> electos) {
-        // TO DO: completar implementación
+        System.out.println("Candidatos electos de " + partido + " en " + circunscripcion + ":");
+        if (electos.isEmpty()){
+            System.out.println("No ha obtenido ningun escaño");
+        } else{
+            for(Candidato c: electos){
+                System.out.println(c.getPosicion() + " " + c.getNombre());
+            }
+        }
+
+        System.out.println();
     }
 
     /**
