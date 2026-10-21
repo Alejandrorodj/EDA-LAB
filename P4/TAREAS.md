@@ -85,7 +85,8 @@ La regla para no pisarse en git: **cada método tiene un solo dueño**, y los m�
 - [x] **Lectura del fichero con las mismas clases que en P1 y P2** (decisión de LP, 20-oct): `util/file/FicheroSecuencial` y `util/file/LeerFicheroInt` (copiadas de P2, paquete `P4.util.file`; carpeta `util` como en P2). `Candidato` implementa `LeerFicheroInt` (`leerDatos`) y `GestionElectoral.procesarArchivoCSV` usa `FicheroSecuencial`. Lee los 48 candidatos.
   - [x] Borrar `util/file/SequentialFile.java` y `SequentialFileReadable.java`, que ya no se usan.
 - [x] **Decidir el paquete**: `package P4;` con `model/` (`Candidato`, `Genero`) y `util/` (`Constantes`, `file/`) (20-oct).
-- [ ] **Ruta del CSV**: `"candidaturas.csv"` se busca en la carpeta desde la que se ejecuta. Ajustarla según el punto anterior.
+- [x] **Ruta del CSV**: `"candidaturas.csv"` se busca en la carpeta desde la que se ejecuta. Ajustarla según el punto anterior.
+  - **(21-oct) Decidido: todo se ejecuta desde `LAB`**, como hace VS Code (y como P2). `RUTA_FICHERO = "P4/archivos/candidaturas.csv"` (cambiado por LP, falta commit). Con `".//archivos//..."` VS Code daba `FileNotFoundException`.
   - (20-oct) LP: `".//archivos//candidaturas.csv"` funciona en su VS Code (directorio de trabajo = `P4`). Desde `LAB` falla. **Unificar con P2**, que usa la ruta desde `LAB` (`.\\P2\\archivos\\acciones.csv`): el evaluador tiene que poder ejecutar las tres de la misma forma.
 - [x] *(20-oct)* **Que compile**: `cumpleParidad`, `calcularEscanos` y `getCandidatosElectos` no tienen `return` y el código base **no compila**. Poner un `return` provisional (`false`, `0`, lista vacía) con `// TODO` para que todos puedan ejecutar mientras tanto.
 - [x] Añadir `import java.util.Collections;` en `GestionElectoral` (lo puso AR en `252ea70`).
@@ -101,8 +102,8 @@ La regla para no pisarse en git: **cada método tiene un solo dueño**, y los m�
 
 ### Fase 2 · `GestionElectoral`
 - [x] `generarListasElectorales` (repartir y ordenar) **[AR]** (`252ea70`; las 4 listas salen completas y ordenadas). Falta javadoc; sobra `import java.util.Collection`.
-- [ ] `verificarParidad` **[VT]**
-- [ ] `mostrarAlertasParidad` **[VT]**
+- [x] `verificarParidad` **[VT]** (`7804cf4`). Falta javadoc.
+- [x] `mostrarAlertasParidad` **[VT]** (`7804cf4`): solo BB Barcelona, 66,67 % H / 33,33 % M. Añadió además `mostrarAlertasParidadCorrecta` para las que sí cumplen. Falta javadoc.
 - [ ] `mostrarListaElectos` **[VT]**
 
 ### Fase 3 · Pruebas **[IA]**
@@ -177,3 +178,11 @@ Resultados esperados con `candidaturas.csv`:
 - LP: `getCandidatosElectos` sin hacer; arreglos de `cumpleParidad` y javadoc pendientes. Detalle en `avisos/AVISOS_LP.md`.
 - AR: javadoc vacío en todos los métodos de `GestionElectoral` (`c98f5aa`), también en los ajenos.
 - Commits: 5 "no message" (AR) y 2 "hay errores" (VT).
+
+### 21-oct (rama `P4` = `7804cf4` + ruta del CSV en local)
+- **Error al ejecutar desde VS Code (LP, 20-oct):** `FileNotFoundException: .\archivos\candidaturas.csv` porque VS Code ejecuta desde `LAB` → 0 candidatos → `ArithmeticException: / by zero` en `cumpleParidad` (lista vacía).
+  - [x] Ruta cambiada a `"P4/archivos/candidaturas.csv"` (LP, sin commit). Comprobado: carga los 48.
+  - [ ] **`cumpleParidad` con lista vacía** sigue dividiendo entre 0 **[LP]**: devolver `false` si `candidatos` está vacía.
+  - [ ] (Opcional) `procesarArchivoCSV` (código base): si no encuentra el fichero imprime la traza, sigue y dice "Se han cargado correctamente 0 registros". Mejor un mensaje claro y terminar. Si se cambia, que lo haga solo uno.
+- Compila. Secciones 1, 2 y 4 de la salida correctas. Con 400.000 votos sale "13 escaños" (bien; la sección 5 todavía no muestra nada).
+- **Falta:** `getCandidatosElectos` **[LP]** y `mostrarListaElectos` **[VT]** → la sección 5 sale vacía. Javadoc de todos. Cabeceras con código de grupo.

@@ -16,7 +16,7 @@ Devuelve los k primeros candidatos de la lista, siendo k los escaños.
 - Esperado con 95.000 votos (3 escaños): BB Madrid → Elena Gomez, Carlos Ruiz, Lucia Sanz · BSOE Madrid → Javier Lopez, Carmen Cano, Andres Gil · BB Barcelona → Marta Roca, Jordi Serra, Adrian Mas · BSOE Barcelona → Lluis Vidal, Laia Sole, Marc Pujol. Con 0 votos: lista vacía. Con 400.000: los 12.
 
 ### 2. `cumpleParidad()` — arreglos (ya funciona con el CSV: solo BB Barcelona da `false`)
-- [ ] **Lista vacía**: ahora lanza `ArithmeticException` (divide entre `total = 0`). Si `candidatos` está vacía, devolver `false` antes de dividir.
+- [ ] **Lista vacía** *(confirmado al ejecutar en VS Code el 20-oct: `ArithmeticException: / by zero` en la línea 120 cuando no se encuentra el CSV)*: lanza `ArithmeticException` (divide entre `total = 0`). Si `candidatos` está vacía, devolver `false` antes de dividir.
 - [ ] **División entera**: `(mujeres * 100) / total` se calcula con enteros aunque se guarde en `double` (79 H / 121 M = 60,5 % → 60 → `true`, y debería ser `false`). Multiplicar por `100.0`, o usar `getPorcentajeMujeres()` y `getPorcentajeHombres()`, que ya existen.
 - [ ] **Javadoc**: quitar `@param listCandidatos` (ese parámetro ya no existe y **hace fallar `generar_javadoc.bat`** con un error). Poner descripción y `@return true si hombres y mujeres están entre el 40 % y el 60 % (incluidos)`.
 - [ ] Errata `porcertajeMujeres` → `porcentajeMujeres`.
@@ -26,10 +26,10 @@ Devuelve los k primeros candidatos de la lista, siendo k los escaños.
 
 ### 4. Lo que queda de la Fase 0
 - [ ] **Cabeceras de clase** con iniciales (`LP, AR, VT`) y **código de grupo** en las 7 clases. `Genero` aún tiene `Autores: [Iniciales]` y `Grupo: [CodigoGrupo]`; el resto, nada o sin grupo.
-- [ ] **Ruta del CSV**: `".//archivos//candidaturas.csv"` funciona ejecutando desde `P4`, pero P2 se ejecuta desde `LAB`. Elegir un criterio para las dos (ver `TAREAS.md`, Fase 0) y cambiar la que no encaje. Usar `/` (vale en Windows y en Mac).
+- [x] *(21-oct, falta commit)* **Ruta del CSV**: `"P4/archivos/candidaturas.csv"`. VS Code ejecuta desde `LAB`; con la ruta anterior daba `FileNotFoundException` y luego `/ by zero`.
 
 ### 5. Coordinación (antes del martes 27)
-- [ ] **La rama `P4` no compila** desde `9afe799` (VT, "hay errores"): en `mostrarAlertasParidad` usa `listasAlertasIncorrecta`, que es una variable de `verificarParidad`. Hasta que VT lo arregle, nadie puede ejecutar. Avisarle (detalle en `AVISOS_VT.md`).
+- [x] *(21-oct: ya compila, `7804cf4`)* **La rama `P4` no compila** desde `9afe799` (VT, "hay errores"): en `mostrarAlertasParidad` usa `listasAlertasIncorrecta`, que es una variable de `verificarParidad`. Hasta que VT lo arregle, nadie puede ejecutar. Avisarle (detalle en `AVISOS_VT.md`).
 - [ ] AR añadió javadoc vacío a **todos** los métodos de `GestionElectoral`, también a los de VT (en `c98f5aa`), y VT los borró. Recordar la norma: cada uno solo sus métodos.
 - [ ] Commits con mensaje: en P4 ya hay 5 "no message" (AR) y 2 "hay errores" (VT).
 - [ ] Subir `TAREAS.md` y `avisos/` cuando se actualicen (solo tú).

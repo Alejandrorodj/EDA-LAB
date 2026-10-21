@@ -4,7 +4,7 @@ Avisos de la P4 para **VT**, agrupados por tema. Cuando arregles uno, márcalo c
 Última revisión: 19-oct-2026 (rama `P4`, sin código todavía).
 
 ## URGENTE (20-oct, `9afe799` "hay errores")
-- [ ] **La rama `P4` no compila por tu cambio**: en `mostrarAlertasParidad` (l. 162) usas `listasAlertasIncorrecta`, que es una variable local de `verificarParidad`; desde otro método no existe → `cannot find symbol`. Nadie puede ejecutar el programa hasta que se arregle.
+- [x] *(21-oct, `7804cf4`: arreglado; las alertas salen bien)* **La rama `P4` no compila por tu cambio**: en `mostrarAlertasParidad` (l. 162) usas `listasAlertasIncorrecta`, que es una variable local de `verificarParidad`; desde otro método no existe → `cannot find symbol`. Nadie puede ejecutar el programa hasta que se arregle.
   - `mostrarAlertasParidad` ya recibe solo las listas que **no** cumplen: no hace falta comparar con nada. `verificarParidad` solo tiene que llamarla **una vez**, con las incorrectas (la lista de "correctas" sobra).
   - `listasAlertas.get(i)` imprime `P4.ListaElectoral@1b6d3586` (no tiene `toString`): usar `getPartido()`, `getCircunscripcion()`, `getPorcentajeHombres()`, `getPorcentajeMujeres()`.
   - `System.out.print` sin salto de línea: con varias alertas salen pegadas. Usar `println`. La frase "La representacion " está cortada.
