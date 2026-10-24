@@ -90,41 +90,41 @@ La regla para no pisarse en git: **cada método tiene un solo dueño**, y los m�
   - (20-oct) LP: `".//archivos//candidaturas.csv"` funciona en su VS Code (directorio de trabajo = `P4`). Desde `LAB` falla. **Unificar con P2**, que usa la ruta desde `LAB` (`.\\P2\\archivos\\acciones.csv`): el evaluador tiene que poder ejecutar las tres de la misma forma.
 - [x] *(20-oct)* **Que compile**: `cumpleParidad`, `calcularEscanos` y `getCandidatosElectos` no tienen `return` y el código base **no compila**. Poner un `return` provisional (`false`, `0`, lista vacía) con `// TODO` para que todos puedan ejecutar mientras tanto.
 - [x] Añadir `import java.util.Collections;` en `GestionElectoral` (lo puso AR en `252ea70`).
-- [ ] Cabeceras `Autores`/`Grupo` (iniciales + código de grupo) en las 6 clases.
+- [x] Cabeceras con iniciales + grupo en las 7 clases (24-oct, falta confirmar el código real).
 - [x] `generar_javadoc.bat` adaptado a la P4 (20-oct; con `cd` a `LAB` y `pause`).
 - [ ] Commit y push; avisar a AR y VT para que hagan `pull` y empiecen.
 
 ### Fase 1 · `ListaElectoral`
 - [x] `agregarCandidato` **[AR]** (`252ea70`). Falta javadoc.
-- [x] `cumpleParidad` **[LP]** (funciona con el CSV). Falta: lista vacía → `ArithmeticException`, división entera, javadoc con `@param` que no existe (error en `generar_javadoc.bat`).
-- [x] `calcularEscanos` **[LP]** (probado). Falta javadoc.
-- [ ] `getCandidatosElectos` **[LP]**
+- [x] `cumpleParidad` **[LP]** (funciona con el CSV). Lista vacía, división entera y javadoc corregidos (24-oct, falta commit).
+- [x] `calcularEscanos` **[LP]** (probado). Javadoc hecho.
+- [x] `getCandidatosElectos` **[LP]** (falta commit)
 
 ### Fase 2 · `GestionElectoral`
 - [x] `generarListasElectorales` (repartir y ordenar) **[AR]** (`252ea70`; las 4 listas salen completas y ordenadas). Falta javadoc; sobra `import java.util.Collection`.
 - [x] `verificarParidad` **[VT]** (`7804cf4`). Falta javadoc.
 - [x] `mostrarAlertasParidad` **[VT]** (`7804cf4`): solo BB Barcelona, 66,67 % H / 33,33 % M. Añadió además `mostrarAlertasParidadCorrecta` para las que sí cumplen. Falta javadoc.
-- [ ] `mostrarListaElectos` **[VT]**
+- [x] `mostrarListaElectos` **[VT]** (`6241884`; falta javadoc)
 
 ### Fase 3 · Pruebas **[IA]**
 Resultados esperados con `candidaturas.csv`:
 
-- [ ] **Listas ordenadas** (posición 1 a 12 en cada una; ninguna tiene huecos ni posiciones repetidas).
-- [ ] **Paridad**: solo **BB Barcelona** da alerta (4 M / 8 H = 33,3 % M). Las demás cumplen: BB Madrid 7 M / 5 H (58,3 % M), BSOE Madrid 5 M / 7 H, BSOE Barcelona 5 M / 7 H (41,7 % M).
-- [ ] **Escaños**: 0 → 0; 29.999 → 0; 30.000 → 1; 95.000 → 3; 360.000 → 12.
-- [ ] **Electos** con 95.000 votos (3 escaños):
+- [x] **Listas ordenadas** (posición 1 a 12 en cada una; ninguna tiene huecos ni posiciones repetidas).
+- [x] **Paridad**: solo **BB Barcelona** da alerta (4 M / 8 H = 33,3 % M). Las demás cumplen: BB Madrid 7 M / 5 H (58,3 % M), BSOE Madrid 5 M / 7 H, BSOE Barcelona 5 M / 7 H (41,7 % M).
+- [x] **Escaños**: 0 → 0; 29.999 → 0; 30.000 → 1; 95.000 → 3; 360.000 → 12.
+- [x] **Electos** con 95.000 votos (3 escaños):
   - BB Madrid: 1 Elena Gomez, 2 Carlos Ruiz, 3 Lucia Sanz
   - BSOE Madrid: 1 Javier Lopez, 2 Carmen Cano, 3 Andres Gil
   - BB Barcelona: 1 Marta Roca, 2 Jordi Serra, 3 Adrian Mas
   - BSOE Barcelona: 1 Lluis Vidal, 2 Laia Sole, 3 Marc Pujol
-- [ ] **0 escaños**: la lista de electos sale vacía y se indica (no un error).
-- [ ] **Más escaños que candidatos**: 400.000 votos → 13 escaños, pero solo hay 12 candidatos. Debe dar los 12, **no lanzar `IndexOutOfBoundsException`**.
-- [ ] Votos no numéricos o negativos → los vuelve a pedir (ya lo hace el código base).
+- [x] **0 escaños**: la lista de electos sale vacía y se indica (no un error).
+- [x] **Más escaños que candidatos**: 400.000 votos → 13 escaños, pero solo hay 12 candidatos. Debe dar los 12, **no lanzar `IndexOutOfBoundsException`**.
+- [x] Votos no numéricos o negativos → los vuelve a pedir (probado 24-oct: `-5`, `-1`, `abc`, vacío, ` 12.5` y `99999999999` se rechazan con mensaje y vuelve a pedir; `0`, `29999`, `30000`, `59999`, `60000` y `2147483647` bien, sin excepción).
 
 ### Fase 4 · Revisión final y entrega
 - [ ] Repasar la **rúbrica** (sección 6): requisitos del enunciado + casos de prueba.
 - [ ] Sin casts de listas ni `Object`.
-- [ ] Javadoc de los 8 métodos; `generar_javadoc.bat` sin errores.
+- [x] Javadoc de los 8 métodos; `generar_javadoc.bat` sin errores (24-oct: 0 errores y solo avisos de atributos con `//` y constructor por defecto).
 - [ ] Cabeceras con iniciales y código de grupo; sin nombres.
 - [ ] Commits con mensajes claros.
 
@@ -182,7 +182,20 @@ Resultados esperados con `candidaturas.csv`:
 ### 21-oct (rama `P4` = `7804cf4` + ruta del CSV en local)
 - **Error al ejecutar desde VS Code (LP, 20-oct):** `FileNotFoundException: .\archivos\candidaturas.csv` porque VS Code ejecuta desde `LAB` → 0 candidatos → `ArithmeticException: / by zero` en `cumpleParidad` (lista vacía).
   - [x] Ruta cambiada a `"P4/archivos/candidaturas.csv"` (LP, sin commit). Comprobado: carga los 48.
-  - [ ] **`cumpleParidad` con lista vacía** sigue dividiendo entre 0 **[LP]**: devolver `false` si `candidatos` está vacía.
+  - [x] **`cumpleParidad` con lista vacía** (arreglado el 24-oct) sigue dividiendo entre 0 **[LP]**: devolver `false` si `candidatos` está vacía.
   - [ ] (Opcional) `procesarArchivoCSV` (código base): si no encuentra el fichero imprime la traza, sigue y dice "Se han cargado correctamente 0 registros". Mejor un mensaje claro y terminar. Si se cambia, que lo haga solo uno.
 - Compila. Secciones 1, 2 y 4 de la salida correctas. Con 400.000 votos sale "13 escaños" (bien; la sección 5 todavía no muestra nada).
 - **Falta:** `getCandidatosElectos` **[LP]** y `mostrarListaElectos` **[VT]** → la sección 5 sale vacía. Javadoc de todos. Cabeceras con código de grupo.
+
+### 24-oct (rama `P4` = `6241884`)
+- VT subió `mostrarListaElectos` (imprime los electos o "No ha obtenido ningun escaño") y quitó el `// TO DO` de `verificarParidad`. Su commit avisa de que "siempre me sale 0": es normal, porque `getCandidatosElectos` sigue vacío.
+- ~~Bloqueo de la sección 5~~ resuelto en local por LP (falta commit): compila sin avisos; 95.000 → 3 electos por lista (los esperados); 400.000 → 13 escaños y 12 electos; 0 y 29.999 votos → "No ha obtenido ningun escaño".
+- [x] Ruta del CSV (`P4/archivos/candidaturas.csv`) ya está commiteada (`69ad47f`).
+- [x] `cumpleParidad` (LP, local, sin commit): ahora usa `getPorcentajeMujeres()` → lista vacía = false, sin división entera, sin `@param` sobrante. `getCandidatosElectos` (LP, local) hecho y probado.
+- [x] *(hecho en local el 24-oct, falta commit)* Javadoc de los 8 métodos con `@param`/`@return` descritos, atributos con `//`, `import Collection` quitado. Era lo pendiente de LP (`cumpleParidad`, `calcularEscanos`, `getCandidatosElectos`), VT (sus 3 métodos) y AR (`agregarCandidato`, `generarListasElectorales`). Quitar `import java.util.Collection;` sin usar en `GestionElectoral` [AR].
+- [x] Cabeceras `@author LP, AR, VT -- Grupo C` + `@version 1.0 (24/10/2026)` en las 7 clases (en local). Código de grupo **confirmado: C** ("Grupo C" confirmado por LP el 24-oct).
+- Quedan 3 días: hoy sáb 24 → `getCandidatosElectos` y `cumpleParidad`; dom 25 → javadoc y cabeceras; lun 26 → mis pruebas (Fase 3), `generar_javadoc.bat` y ZIP; mar 27 → evaluación.
+- Pruebas de la Fase 3 pasadas en mi copia local (listas ordenadas, alerta solo en BB Barcelona, escaños 0/29.999/30.000/95.000/400.000, electos esperados, 0 escaños y 400.000 sin excepción). Falta repetirlas con la versión final ya subida.
+- **Pendiente real:** commit y push de todo lo local (`ListaElectoral`, `GestionElectoral`, `Candidato`, `Genero`, `Constantes`, `FicheroSecuencial`, `LeerFicheroInt`, `TAREAS.md`, `avisos/`), con `git pull` antes. Después: código de grupo real, votos no numéricos/negativos, casts/`Object`, mensajes de commit claros y prueba desde el ZIP el lunes.
+- El javadoc de los métodos de AR y VT lo ha puesto LP en local: que lo vean antes del commit (cada uno documenta los suyos).
+- **Revisión completa 24-oct (estado local):** compila sin avisos; sin casts ni `Object`; sin nombres ni correos en el código; `javadoc` con 0 errores; pruebas con votos negativos/texto/límites OK. Solo queda subir (commit y push) y probar desde el ZIP.

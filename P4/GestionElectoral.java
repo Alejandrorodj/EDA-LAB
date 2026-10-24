@@ -1,9 +1,8 @@
 package P4;
 
-import java.util.Collections;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,12 +13,20 @@ import P4.util.file.FicheroSecuencial;
 /**
  * Programa principal para la gestion, verificacion y asignacion de candidaturas
  * electorales.
- * 
+ *
+ * @author LP, AR, VT -- Grupo C
+ * @version 1.0 (24/10/2026)
  */
 public class GestionElectoral {
 
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Programa principal: lee los candidatos, comprueba la paridad y muestra los
+     * electos
+     *
+     * @param args argumentos (no se usan)
+     */
     public static void main(String[] args) {
 
         List<Candidato> todosCandidatos = new ArrayList<>();
@@ -51,9 +58,10 @@ public class GestionElectoral {
 
     /**
      * Proceso el archivo csv
-     * @param rutaFichero
-     * @param separador
-     * @param todosCandidatos
+     * 
+     * @param rutaFichero     ruta del fichero CSV
+     * @param separador       separador de campos del fichero
+     * @param todosCandidatos lista con todos los candidatos
      */
     private static void procesarArchivoCSV(String rutaFichero, String separador, List<Candidato> todosCandidatos) {
         try {
@@ -71,24 +79,25 @@ public class GestionElectoral {
 
     /**
      * Mete los candidatos en el partido que es y circunscripcion de donde es
-     * @param todosCandidatos
-     * @param bBMadrid
-     * @param bBBarcelona
-     * @param bSOEMadrid
-     * @param bSOEBarcelona
+     * 
+     * @param todosCandidatos lista con todos los candidatos
+     * @param bBMadrid        lista electoral de BB en Madrid
+     * @param bBBarcelona     lista electoral de BB en Barcelona
+     * @param bSOEMadrid      lista electoral de BSOE en Madrid
+     * @param bSOEBarcelona   lista electoral de BSOE en Barcelona
      */
     private static void generarListasElectorales(List<Candidato> todosCandidatos, ListaElectoral bBMadrid,
             ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid, ListaElectoral bSOEBarcelona) {
 
-        for(Candidato c : todosCandidatos) {
-            if(c.getPartido().equals("BB")) {
-                if(c.getCircunscripcion().equals("Madrid")) {
+        for (Candidato c : todosCandidatos) {
+            if (c.getPartido().equals("BB")) {
+                if (c.getCircunscripcion().equals("Madrid")) {
                     bBMadrid.agregarCandidato(c);
                 } else {
                     bBBarcelona.agregarCandidato(c);
                 }
-            } else if(c.getPartido().equals("BSOE")) {
-                if(c.getCircunscripcion().equals("Madrid")) {
+            } else if (c.getPartido().equals("BSOE")) {
+                if (c.getCircunscripcion().equals("Madrid")) {
                     bSOEMadrid.agregarCandidato(c);
                 } else {
                     bSOEBarcelona.agregarCandidato(c);
@@ -100,15 +109,16 @@ public class GestionElectoral {
         Collections.sort(bBBarcelona.getCandidatos());
         Collections.sort(bSOEMadrid.getCandidatos());
         Collections.sort(bSOEBarcelona.getCandidatos());
-                
+
     }
 
     /**
      * Muestra las lista de cada partido en cada ciudad
-     * @param bBMadrid
-     * @param bBBarcelona
-     * @param bSOEMadrid
-     * @param bSOEBarcelona
+     * 
+     * @param bBMadrid      lista electoral de BB en Madrid
+     * @param bBBarcelona   lista electoral de BB en Barcelona
+     * @param bSOEMadrid    lista electoral de BSOE en Madrid
+     * @param bSOEBarcelona lista electoral de BSOE en Barcelona
      */
     private static void mostrarListasElectorales(ListaElectoral bBMadrid, ListaElectoral bBBarcelona,
             ListaElectoral bSOEMadrid, ListaElectoral bSOEBarcelona) {
@@ -121,6 +131,14 @@ public class GestionElectoral {
         bSOEBarcelona.mostrarListaCandidatos();
     }
 
+    /**
+     * Separa las listas que cumplen la paridad de las que no y muestra el resultado
+     *
+     * @param BBMadrid      lista electoral de BB en Madrid
+     * @param BBBarcelona   lista electoral de BB en Barcelona
+     * @param BSOEMadrid    lista electoral de BSOE en Madrid
+     * @param BSOEBarcelona lista electoral de BSOE en Barcelona
+     */
     private static void verificarParidad(ListaElectoral BBMadrid, ListaElectoral BBBarcelona,
             ListaElectoral BSOEMadrid, ListaElectoral BSOEBarcelona) {
         System.out.println("----------------------------------------------------------");
@@ -129,27 +147,27 @@ public class GestionElectoral {
 
         List<ListaElectoral> listasAlertasIncorrecta = new ArrayList<>();
         List<ListaElectoral> listasAlertasCorrecta = new ArrayList<>();
-        if(!BBMadrid.cumpleParidad()){
+        if (!BBMadrid.cumpleParidad()) {
             listasAlertasIncorrecta.add(BBMadrid);
-        } else{
+        } else {
             listasAlertasCorrecta.add(BBMadrid);
         }
 
-        if(!BBBarcelona.cumpleParidad()){
+        if (!BBBarcelona.cumpleParidad()) {
             listasAlertasIncorrecta.add(BBBarcelona);
-        } else{
+        } else {
             listasAlertasCorrecta.add(BBBarcelona);
         }
 
-        if(!BSOEMadrid.cumpleParidad()){
+        if (!BSOEMadrid.cumpleParidad()) {
             listasAlertasIncorrecta.add(BSOEMadrid);
-        } else{
+        } else {
             listasAlertasCorrecta.add(BSOEMadrid);
         }
 
-        if(!BSOEBarcelona.cumpleParidad()){
+        if (!BSOEBarcelona.cumpleParidad()) {
             listasAlertasIncorrecta.add(BSOEBarcelona);
-        } else{
+        } else {
             listasAlertasCorrecta.add(BSOEBarcelona);
         }
 
@@ -157,46 +175,54 @@ public class GestionElectoral {
         mostrarAlertasParidadCorrecta(listasAlertasCorrecta);
     }
 
+    /**
+     * Muestra una alerta por cada lista que no cumple la paridad
+     *
+     * @param listasAlertas listas que no cumplen la paridad
+     */
     private static void mostrarAlertasParidad(List<ListaElectoral> listasAlertas) {
         for (int i = 0; i < listasAlertas.size(); i++) {
             ListaElectoral lista = listasAlertas.get(i);
 
             System.out.printf(
-                "\n[ALERTA] El partido %s (%s) no cumple la paridad adecuada. "
-                + "Representan un %.2f%% hombres y un %.2f%% mujeres.%n",
-                lista.getPartido(),
-                lista.getCircunscripcion(),
-                lista.getPorcentajeHombres(),
-                lista.getPorcentajeMujeres()
-            );
+                    "\n[ALERTA] El partido %s (%s) no cumple la paridad adecuada. "
+                            + "Representan un %.2f%% hombres y un %.2f%% mujeres.%n",
+                    lista.getPartido(),
+                    lista.getCircunscripcion(),
+                    lista.getPorcentajeHombres(),
+                    lista.getPorcentajeMujeres());
         }
     }
 
+    /**
+     * Muestra las listas que si cumplen la paridad
+     *
+     * @param listasAlertasCorrectas listas que cumplen la paridad
+     */
     private static void mostrarAlertasParidadCorrecta(List<ListaElectoral> listasAlertasCorrectas) {
         for (int i = 0; i < listasAlertasCorrectas.size(); i++) {
             ListaElectoral lista = listasAlertasCorrectas.get(i);
 
             System.out.printf(
-                "\nEl partido %s (%s) cumple la paridad correcta. "
-                + "Representan un %.2f%% hombres y un %.2f%% mujeres.%n",
-                lista.getPartido(),
-                lista.getCircunscripcion(),
-                lista.getPorcentajeHombres(),
-                lista.getPorcentajeMujeres()
-            );
+                    "\nEl partido %s (%s) cumple la paridad correcta. "
+                            + "Representan un %.2f%% hombres y un %.2f%% mujeres.%n",
+                    lista.getPartido(),
+                    lista.getCircunscripcion(),
+                    lista.getPorcentajeHombres(),
+                    lista.getPorcentajeMujeres());
         }
     }
 
-
     /**
      * Lee los votos que tiene cada partido en cada ciudad
-     * @param bBMadrid
-     * @param bBBarcelona
-     * @param bSOEMadrid
-     * @param bSOEBarcelona
+     * 
+     * @param bBMadrid      lista electoral de BB en Madrid
+     * @param bBBarcelona   lista electoral de BB en Barcelona
+     * @param bSOEMadrid    lista electoral de BSOE en Madrid
+     * @param bSOEBarcelona lista electoral de BSOE en Barcelona
      */
 
-private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
+    private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
             ListaElectoral bSOEBarcelona) {
         System.out.println("----------------------------------------------------------");
         System.out.println("3. RECUENTO DE VOTACIONES");
@@ -209,10 +235,11 @@ private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarce
 
     /**
      * Lee los escaños de cada partido en cada ciudad
-     * @param bBMadrid
-     * @param bBBarcelona
-     * @param bSOEMadrid
-     * @param bSOEBarcelona
+     * 
+     * @param bBMadrid      lista electoral de BB en Madrid
+     * @param bBBarcelona   lista electoral de BB en Barcelona
+     * @param bSOEMadrid    lista electoral de BSOE en Madrid
+     * @param bSOEBarcelona lista electoral de BSOE en Barcelona
      */
     private static void obtenerEscanos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
             ListaElectoral bSOEBarcelona) {
@@ -227,10 +254,11 @@ private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarce
 
     /**
      * Muestra los candidatos electos
-     * @param bBMadrid
-     * @param bBBarcelona
-     * @param bSOEMadrid
-     * @param bSOEBarcelona
+     * 
+     * @param bBMadrid      lista electoral de BB en Madrid
+     * @param bBBarcelona   lista electoral de BB en Barcelona
+     * @param bSOEMadrid    lista electoral de BSOE en Madrid
+     * @param bSOEBarcelona lista electoral de BSOE en Barcelona
      */
     private static void mostrarCandidatosElectos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona,
             ListaElectoral bSOEMadrid, ListaElectoral bSOEBarcelona) {
@@ -245,16 +273,17 @@ private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarce
 
     /**
      * Muestra la lista de los electos
-     * @param partido
-     * @param circunscripcion
-     * @param electos
+     * 
+     * @param partido         partido (BB o BSOE)
+     * @param circunscripcion circunscripcion (Madrid o Barcelona)
+     * @param electos         candidatos electos del partido
      */
     private static void mostrarListaElectos(String partido, String circunscripcion, List<Candidato> electos) {
         System.out.println("Candidatos electos de " + partido + " en " + circunscripcion + ":");
-        if (electos.isEmpty()){
+        if (electos.isEmpty()) {
             System.out.println("No ha obtenido ningun escaño");
-        } else{
-            for(Candidato c: electos){
+        } else {
+            for (Candidato c : electos) {
                 System.out.println(c.getPosicion() + " " + c.getNombre());
             }
         }
@@ -264,9 +293,10 @@ private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarce
 
     /**
      * Va leyendo el numero de votos de cada partido en cada ciudad
-     * @param partido
-     * @param circunscripcion
-     * @return
+     * 
+     * @param partido         partido (BB o BSOE)
+     * @param circunscripcion circunscripcion (Madrid o Barcelona)
+     * @return votos introducidos (mayor o igual que 0)
      */
     private static int leerNumeroVotos(String partido, String circunscripcion) {
         int numero = -1;

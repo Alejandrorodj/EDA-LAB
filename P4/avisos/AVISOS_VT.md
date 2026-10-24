@@ -13,10 +13,10 @@ Avisos de la P4 para **VT**, agrupados por tema. Cuando arregles uno, márcalo c
 - [ ] Antes de hacer push, **compilar y ejecutar**. Si algo no compila, no subirlo a la rama compartida.
 
 ## Tus tareas (empezar después del `pull` de la Fase 0)
-- [ ] `GestionElectoral.verificarParidad` (l. 77-83): juntar en una `List<ListaElectoral>` las listas que **no** cumplen (`cumpleParidad`, de LP) y pasársela a `mostrarAlertasParidad`.
-- [ ] `GestionElectoral.mostrarAlertasParidad` (l. 85-87): una alerta por lista, con partido, circunscripción y porcentajes (`getPorcentajeHombres`/`getPorcentajeMujeres` ya existen). Si no hay ninguna, decirlo.
-- [ ] `GestionElectoral.mostrarListaElectos` (l. 122-124): partido, circunscripción y los electos en orden (posición, nombre). Si la lista está vacía (0 escaños), indicarlo.
-- [ ] Javadoc de esos tres métodos.
+- [x] `GestionElectoral.verificarParidad` (l. 77-83): juntar en una `List<ListaElectoral>` las listas que **no** cumplen (`cumpleParidad`, de LP) y pasársela a `mostrarAlertasParidad`. *(hecho, `7804cf4`)*
+- [x] `GestionElectoral.mostrarAlertasParidad` (l. 85-87): una alerta por lista, con partido, circunscripción y porcentajes (`getPorcentajeHombres`/`getPorcentajeMujeres` ya existen). Si no hay ninguna, decirlo. *(hecho, `7804cf4`)*
+- [x] *(24-oct, `6241884`: hecho)* `GestionElectoral.mostrarListaElectos`: partido, circunscripción y los electos en orden (posición, nombre). Si la lista está vacía (0 escaños), indicarlo.
+- [x] **Javadoc** de tus tres métodos (lo único que te queda). El "siempre me sale 0" es porque `getCandidatosElectos` (LP) aún no está hecho; tu método está bien. *(24-oct: javadoc puesto en local, falta commit)*
 - No toques `generarListasElectorales` (AR) ni `ListaElectoral` (LP y AR).
 
 ## Lecciones de P3

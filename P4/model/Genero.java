@@ -2,11 +2,11 @@ package P4.model;
 
 /**
  * Representacion del genero del candidato.
- * 
- * Autores: [Iniciales]
- * Grupo: [CodigoGrupo]
+ *
+ * @author LP, AR, VT -- Grupo C
+ * @version 1.0 (24/10/2026)
  */
 public enum Genero {
-    H,
-    M
+    H, // hombre
+    M // mujer
 }
