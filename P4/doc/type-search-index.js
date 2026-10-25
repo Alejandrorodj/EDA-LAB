@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"P4.model","l":"Candidato"},{"p":"P4.util","l":"Constantes"},{"p":"P4.util.file","l":"FicheroSecuencial"},{"p":"P4.model","l":"Genero"},{"p":"P4","l":"GestionElectoral"},{"p":"P4.util.file","l":"LeerFicheroInt"},{"p":"P4","l":"ListaElectoral"}];updateSearchResults();
