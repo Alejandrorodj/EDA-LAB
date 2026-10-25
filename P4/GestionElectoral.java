@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import P4.model.Candidato;
 import P4.util.Constantes;
-import P4.util.file.FicheroSecuencial;
+import P4.util.file.SequentialFile;
 
 /**
  * Programa principal para la gestion, verificacion y asignacion de candidaturas
@@ -65,7 +65,7 @@ public class GestionElectoral {
      */
     private static void procesarArchivoCSV(String rutaFichero, String separador, List<Candidato> todosCandidatos) {
         try {
-            FicheroSecuencial<Candidato> sf = new FicheroSecuencial<Candidato>(rutaFichero, separador);
+            SequentialFile<Candidato> sf = new SequentialFile<Candidato>(rutaFichero, separador);
             while (!sf.isEndOfFile()) {
                 Candidato candidato = new Candidato();
                 sf.read(candidato);
@@ -221,7 +221,6 @@ public class GestionElectoral {
      * @param bSOEMadrid    lista electoral de BSOE en Madrid
      * @param bSOEBarcelona lista electoral de BSOE en Barcelona
      */
-
     private static void obtenerVotos(ListaElectoral bBMadrid, ListaElectoral bBBarcelona, ListaElectoral bSOEMadrid,
             ListaElectoral bSOEBarcelona) {
         System.out.println("----------------------------------------------------------");

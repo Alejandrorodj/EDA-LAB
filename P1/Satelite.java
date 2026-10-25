@@ -1,57 +1,34 @@
-/****
-*
-* Class Name: LeerFicheroInt
-* Author/s name: Luis Pérez, Alejandro Rodríguez, Victor Tapiador
-* Release/Creation date: 22/09/2026
-* Class version: 1.0
-* Class description: Clase que representa un satélite orbital y almacena sus parámetros orbitales y de identificación.
-*
-*/
-
 package P1;
 
 /**
- * 
- * Satelite
+ * Clase que representa un satelite con sus datos orbitales, leidos de una linea
+ * del fichero.
+ *
+ * @author LP, AR, VT -- Grupo C
+ * @version 1.0 (22/09/2026)
  */
 public class Satelite implements LeerFicheroInt {
-    private String nombre;
-    private String designadorInternacional;
-    private String epoca;
-    private double inclinacion;
-    private double raan;
-    private double excentricidad;
-    private double argumentoPerigeo;
-    private double numOrbitas; // meanMotion
+    private String nombre; // nombre del satelite
+    private String designadorInternacional; // designador internacional
+    private String epoca; // epoca de los datos
+    private double inclinacion; // inclinacion de la orbita
+    private double raan; // ascension recta del nodo ascendente
+    private double excentricidad; // excentricidad de la orbita
+    private double argumentoPerigeo; // argumento del perigeo
+    private double numOrbitas; // orbitas al dia (meanMotion)
 
     /**
-     * @param nombre
-     * @param designadorInternacional
-     * @param epoca
-     * @param inclinacion
-     * @param raan
-     * @param excentricidad
-     * @param argumentoPerigeo
-     * @param revolucionesPorDia
+     * Crea un satelite con todos sus datos
+     *
+     * @param nombre                  nombre del satelite
+     * @param designadorInternacional designador internacional
+     * @param epoca                   epoca de los datos
+     * @param inclinacion             inclinacion de la orbita
+     * @param raan                    ascension recta del nodo ascendente
+     * @param excentricidad           excentricidad de la orbita
+     * @param argumentoPerigeo        argumento del perigeo
+     * @param numOrbitas              orbitas al dia
      */
-
-    /**
-    Method name: Satelite
-    *
-    * Description of the Method: Constructor completo parametrizado para la inicialización de todos los datos del satélite.
-    * Calling arguments:
-    *   - nombre (String): Nombre asignado al satélite.
-    *   - designadorInternacional (String): Código identificador internacional.
-    *   - epoca (String): Cadena que representa la época.
-    *   - inclinacion (double): Ángulo de inclinación de la órbita.
-    *   - raan (double): Ángulo de ascensión recta del nodo ascendente.
-    *   - excentricidad (double): Valor de la excentricidad orbital.
-    *   - argumentoPerigeo (double): Ángulo del argumento del perigeo.
-    *   - numOrbitas (double): Número de órbitas diarias (movimiento medio).
-    * Return value: Ninguno (Constructor).
-    * Required Files: Ninguno.
-    * List of Checked Exceptions: Ninguna.
-    *************/
     public Satelite(String nombre, String designadorInternacional, String epoca, double inclinacion, double raan,
             double excentricidad, double argumentoPerigeo, double numOrbitas) {
         this.nombre = nombre;
@@ -65,21 +42,16 @@ public class Satelite implements LeerFicheroInt {
     }
 
     /**
-     * constructor vacio
+     * Constructor vacio
      */
     public Satelite() {
     }
 
     /**
-    Method name: leerDatos
-    *
-    * Description of the Method: Procesa un array de cadenas con campos de datos para extraer y asignar las propiedades del satélite.
-    * Calling arguments:
-    *   - campos (String[]): Array de valores leídos previamente desde un fichero secuencial.
-    * Return value: void.
-    * Required Files: Ninguno.
-    * List of Checked Exceptions: Ninguna
-    *************/
+     * Lee los datos de una linea del fichero
+     *
+     * @param campos campos de la linea del fichero
+     */
     public void leerDatos(String[] campos) {
         nombre = campos[0].trim();
         designadorInternacional = campos[1].trim();
@@ -96,104 +68,134 @@ public class Satelite implements LeerFicheroInt {
     }
 
     /**
-     * @return the nombre
+     * Devuelve el nombre
+     *
+     * @return nombre
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * Guarda el nombre
+     *
+     * @param nombre nombre del satelite
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * @return the designadorInternacional
+     * Devuelve el designador internacional
+     *
+     * @return designador internacional
      */
     public String getDesignadorInternacional() {
         return designadorInternacional;
     }
 
     /**
-     * @param designadorInternacional the designadorInternacional to set
+     * Guarda el designador internacional
+     *
+     * @param designadorInternacional designador internacional
      */
     public void setDesignadorInternacional(String designadorInternacional) {
         this.designadorInternacional = designadorInternacional;
     }
 
     /**
-     * @return the epoca
+     * Devuelve la epoca
+     *
+     * @return epoca
      */
     public String getEpoca() {
         return epoca;
     }
 
     /**
-     * @param epoca the epoca to set
+     * Guarda la epoca
+     *
+     * @param epoca epoca de los datos
      */
     public void setEpoca(String epoca) {
         this.epoca = epoca;
     }
 
     /**
-     * @return the inclinacion
+     * Devuelve la inclinacion
+     *
+     * @return inclinacion
      */
     public double getInclinacion() {
         return inclinacion;
     }
 
     /**
-     * @param inclinacion the inclinacion to set
+     * Guarda la inclinacion
+     *
+     * @param inclinacion inclinacion de la orbita
      */
     public void setInclinacion(double inclinacion) {
         this.inclinacion = inclinacion;
     }
 
     /**
-     * @return the raan
+     * Devuelve la ascension recta del nodo ascendente
+     *
+     * @return raan
      */
     public double getRaan() {
         return raan;
     }
 
     /**
-     * @param raan the raan to set
+     * Guarda la ascension recta del nodo ascendente
+     *
+     * @param raan ascension recta del nodo ascendente
      */
     public void setRaan(double raan) {
         this.raan = raan;
     }
 
     /**
-     * @return the excentricidad
+     * Devuelve la excentricidad
+     *
+     * @return excentricidad
      */
     public double getExcentricidad() {
         return excentricidad;
     }
 
     /**
-     * @param excentricidad the excentricidad to set
+     * Guarda la excentricidad
+     *
+     * @param excentricidad excentricidad de la orbita
      */
     public void setExcentricidad(double excentricidad) {
         this.excentricidad = excentricidad;
     }
 
     /**
-     * @return the argumentoPerigeo
+     * Devuelve el argumento del perigeo
+     *
+     * @return argumento del perigeo
      */
     public double getArgumentoPerigeo() {
         return argumentoPerigeo;
     }
 
     /**
-     * @param argumentoPerigeo the argumentoPerigeo to set
+     * Guarda el argumento del perigeo
+     *
+     * @param argumentoPerigeo argumento del perigeo
      */
     public void setArgumentoPerigeo(double argumentoPerigeo) {
         this.argumentoPerigeo = argumentoPerigeo;
     }
 
     /**
+     * Devuelve las orbitas al dia
+     *
      * @return numero de orbitas
      */
     public double getNumOrbitas() {
@@ -201,12 +203,19 @@ public class Satelite implements LeerFicheroInt {
     }
 
     /**
-     * @param numero de orbitas
+     * Guarda las orbitas al dia
+     *
+     * @param numOrbitas numero de orbitas
      */
     public void setNumOrbitas(double numOrbitas) {
         this.numOrbitas = numOrbitas;
     }
 
+    /**
+     * Devuelve el satelite como texto: nombre, orbitas e inclinacion
+     *
+     * @return satelite en formato legible
+     */
     public String toString() {
         return String.format("Satélite: %-25s | Órbitas/día: %.2f | Inclinación: %.2f°",
                 nombre, numOrbitas, inclinacion);

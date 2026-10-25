@@ -1,18 +1,17 @@
 package P3;
 
 /**
- * Contiene el punto de entrada del programa y permite iniciar
- * la simulacion de la atraccion.
+ * Programa principal de la simulacion de la atraccion.
  *
- * @author LP, AR, VT
+ * @author LP, AR, VT -- Grupo C
  * @version 1.0 (19/10/2026)
  */
 public class ParqueDeAtracciones {
 
-     /**
-     * Crea la simulacion e inicia su ejecucion.
-     *
-     * @param args argumentos recibidos desde la linea de comandos
+    /**
+     * Main
+     * 
+     * @param args args
      */
     public static void main(String[] args) {
 

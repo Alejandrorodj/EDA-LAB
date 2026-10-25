@@ -16,25 +16,25 @@ import P2.util.file.FicheroSecuencial;
  * descartes y pila de efectos), lee las acciones del fichero CSV y las ejecuta
  * en orden.
  *
- * @author LP, AR, VT
+ * @author LP, AR, VT -- Grupo C
  * @version 1.0 (04/10/2026)
  */
 public class JuegoDeCartas {
 
-    /** Crea una instancia del juego de cartas. */
+    /**
+     * Constructor vacio
+     */
     public JuegoDeCartas() {
     }
-    
-    /** Mazo de robo: cartas disponibles para robar. */
-    private Stack<CARTA> mazoDeRobo;
 
-    /** Mazo de descartes: cartas usadas o descartadas. */
-    private Stack<CARTA> mazoDeDescartes;
+    private Stack<CARTA> mazoDeRobo; // cartas que se pueden robar
+    private Stack<CARTA> mazoDeDescartes; // cartas usadas o descartadas
+    private Stack<Efecto> pilaDeEfectos; // efectos pendientes de resolver (carta y jugador)
 
-    /** Pila de efectos pendientes de resolver (carta y jugador que la lanzó). */
-    private Stack<Efecto> pilaDeEfectos;
-
-    /** Crea las tres pilas vacías y rellena el mazo de robo con una carta de cada tipo. */
+    /**
+     * Crea las tres pilas vacias y llena el mazo de robo con una carta de cada
+     * tipo
+     */
     public void inicializar() {
         System.out.println("*************************************************************");
         System.out.println("INICIALIZANDO DATOS:\n");
@@ -49,9 +49,9 @@ public class JuegoDeCartas {
     }
 
     /**
-     * Apila en el mazo una carta de cada tipo, en el orden del enumerado {@link CARTA}.
+     * Mete en el mazo una carta de cada tipo, en el orden del enumerado CARTA
      *
-     * @param mazo mazo de robo que se rellena
+     * @param mazo mazo de robo que se llena
      */
     public void rellenarMazoRobo(Stack<CARTA> mazo) {
         for (CARTA carta : Constantes.CARTA.values()) {
@@ -61,8 +61,8 @@ public class JuegoDeCartas {
     }
 
     /**
-     * Lee las acciones del fichero y las ejecuta una a una, mostrando el resultado
-     * de cada una.
+     * Lee las acciones del fichero y las ejecuta una a una, mostrando el
+     * resultado de cada una
      */
     public void simulacion() {
 
@@ -78,10 +78,10 @@ public class JuegoDeCartas {
     }
 
     /**
-     * Lee el fichero de acciones indicado en {@link Constantes#RUTA_FICHERO_ACCIONES}.
-     * Descarta las líneas de {@code JUGAR} o {@code DESCARTAR} cuya carta no existe.
+     * Lee el fichero de acciones. Se salta las de JUGAR o DESCARTAR con una carta
+     * que no existe
      *
-     * @return lista de acciones válidas, vacía si no se encuentra el fichero
+     * @return lista de acciones validas, vacia si no se encuentra el fichero
      */
     private static List<Accion> leerFicheroAcciones() {
         System.out.println("*************************************************************");

@@ -3,50 +3,63 @@ package P2.model;
 import P2.util.Constantes.CARTA;
 
 /**
- * Efecto de la pila de efectos: la carta jugada y el jugador que la lanzó.
+ * Clase que representa un efecto de la pila de efectos: la carta jugada y el
+ * jugador que la lanzo.
  *
- * @author LP, AR, VT
+ * @author LP, AR, VT -- Grupo C
  * @version 1.0 (04/10/2026)
  */
 public class Efecto {
 
-    /** Jugador que lanzó la carta. */
-    private String jugador;
-
-    /** Carta jugada. */
-    private CARTA carta;
+    private String jugador; // jugador que lanzo la carta
+    private CARTA carta; // carta jugada
 
     @Override
-    /**
-     * Devuelve el efecto como texto: carta y jugador.
-     *
-     * @return el efecto en formato legible
-     */
     public String toString() {
         return carta + " - " + jugador;
     }
 
+    /**
+     * Devuelve el jugador
+     *
+     * @return jugador
+     */
     public String getJugador() {
         return jugador;
     }
 
+    /**
+     * Guarda el jugador
+     *
+     * @param jugador jugador que lanzo la carta
+     */
     public void setJugador(String jugador) {
         this.jugador = jugador;
     }
 
+    /**
+     * Devuelve la carta
+     *
+     * @return carta
+     */
     public CARTA getCarta() {
         return carta;
     }
 
+    /**
+     * Guarda la carta
+     *
+     * @param carta carta jugada
+     */
     public void setCarta(CARTA carta) {
         this.carta = carta;
     }
 
     /**
-     * Crea un efecto con la carta jugada y el jugador que la lanzó.
+     * Crea un efecto con la carta jugada y el jugador que la lanzo
      *
-     * @param jugador jugador que lanzó la carta
-     * @param carta carta jugada
+     * @param jugador jugador que lanzo la carta
+     * @param carta   carta jugada
      */
     public Efecto(String jugador, CARTA carta) {
         this.jugador = jugador;

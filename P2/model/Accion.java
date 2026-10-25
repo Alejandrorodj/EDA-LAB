@@ -4,33 +4,30 @@ import P2.util.Constantes.CARTA;
 import P2.util.file.LeerFicheroInt;
 
 /**
- * Acción leída de una línea del fichero CSV: jugador, jugada ({@code ROBAR},
- * {@code JUGAR}, {@code DESCARTAR} o {@code RESOLVER}) y carta, si la lleva.
+ * Clase que representa una accion leida de una linea del fichero CSV: jugador,
+ * jugada (ROBAR, JUGAR, DESCARTAR o RESOLVER) y carta, si la lleva.
  *
- * @author LP, AR, VT
+ * @author LP, AR, VT -- Grupo C
  * @version 1.0 (04/10/2026)
  */
 public class Accion implements LeerFicheroInt {
 
-    /** Jugador que realiza la acción. */
-    private String jugador;
+    private String jugador; // jugador que hace la accion
+    private String jugada; // ROBAR, JUGAR, DESCARTAR o RESOLVER
+    private CARTA carta; // carta de la jugada
 
-    /** Tipo de jugada: ROBAR, JUGAR, DESCARTAR o RESOLVER. */
-    private String jugada;
-
-    /** Carta de la jugada; {@code null} en ROBAR y RESOLVER o si no existe. */
-    private CARTA carta;
-
-    /** Crea una acción vacía, que se rellena después con {@link #leerDatos(String[])}. */
+    /**
+     * Constructor vacio
+     */
     public Accion() {
     }
 
     /**
-     * Crea una acción con todos sus datos.
+     * Crea una accion con todos sus datos
      *
-     * @param jugador jugador que realiza la acción
-     * @param jugada tipo de jugada
-     * @param carta carta de la jugada, o {@code null} si no lleva
+     * @param jugador jugador que hace la accion
+     * @param jugada  tipo de jugada
+     * @param carta   carta de la jugada, o null si no lleva
      */
     public Accion(String jugador, String jugada, CARTA carta) {
         this.jugador = jugador;
@@ -39,10 +36,10 @@ public class Accion implements LeerFicheroInt {
     }
 
     /**
-     * Rellena la acción con los campos de una línea del CSV. Si la carta no existe
-     * en {@link CARTA}, avisa por la salida de error y la deja a {@code null}.
+     * Lee los datos de una linea del fichero. Si la carta no existe avisa y la
+     * deja a null
      *
-     * @param campos campos de la línea: jugador, jugada y, opcionalmente, carta
+     * @param campos campos de la linea: jugador, jugada y carta (opcional)
      */
     public void leerDatos(String[] campos) {
         jugador = campos[0].trim();
@@ -58,36 +55,66 @@ public class Accion implements LeerFicheroInt {
 
     }
 
+    /**
+     * Devuelve el jugador
+     *
+     * @return jugador
+     */
     public String getJugador() {
         return jugador;
     }
 
+    /**
+     * Guarda el jugador
+     *
+     * @param jugador jugador que hace la accion
+     */
     public void setJugador(String jugador) {
         this.jugador = jugador;
     }
 
+    /**
+     * Devuelve la jugada
+     *
+     * @return jugada
+     */
     public String getJugada() {
         return jugada;
     }
 
+    /**
+     * Guarda la jugada
+     *
+     * @param jugada tipo de jugada
+     */
     public void setJugada(String jugada) {
         this.jugada = jugada;
     }
 
+    /**
+     * Devuelve la carta
+     *
+     * @return carta, o null si no lleva
+     */
     public CARTA getCarta() {
         return carta;
     }
 
+    /**
+     * Guarda la carta
+     *
+     * @param carta carta de la jugada
+     */
     public void setCarta(CARTA carta) {
         this.carta = carta;
     }
 
-    @Override
     /**
-     * Devuelve la acción como texto; sin la carta si no lleva.
-     *
-     * @return la acción en formato legible
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
      */
+    @Override
     public String toString() {
 
         String resultado = jugador + "(accion: " + jugada + " - carta: " + carta + ")";

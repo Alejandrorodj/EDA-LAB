@@ -1,6 +1,6 @@
 package P4.model;
 
-import P4.util.file.LeerFicheroInt;
+import P4.util.file.SequentialFileReadable;
 
 /**
  * Clase que representa a un candidato individual de una lista electoral.
@@ -8,7 +8,7 @@ import P4.util.file.LeerFicheroInt;
  * @author LP, AR, VT -- Grupo C
  * @version 1.0 (24/10/2026)
  */
-public class Candidato implements Comparable<Candidato>, LeerFicheroInt {
+public class Candidato implements Comparable<Candidato>, SequentialFileReadable {
 
     private String partido; // partido
     private String circunscripcion; // circunscripcion
@@ -102,7 +102,7 @@ public class Candidato implements Comparable<Candidato>, LeerFicheroInt {
      * @param data campos de la linea del fichero
      */
     @Override
-    public void leerDatos(String[] data) {
+    public void readData(String[] data) {
         this.partido = data[0];
         this.circunscripcion = data[1];
         this.posicion = Integer.parseInt(data[2]);

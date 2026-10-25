@@ -10,43 +10,24 @@ import P3.model.Visitante;
 import P3.util.Constantes;
 
 /**
- * Gestiona los parametros, las colas de visitantes y la simulacion
- * de los recorridos de la atraccion.
+ * Clase que gestiona los parametros, las colas de visitantes y los recorridos
+ * de la atraccion.
  *
- * @author LP, AR, VT
+ * @author LP, AR, VT -- Grupo C
  * @version 1.0 (19/10/2026)
  */
 public class Simulacion {
 
-    /**
-     * n: numero de lotes
-     * e: numero de visitantes standar
-     * f: numero de fastPAss
-     * l: tiempo entre lotes
-     */ 
-    private int n, e, f, l;
-
-    /** Siguiente identificador que se asignara a un visitante. */
-    private int idVisitante;
-
-    /** Cola con prioridad que determina el orden de acceso a la atraccion. */
-    private PriorityQueue<Visitante> cola;
-
-    /** Cola inicial que contiene a los visitantes pendientes de llegar a la atraccion. */
-    private Queue<Visitante> colaEspera;
-
-    /** Instante actual de la simulacion. */
-    private int reloj;
-
-    /** Visitante que ha acumulado la mayor espera durante la simulacion. */
-    private Visitante visitanteMasEspera;
-
-    /** Mayor tiempo de espera registrado hasta el momento. */
-    private int esperaMaxima;
+    private int n, e, f, l; // lotes, standard por lote, fast pass por lote y tiempo entre lotes
+    private int idVisitante; // id que se le da al siguiente visitante
+    private PriorityQueue<Visitante> cola; // cola de acceso a la atraccion (por pase, llegada e id)
+    private Queue<Visitante> colaEspera; // todos los visitantes en orden de llegada
+    private int reloj; // tiempo actual de la simulacion
+    private Visitante visitanteMasEspera; // visitante que mas ha esperado
+    private int esperaMaxima; // mayor espera hasta ahora
 
     /**
-     * Inicializa el estado de la simulacion, solicita los parametros de entrada
-     * y genera los lotes de visitantes.
+     * Inicia la simulacion: pide los parametros y genera los lotes de visitantes
      */
     public Simulacion() {
         idVisitante = 1;
@@ -59,8 +40,8 @@ public class Simulacion {
     }
 
     /**
-     * Ejecuta los recorridos hasta que no quedan visitantes pendientes ni en la
-     * cola de acceso. Al finalizar, muestra el visitante que mas ha esperado.
+     * Hace recorridos hasta que las dos colas estan vacias y al final muestra el
+     * visitante que mas ha esperado
      */
     public void iniciarSimulacion() {
         while (!colaEspera.isEmpty() || !cola.isEmpty()) {
@@ -71,13 +52,14 @@ public class Simulacion {
             reloj += Constantes.DURACION_ATRACCION;
         }
 
-        System.out.println("El visitante con el ID que mas ha esperado es: ID = " + visitanteMasEspera.getId() + " | Pase: "
-                + visitanteMasEspera.getPase() + " | Espera: " + esperaMaxima);
+        System.out.println(
+                "El visitante con el ID que mas ha esperado es: ID = " + visitanteMasEspera.getId() + " | Pase: "
+                        + visitanteMasEspera.getPase() + " | Llegada: " + visitanteMasEspera.getLlegada()
+                        + " | Espera: " + esperaMaxima);
     }
 
     /**
-     * Pasa a la cola prioritaria a los visitantes cuya llegada ya se ha producido
-     * en el instante actual de la simulacion.
+     * Pasa a la cola de acceso los visitantes que ya han llegado
      */
     private void pasarALaCola() {
         while (!colaEspera.isEmpty() && colaEspera.peek().getLlegada() <= reloj) {
@@ -86,8 +68,8 @@ public class Simulacion {
     }
 
     /**
-     * Realiza un recorrido con hasta el numero maximo de visitantes permitido,
-     * registra su instante de inicio y actualiza el mayor tiempo de espera.
+     * Hace un recorrido con hasta 5 visitantes, guarda su hora de inicio y
+     * actualiza el que mas ha esperado
      */
     private void simularAtraccion() {
         System.out.println("Recorrido en el tiempo: " + reloj);
@@ -103,10 +85,10 @@ public class Simulacion {
 
             if (espera > esperaMaxima
                     || (espera == esperaMaxima
-                        && v.getLlegada() < visitanteMasEspera.getLlegada())
+                            && v.getLlegada() < visitanteMasEspera.getLlegada())
                     || (espera == esperaMaxima
-                        && v.getLlegada() == visitanteMasEspera.getLlegada()
-                        && v.getId() < visitanteMasEspera.getId())) {
+                            && v.getLlegada() == visitanteMasEspera.getLlegada()
+                            && v.getId() < visitanteMasEspera.getId())) {
 
                 visitanteMasEspera = v;
                 esperaMaxima = espera;
@@ -117,8 +99,8 @@ public class Simulacion {
     }
 
     /**
-     * Genera los lotes de visitantes a partir de los parametros introducidos.
-     * Cada lote posterior llega despues del intervalo indicado por {@code l}.
+     * Genera los n lotes de visitantes, cada uno l unidades de tiempo despues
+     * del anterior
      */
     public void generarLote() {
         int tiempoLlegada = 0;
@@ -132,8 +114,7 @@ public class Simulacion {
     }
 
     /**
-     * Lee por teclado el numero de lotes, los visitantes de cada tipo y el tiempo
-     * entre lotes, y solicita de nuevo los datos si alguno queda fuera de rango.
+     * Pide por teclado n, e, f y l, y vuelve a pedir el dato si no es valido
      */
     public void leerPorPantalla() {
         Scanner sc = new Scanner(System.in);
@@ -218,10 +199,10 @@ public class Simulacion {
     }
 
     /**
-     * Genera los visitantes de un lote y los añade a la cola inicial en el orden
-     * Standard, Fast Pass y VIP, asignando un identificador a cada visitante.
+     * Genera un lote (e Standard, f Fast Pass y 1 VIP, en ese orden) y lo mete en
+     * la cola de espera con ids seguidos
      *
-     * @param llegada instante de llegada de los visitantes del lote
+     * @param llegada tiempo de llegada del lote
      */
     private void generarVisitantes(int llegada) {
 
